@@ -27,7 +27,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from collections import OrderedDict
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -74,6 +74,13 @@ CATALOG_MAX_SIZE = 5000
 # disable availability enrichment entirely.
 MAX_ENRICH_PER_RUN = 1000
 
+# Days an entry's availability stays "fresh" after enrichment. Within
+# this window, the entry is skipped — no /watch/providers call. Past it,
+# the entry is eligible for re-enrichment. Stamping happens on every
+# attempt (success or failure) so titles TMDb has no provider data for
+# don't get hammered every run either.
+ENRICH_COOLDOWN_DAYS = 7
+
 # Polite pacing. TMDb's rate limit is generous (~50 req/s) but we
 # don't need to sprint.
 SLEEP_BETWEEN = 0.05
@@ -88,7 +95,8 @@ FIELD_ORDER = [
     "title", "year", "rating", "votes",
     "genres", "type", "netflix_status",
     "original_language", "origin_country", "available_in",
-    "imdb_id", "tmdb_id", "rating_refreshed_at",
+    "imdb_id", "tmdb_id",
+    "rating_refreshed_at", "enriched_at",
 ]
 
 
@@ -454,24 +462,67 @@ def main() -> int:
             if stop_outer:
                 break
 
-    # Availability enrichment: any entry with a tmdb_id but no
-    # `available_in` field gets a /watch/providers call so the UI can
-    # filter "what's on Netflix in my region". Capped per-run so a huge
-    # catalog can't stall a run; remaining entries enrich on the next
-    # run.
+    # Availability enrichment with cooldown.
+    #
+    # Eligible entries: any with a tmdb_id whose `enriched_at` is missing
+    # or older than ENRICH_COOLDOWN_DAYS. Within the cooldown window the
+    # entry is skipped — no /watch/providers call — even if a previous
+    # attempt failed. We stamp `enriched_at` on EVERY attempt (success or
+    # failure) so titles TMDb has no provider data for don't get hammered
+    # every run.
+    #
+    # One-time migration: entries that already have `available_in` but no
+    # `enriched_at` (from runs that landed before the cooldown shipped)
+    # are stamped to "now" so the cooldown immediately protects them
+    # without an extra round of redundant calls.
+    now_utc = datetime.now(timezone.utc)
+    now_iso = now_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
+    cutoff_iso = (now_utc - timedelta(days=ENRICH_COOLDOWN_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    migrated = 0
+    for s in shows:
+        if "available_in" in s and "enriched_at" not in s:
+            s["enriched_at"] = now_iso
+            migrated += 1
+    if migrated:
+        print(f"Cooldown migration: stamped {migrated} pre-existing enriched entries.")
+
+    # Cooldown is bypassed when an entry's data is incomplete (missing
+    # `available_in` from a prior failed fetch). Those entries retry on
+    # every run until they get a valid response, even if `enriched_at`
+    # is recent. Entries that *do* have `available_in` respect the
+    # 7-day cooldown.
     enriched = 0
+    skipped_cooldown = 0
+    retried_incomplete = 0
     if MAX_ENRICH_PER_RUN > 0:
-        to_enrich = [
-            (i, s) for i, s in enumerate(shows)
-            if s.get("tmdb_id") and "available_in" not in s
-        ][:MAX_ENRICH_PER_RUN]
+        candidates: list[tuple[int, dict]] = []
+        for i, s in enumerate(shows):
+            if not s.get("tmdb_id"):
+                continue
+            has_data = "available_in" in s
+            last = s.get("enriched_at") or ""
+            in_cooldown = last >= cutoff_iso
+            if has_data and in_cooldown:
+                skipped_cooldown += 1
+                continue
+            if not has_data:
+                retried_incomplete += 1
+            candidates.append((i, s))
+        to_enrich = candidates[:MAX_ENRICH_PER_RUN]
         if to_enrich:
-            print(f"Enriching {len(to_enrich)} entries with watch/providers…")
+            print(f"Enriching {len(to_enrich)} entries with watch/providers "
+                  f"(cooldown={ENRICH_COOLDOWN_DAYS}d skipped {skipped_cooldown}, "
+                  f"retrying-incomplete {retried_incomplete}).")
         for idx, s in to_enrich:
             avail = fetch_availability(api_key, int(s["tmdb_id"]), s.get("type", "movie"))
             if avail is not None:
                 shows[idx]["available_in"] = avail
                 enriched += 1
+            # Stamp every attempt so successful runs skip on cooldown.
+            # Failed attempts still get stamped, but the `not has_data`
+            # branch above means they'll be retried next run anyway.
+            shows[idx]["enriched_at"] = now_iso
             time.sleep(SLEEP_BETWEEN)
 
     # Persist cursors. Region cursor advances regardless of whether we hit
@@ -490,7 +541,9 @@ def main() -> int:
     DATA_FILE.write_text(json.dumps(raw, indent=2, ensure_ascii=False) + "\n")
 
     print()
-    print(f"Catalog size after: {len(shows)} (+{added})  enriched: {enriched}")
+    print(f"Catalog size after: {len(shows)} (+{added})  "
+          f"enriched: {enriched}  cooldown-skipped: {skipped_cooldown}  "
+          f"retried-incomplete: {retried_incomplete}  migrated: {migrated}")
     return 0
 
 

@@ -103,7 +103,7 @@ def merge_entries(group: list[dict]) -> dict:
                 new = NETFLIX_STATUS_PRIORITY.get(v, 0)
                 if new > cur:
                     merged[k] = v
-            elif k == "rating_refreshed_at":
+            elif k in ("rating_refreshed_at", "enriched_at"):
                 if v > (merged.get(k) or ""):
                     merged[k] = v
             elif k in ("imdb_id", "tmdb_id", "original_language"):

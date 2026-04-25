@@ -65,6 +65,14 @@ These document *why* the data pipeline looks the way it does. If a constraint ch
 - **Why budget = 950 (not 1000):** OMDb's free cap is 1k/day; reserving ~50 covers the preflight + any incidental retries + a buffer for the existing-data UI to also hit OMDb if we ever add that.
 - **Why no concurrency:** OMDb has no published rate limit but `SLEEP_BETWEEN=0.1` keeps us conservative. Adding a thread pool buys minutes per run, not hours.
 
+### Availability enrichment & cooldown
+- After the catalog growth pass, `refresh_catalog.py` calls `/watch/providers` per entry to populate `available_in` (regions where Netflix carries it as a flatrate provider). This drives the UI's region filter.
+- **`ENRICH_COOLDOWN_DAYS = 7`**: an entry that already has `available_in` is skipped for 7 days after its last `enriched_at` stamp. Avoids hammering TMDb daily for data that rarely changes.
+- **Exception (data completeness wins):** if `available_in` is *missing* on an entry (prior fetch failed / never ran), the cooldown is bypassed — the entry retries every run until it succeeds, even if `enriched_at` is recent.
+- **Stamp every attempt** — successes and failures both write `enriched_at = now`. Successful entries respect the cooldown; failures are still retried via the data-completeness exception. (One pathological case: titles TMDb truly has no provider data for will be retried forever; if that becomes wasteful, add a `enrichment_failures` counter and stop after N consecutive misses.)
+- **One-time migration:** entries that already have `available_in` but no `enriched_at` (added before the cooldown shipped) get `enriched_at = now` at script start, so the cooldown immediately protects them without an extra round of redundant calls.
+- **`MAX_ENRICH_PER_RUN = 1000`** caps per-run cost. Catalog can't currently approach that.
+
 ### Identity & deduplication
 - **Two-tier identity:** `tmdb_id` (canonical, exact) + composite key `(normalize_title(title), year, type)` for entries without one. Both live in `scripts/_catalog.py` — never reimplement them inline.
 - **`normalize_title`** strips diacritics, lowercases, drops punctuation, collapses whitespace. So `"Spider-Man: Across the Spider-Verse"`, `"Spider-Man Across the Spider-Verse"`, and `"  spider man across the spider verse "` all hash to one key. `"Élite"` and `"Elite"` collapse together; `"Money Heist"` and `"La Casa de Papel"` deliberately do not (different strings → different content under our model; merging across translations requires `tmdb_id`).

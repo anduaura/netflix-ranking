@@ -40,7 +40,8 @@ FIELD_ORDER = [
     "title", "year", "rating", "votes",
     "genres", "type", "netflix_status",
     "original_language", "origin_country", "available_in",
-    "imdb_id", "tmdb_id", "rating_refreshed_at",
+    "imdb_id", "tmdb_id",
+    "rating_refreshed_at", "enriched_at",
 ]
 
 
