@@ -62,6 +62,24 @@ Allowed values:
 
 Bump the top-level `updated` field when you publish a new dataset; it's shown in the footer.
 
+## Auto-refreshing ratings (optional)
+
+A scheduled workflow can keep `shows.json` fresh by pulling current IMDb ratings from [OMDb](https://www.omdbapi.com/) once a week.
+
+**Set it up:**
+
+1. Get a free OMDb API key at https://www.omdbapi.com/apikey.aspx (1,000 requests/day on the free tier — plenty for ~100 shows weekly).
+2. In your repo: **Settings → Secrets and variables → Actions → New repository secret**, name it `OMDB_API_KEY`.
+3. The workflow at `.github/workflows/refresh-ratings.yml` runs every Monday 06:00 UTC and on manual dispatch. When ratings or vote counts change, it commits `shows.json` to `main`, which then triggers the Pages deploy.
+
+**Run it manually:** **Actions → Refresh IMDb ratings → Run workflow**, or locally:
+
+```bash
+OMDB_API_KEY=xxxx python3 scripts/refresh_ratings.py
+```
+
+The script writes back IMDb IDs as it discovers them, so subsequent runs use direct ID lookups (more accurate than title+year).
+
 ## Notes on data
 
-Ratings are a curated, static snapshot from publicly available IMDb data. They drift over time, and Netflix availability varies by region. This site is not affiliated with Netflix or IMDb.
+Ratings come from IMDb (via OMDb when the refresh workflow is enabled). Netflix availability varies by region. This site is not affiliated with Netflix or IMDb.
