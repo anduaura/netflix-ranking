@@ -13,7 +13,7 @@
     sort: document.getElementById("sort"),
     reset: document.getElementById("reset"),
     language: document.getElementById("language"),
-    regionFilters: document.getElementById("regionFilters"),
+    region: document.getElementById("region"),
     supportBtn: document.getElementById("supportBtn"),
     supportDialog: document.getElementById("supportDialog"),
     supportLinks: document.getElementById("supportLinks"),
@@ -46,13 +46,33 @@
   };
   const langLabel = (code) => LANGUAGE_LABEL[code] || (code ? code.toUpperCase() : "Unknown");
 
-  const REGION_LABEL = {
-    US: "🇺🇸 United States", KR: "🇰🇷 Korea", JP: "🇯🇵 Japan",
-    GB: "🇬🇧 United Kingdom", IN: "🇮🇳 India", BR: "🇧🇷 Brazil",
-    DE: "🇩🇪 Germany", FR: "🇫🇷 France", ES: "🇪🇸 Spain", MX: "🇲🇽 Mexico",
-    CA: "🇨🇦 Canada", AU: "🇦🇺 Australia", IT: "🇮🇹 Italy", NL: "🇳🇱 Netherlands",
-  };
-  const regionLabel = (code) => REGION_LABEL[code] || code;
+  // Major Netflix markets, in roughly subscriber-count order. Surfaced
+  // first in the "Available on" dropdown.
+  const POPULAR_REGIONS = [
+    "US", "GB", "CA", "BR", "MX", "DE", "FR", "IN",
+    "JP", "KR", "AU", "ES", "IT", "NL",
+  ];
+
+  // ISO 3166 country code → 🇺🇸-style flag emoji via regional indicators.
+  function flagFor(code) {
+    if (!code || code.length !== 2) return "";
+    const base = 127397; // 'A' regional indicator offset from ASCII 'A'.
+    return String.fromCodePoint(
+      ...code.toUpperCase().split("").map((c) => base + c.charCodeAt(0)),
+    );
+  }
+
+  const regionNamer = (() => {
+    try { return new Intl.DisplayNames(["en"], { type: "region" }); }
+    catch { return null; }
+  })();
+  function regionName(code) {
+    if (regionNamer) {
+      try { return regionNamer.of(code) || code; } catch { return code; }
+    }
+    return code;
+  }
+  const regionLabel = (code) => `${flagFor(code)} ${regionName(code)}`.trim();
 
   const imdbSearchUrl = (title, year) =>
     `https://www.imdb.com/find/?s=tt&q=${encodeURIComponent(title + " " + year)}`;
@@ -64,15 +84,13 @@
   };
 
   function readFilters() {
-    const checkedRegions = [...els.regionFilters.querySelectorAll("input:checked")]
-      .map((el) => el.value);
     return {
       q: els.q.value.trim().toLowerCase(),
       genre: els.genre.value,
       type: els.type.value,
       status: els.status.value,
       language: els.language.value,
-      regions: checkedRegions,
+      region: els.region.value,
       minRating: parseFloat(els.minRating.value) || 0,
       sort: els.sort.value,
     };
@@ -85,7 +103,7 @@
     if (f.type) params.set("type", f.type);
     if (f.status) params.set("status", f.status);
     if (f.language) params.set("lang", f.language);
-    if (f.regions.length) params.set("regions", f.regions.join(","));
+    if (f.region) params.set("region", f.region);
     if (f.minRating > 0) params.set("min", String(f.minRating));
     if (f.sort && f.sort !== "rating") params.set("sort", f.sort);
     const qs = params.toString();
@@ -99,12 +117,7 @@
     if (p.has("type")) els.type.value = p.get("type");
     if (p.has("status")) els.status.value = p.get("status");
     if (p.has("lang")) els.language.value = p.get("lang");
-    if (p.has("regions")) {
-      const wanted = new Set(p.get("regions").split(",").filter(Boolean));
-      els.regionFilters.querySelectorAll("input").forEach((el) => {
-        el.checked = wanted.has(el.value);
-      });
-    }
+    if (p.has("region")) els.region.value = p.get("region");
     if (p.has("min")) {
       els.minRating.value = p.get("min");
       els.minRatingVal.textContent = parseFloat(p.get("min")).toFixed(1);
@@ -137,20 +150,29 @@
   }
 
   function populateRegions(shows, configuredRegions) {
-    // Union of configured regions + anything we've actually seen.
+    // Union of configured regions + anything we've actually seen in
+    // the data. Only keep regions that are real candidates.
     const set = new Set(configuredRegions || []);
     shows.forEach((s) => (s.available_in || []).forEach((r) => set.add(r)));
-    const codes = [...set].sort((a, b) => regionLabel(a).localeCompare(regionLabel(b)));
-    if (!codes.length) {
-      els.regionFilters.parentElement.hidden = true;
+    if (!set.size) {
+      els.region.parentElement.hidden = true;
       return;
     }
-    els.regionFilters.innerHTML = codes.map((c) => `
-      <label class="region-chip">
-        <input type="checkbox" value="${escapeHtml(c)}" />
-        <span>${escapeHtml(regionLabel(c))}</span>
-      </label>
-    `).join("");
+    const popular = POPULAR_REGIONS.filter((c) => set.has(c));
+    const popularSet = new Set(popular);
+    const rest = [...set]
+      .filter((c) => !popularSet.has(c))
+      .sort((a, b) => regionName(a).localeCompare(regionName(b)));
+
+    const opt = (c) => `<option value="${escapeHtml(c)}">${escapeHtml(regionLabel(c))}</option>`;
+    let html = '<option value="">Anywhere</option>';
+    if (popular.length) {
+      html += `<optgroup label="Popular">${popular.map(opt).join("")}</optgroup>`;
+    }
+    if (rest.length) {
+      html += `<optgroup label="All regions">${rest.map(opt).join("")}</optgroup>`;
+    }
+    els.region.innerHTML = html;
   }
 
   function applyFilters(shows, f) {
@@ -160,10 +182,9 @@
       if (f.type && s.type !== f.type) return false;
       if (f.status && s.netflix_status !== f.status) return false;
       if (f.language && s.original_language !== f.language) return false;
-      if (f.regions.length) {
+      if (f.region) {
         const avail = s.available_in || [];
-        // OR semantics: show titles available in ANY of the checked regions.
-        if (!f.regions.some((r) => avail.includes(r))) return false;
+        if (!avail.includes(f.region)) return false;
       }
       if (s.rating < f.minRating) return false;
       return true;
@@ -275,17 +296,16 @@
         render();
       });
     });
-    [els.genre, els.type, els.status, els.language, els.sort].forEach((el) =>
+    [els.genre, els.type, els.status, els.language, els.region, els.sort].forEach((el) =>
       el.addEventListener("change", render)
     );
-    els.regionFilters.addEventListener("change", render);
     els.reset.addEventListener("click", () => {
       els.q.value = "";
       els.genre.value = "";
       els.type.value = "";
       els.status.value = "";
       els.language.value = "";
-      els.regionFilters.querySelectorAll("input").forEach((el) => (el.checked = false));
+      els.region.value = "";
       els.minRating.value = "0";
       els.minRatingVal.textContent = "0.0";
       els.sort.value = "rating";
