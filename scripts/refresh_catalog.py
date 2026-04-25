@@ -41,11 +41,22 @@ from _catalog import composite_key  # noqa: E402
 TMDB_NETFLIX_PROVIDER = 8       # streaming-availability filter
 TMDB_NETFLIX_NETWORK = 213      # Netflix as a TV network (originals)
 
-# Catalog scope.
-TMDB_REGION = "US"
+# Regions to scan, in order. Each region has its own scan cursor stored in
+# shows.json so they advance independently. Add codes here to expand the
+# catalog (e.g. "GB", "IN"); remove to narrow it.
+TMDB_REGIONS = ["US", "KR", "JP"]
+
+# How many regions get scanned per run. The script rotates through
+# TMDB_REGIONS in order, scanning this many per run starting from the
+# stored region cursor. Set to len(TMDB_REGIONS) to scan everything every
+# run; set to 1 to be polite (one region per day).
+TMDB_REGIONS_PER_RUN = 3
+
+# TMDb response language. Affects returned title spelling; doesn't
+# restrict which content is returned.
 TMDB_LANGUAGE = "en-US"
 
-# How many discover pages each run inspects per media type.
+# How many discover pages each run inspects per (region, media) combo.
 # 1 page = 20 titles. Stops early if a page is empty.
 TMDB_PAGES_PER_RUN = 5
 
@@ -116,9 +127,9 @@ def map_genres(ids: list[int], lookup: dict[int, str]) -> list[str]:
 # Discovery
 # ---------------------------------------------------------------------------
 
-def discover_page(api_key: str, media: str, page: int, *, network: int | None = None) -> dict:
+def discover_page(api_key: str, media: str, page: int, region: str, *, network: int | None = None) -> dict:
     params = {
-        "watch_region": TMDB_REGION,
+        "watch_region": region,
         "with_watch_providers": TMDB_NETFLIX_PROVIDER,
         "sort_by": "popularity.desc",
         "include_adult": "false",
@@ -132,14 +143,22 @@ def discover_page(api_key: str, media: str, page: int, *, network: int | None = 
 def fetch_originals_ids(api_key: str) -> set[int]:
     """TV originals on Netflix, identified by network=213.
 
+    Region-independent — Netflix's network id is global. We scan a few
+    pages here just to seed the originals lookup; titles missed at this
+    step still appear in catalog growth, they'll just default to
+    'library' until a future scan catches them.
+
     Movies don't have a clean equivalent in /discover, so we mark TV
     originals only. Movies default to library (a future iteration could
     enrich via /movie/{id} production_companies).
     """
     ids: set[int] = set()
+    # Use the first region as the "watch_region" for this query — it
+    # doesn't matter much because with_networks=213 is the real filter.
+    region = TMDB_REGIONS[0] if TMDB_REGIONS else "US"
     for page in range(1, TMDB_PAGES_PER_RUN + 1):
         try:
-            data = discover_page(api_key, "tv", page, network=TMDB_NETFLIX_NETWORK)
+            data = discover_page(api_key, "tv", page, region, network=TMDB_NETFLIX_NETWORK)
         except Exception as e:
             print(f"  ! originals page {page} failed: {e}", file=sys.stderr)
             break
@@ -227,6 +246,7 @@ def make_entry(result: dict, media: str, genre_lookup: dict[int, str], originals
 def scan_media(
     api_key: str,
     media: str,
+    region: str,
     start_page: int,
     pages: int,
     genre_lookup: dict[int, str],
@@ -239,9 +259,9 @@ def scan_media(
     for offset in range(pages):
         page = start_page + offset
         try:
-            data = discover_page(api_key, media, page)
+            data = discover_page(api_key, media, page, region)
         except Exception as e:
-            print(f"  ! /discover/{media} page {page} failed: {e}", file=sys.stderr)
+            print(f"  ! /discover/{media} {region} page {page} failed: {e}", file=sys.stderr)
             break
         total_pages = data.get("total_pages") or total_pages
         results = data.get("results") or []
@@ -266,6 +286,51 @@ def advance_cursor(prev_cursor: int, last_scanned: int, total_pages: int) -> int
     return nxt
 
 
+def migrate_cursors(stored: dict | None) -> dict:
+    """Normalize the on-disk cursor blob into per-region structure.
+
+    Three shapes we accept on input:
+      None or {}            → fresh start, all regions at p1
+      {"tv": N, "movie": M} → legacy single-region; assumed to be the
+                              first region in TMDB_REGIONS, others at p1
+      {"US": {...}, ...}    → already per-region; passed through, missing
+                              regions backfilled at p1
+    """
+    out: dict[str, dict[str, int]] = {r: {"tv": 1, "movie": 1} for r in TMDB_REGIONS}
+    if not stored:
+        return out
+    if "tv" in stored or "movie" in stored:
+        legacy_region = TMDB_REGIONS[0] if TMDB_REGIONS else "US"
+        out[legacy_region] = {
+            "tv": int(stored.get("tv", 1)),
+            "movie": int(stored.get("movie", 1)),
+        }
+        return out
+    for region, cur in stored.items():
+        if not isinstance(cur, dict):
+            continue
+        out[region] = {
+            "tv": int(cur.get("tv", 1)),
+            "movie": int(cur.get("movie", 1)),
+        }
+    return out
+
+
+def select_regions_for_run(stored: dict, count: int) -> tuple[list[str], int]:
+    """Pick the next `count` regions starting from stored region cursor.
+
+    Returns (regions_to_scan, next_region_cursor).
+    """
+    if not TMDB_REGIONS:
+        return [], 0
+    n = len(TMDB_REGIONS)
+    start = int(stored.get("region_cursor", 0)) % n
+    take = min(count, n)
+    selected = [TMDB_REGIONS[(start + i) % n] for i in range(take)]
+    next_cursor = (start + take) % n
+    return selected, next_cursor
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -288,14 +353,22 @@ def main() -> int:
 
     raw = json.loads(DATA_FILE.read_text())
     shows: list[dict] = raw.get("shows", [])
-    cursors: dict = raw.get("scan_cursors") or {"tv": 1, "movie": 1}
+    cursors = migrate_cursors(raw.get("scan_cursors"))
+    region_cursor_state = raw.get("scan_cursors") or {}
 
     if len(shows) >= CATALOG_MAX_SIZE:
         print(f"Catalog at cap ({len(shows)}/{CATALOG_MAX_SIZE}); not scanning.")
         return 4
 
+    regions_this_run, next_region_cursor = select_regions_for_run(
+        region_cursor_state, TMDB_REGIONS_PER_RUN,
+    )
+
     print(f"Catalog size before: {len(shows)}")
-    print(f"Scan cursors: tv=p{cursors.get('tv', 1)} movie=p{cursors.get('movie', 1)}")
+    print(f"Configured regions: {TMDB_REGIONS}; this run: {regions_this_run}")
+    for r in regions_this_run:
+        c = cursors[r]
+        print(f"  cursor[{r}]: tv=p{c['tv']} movie=p{c['movie']}")
 
     genre_maps = fetch_genre_maps(api_key)
     originals_ids = fetch_originals_ids(api_key)
@@ -304,43 +377,52 @@ def main() -> int:
     by_tmdb, by_key = index_existing(shows)
     added = 0
 
-    for media in ("tv", "movie"):
-        start = max(1, int(cursors.get(media, 1)))
-        candidates, last, total = scan_media(
-            api_key, media, start, TMDB_PAGES_PER_RUN,
-            genre_maps[media], originals_ids,
-        )
-        added_for_media = 0
-        for e in candidates:
-            tid = e["tmdb_id"]
-            if tid in by_tmdb:
-                continue
-            ckey = composite_key(e)
-            if ckey in by_key:
-                # Existing entry under a slightly different title/year —
-                # backfill tmdb_id only, never overwrite ratings.
-                idx = by_key[ckey]
-                shows[idx].setdefault("tmdb_id", tid)
-                by_tmdb[tid] = idx
-                continue
-            shows.append(e)
-            by_tmdb[tid] = len(shows) - 1
-            by_key[ckey] = len(shows) - 1
-            added_for_media += 1
-            added += 1
-            if len(shows) >= CATALOG_MAX_SIZE:
-                print(f"Hit CATALOG_MAX_SIZE={CATALOG_MAX_SIZE}; stopping.")
-                break
-        cursors[media] = advance_cursor(start, last, total)
-        print(f"  {media}: scanned p{start}..p{last} (total_pages={total}), "
-              f"candidates={len(candidates)}, added={added_for_media}, next=p{cursors[media]}")
-        if len(shows) >= CATALOG_MAX_SIZE:
+    stop_outer = False
+    for region in regions_this_run:
+        if stop_outer:
             break
+        for media in ("tv", "movie"):
+            start = max(1, int(cursors[region][media]))
+            candidates, last, total = scan_media(
+                api_key, media, region, start, TMDB_PAGES_PER_RUN,
+                genre_maps[media], originals_ids,
+            )
+            added_here = 0
+            for e in candidates:
+                tid = e["tmdb_id"]
+                if tid in by_tmdb:
+                    continue
+                ckey = composite_key(e)
+                if ckey in by_key:
+                    idx = by_key[ckey]
+                    shows[idx].setdefault("tmdb_id", tid)
+                    by_tmdb[tid] = idx
+                    continue
+                shows.append(e)
+                by_tmdb[tid] = len(shows) - 1
+                by_key[ckey] = len(shows) - 1
+                added_here += 1
+                added += 1
+                if len(shows) >= CATALOG_MAX_SIZE:
+                    print(f"Hit CATALOG_MAX_SIZE={CATALOG_MAX_SIZE}; stopping.")
+                    stop_outer = True
+                    break
+            cursors[region][media] = advance_cursor(start, last, total)
+            print(f"  [{region} {media}] scanned p{start}..p{last} (total_pages={total}), "
+                  f"candidates={len(candidates)}, added={added_here}, next=p{cursors[region][media]}")
+            if stop_outer:
+                break
+
+    # Persist cursors. Region cursor advances regardless of whether we hit
+    # the cap, so a maxed catalog still rotates if we ever raise the cap.
+    out_cursors: dict = dict(cursors)
+    out_cursors["region_cursor"] = next_region_cursor
 
     raw["shows"] = [reorder(s) for s in shows]
-    raw["scan_cursors"] = cursors
-    raw["region"] = TMDB_REGION
+    raw["scan_cursors"] = out_cursors
+    raw["regions"] = TMDB_REGIONS
     raw["source"] = "Catalog discovered via TMDb (Netflix). Ratings from OMDb (IMDb)."
+    raw.pop("region", None)  # superseded by regions
     if added > 0:
         raw["updated"] = date.today().isoformat()
 

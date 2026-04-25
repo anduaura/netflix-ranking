@@ -3,6 +3,12 @@ name: Deploy site to GitHub Pages
 on:
   push:
     branches: [main]
+  # Bot-pushed commits from the refresh workflow don't fire `push` (GitHub
+  # blocks GITHUB_TOKEN-triggered workflow chains to prevent recursion), so
+  # we explicitly redeploy after each successful catalog/ratings refresh.
+  workflow_run:
+    workflows: ["Refresh catalog and ratings"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -16,12 +22,18 @@ concurrency:
 
 jobs:
   deploy:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # workflow_run defaults to the SHA of the triggering workflow's
+          # head_sha; pin to the latest main commit so we always deploy
+          # the freshest data.
+          ref: main
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

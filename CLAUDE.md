@@ -86,9 +86,20 @@ These document *why* the data pipeline looks the way it does. If a constraint ch
 - `netflix_status` distinguishes `original` / `library` / `exclusive-region`. We currently only auto-detect TV originals (via `with_networks=213`). Movies default to `library`. Future: enrich movies via `/movie/{id}/?append_to_response=production_companies` and check for Netflix.
 - Top-level `scan_cursors` is per-media (`tv`, `movie`) so the two cycle independently.
 
-### Region scope
-- Default `TMDB_REGION="US"`. TMDb's `with_watch_providers` filter is region-specific; "Netflix" in Brazil ≠ Netflix in the US.
-- **Future iteration:** if we want multi-region, add `regions: [...]` to the workflow input or env, fan out catalog growth per region, and add a `regions` array per show entry. Schema is forward-compatible.
+### Region scope (multi-region rotating)
+- `TMDB_REGIONS` constant (currently `["US", "KR", "JP"]`) drives discovery scope. TMDb's `with_watch_providers` filter is region-specific, so each region gets scanned independently.
+- **Two-axis rotation:**
+  - **Page cursor per (region, media):** stored in `shows.json` as `scan_cursors[region][media]`. Advances by `TMDB_PAGES_PER_RUN` each time the region is scanned.
+  - **Region cursor:** stored as `scan_cursors["region_cursor"]` (an integer index into `TMDB_REGIONS`). Each run picks the next `TMDB_REGIONS_PER_RUN` regions starting from this cursor and advances modulo `len(TMDB_REGIONS)`.
+- **`TMDB_REGIONS_PER_RUN`** is the polite/aggressive knob: set to `len(TMDB_REGIONS)` for fastest growth (every region every run, default), set to `1` to scan one region per run if TMDb-side concerns or daily-budget pressure ever matter.
+- **Cross-region dedup is automatic** — `composite_key` collapses overlapping titles (e.g. *Squid Game* surfacing in both US and KR scans) into one entry. No per-region availability is tracked; the site says "on Netflix" without specifying where.
+- **Schema migration:** `migrate_cursors()` accepts the legacy `{tv, movie}` shape (treated as `TMDB_REGIONS[0]` cursors) and the new per-region shape, backfilling missing regions to page 1. Safe to add or remove regions in `TMDB_REGIONS` between runs.
+- **TV originals detection (`with_networks=213`)** is region-independent — Netflix's network ID is global, so we run it once per scan slice, not per-region.
+
+### Deploy chain (workflow_run)
+- `pages.yml` listens to `workflow_run` after `Refresh catalog and ratings` completes successfully. Required because GitHub deliberately blocks workflow chains from `GITHUB_TOKEN`-pushed commits — without this trigger, bot-pushed catalog/ratings updates would never reach Pages.
+- `pages.yml` also keeps its `push: branches: [main]` and `workflow_dispatch` triggers for manual / human-driven deploys.
+- The `if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'` guard prevents redeploying after failed refresh runs.
 
 ### Workflow shape
 - Single workflow with two steps so a catalog growth + ratings refresh land in the same commit.
