@@ -78,6 +78,12 @@
   const imdbSearchUrl = (title, year) =>
     `https://www.imdb.com/find/?s=tt&q=${encodeURIComponent(title + " " + year)}`;
 
+  // Netflix's search auto-routes to the viewer's home region/account when
+  // they're signed in, so a single URL works globally without us needing
+  // per-region deep-link IDs.
+  const netflixSearchUrl = (title) =>
+    `https://www.netflix.com/search?q=${encodeURIComponent(title)}`;
+
   const fmtVotes = (v) => {
     if (v >= 1_000_000) return (v / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
     if (v >= 1_000) return Math.round(v / 1_000) + "K";
@@ -230,7 +236,7 @@
       li.innerHTML = `
         <div class="rank">${i + 1}</div>
         <div class="title">
-          <a href="${imdbSearchUrl(s.title, s.year)}" target="_blank" rel="noopener noreferrer">${escapeHtml(s.title)}</a>
+          <a class="title-link" href="${netflixSearchUrl(s.title)}" target="_blank" rel="noopener noreferrer" title="Open on Netflix">${escapeHtml(s.title)}</a>
           <div class="sub">
             <span>${s.year}</span>
             <span>·</span>
@@ -238,6 +244,7 @@
             <span class="tag ${s.netflix_status === "original" ? "original" : ""}">${STATUS_LABEL[s.netflix_status] || s.netflix_status}</span>
             ${langTag}
             ${s.genres.slice(0, 3).map((g) => `<span class="tag">${escapeHtml(g)}</span>`).join("")}
+            <a class="ext-link" href="${imdbSearchUrl(s.title, s.year)}" target="_blank" rel="noopener noreferrer" title="View on IMDb">IMDb ↗</a>
           </div>
         </div>
         <div class="score" title="${s.votes.toLocaleString()} votes">
