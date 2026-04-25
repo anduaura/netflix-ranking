@@ -6,784 +6,846 @@
       "title": "Breaking Bad",
       "year": 2008,
       "rating": 9.5,
-      "votes": 2100000,
+      "votes": 2602845,
       "genres": [
         "Crime",
         "Drama",
         "Thriller"
       ],
       "type": "series",
-      "netflix_status": "exclusive-region"
+      "netflix_status": "exclusive-region",
+      "imdb_id": "tt0903747"
     },
     {
       "title": "Better Call Saul",
       "year": 2015,
       "rating": 9.0,
-      "votes": 580000,
+      "votes": 807349,
       "genres": [
         "Crime",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "exclusive-region"
+      "netflix_status": "exclusive-region",
+      "imdb_id": "tt3032476"
     },
     {
       "title": "Avatar: The Last Airbender",
       "year": 2005,
       "rating": 9.3,
-      "votes": 380000,
+      "votes": 432739,
       "genres": [
         "Animation",
         "Action",
         "Adventure"
       ],
       "type": "series",
-      "netflix_status": "library"
+      "netflix_status": "library",
+      "imdb_id": "tt0417299"
     },
     {
       "title": "Arcane",
       "year": 2021,
       "rating": 9.0,
-      "votes": 280000,
+      "votes": 441347,
       "genres": [
         "Animation",
         "Action",
         "Adventure"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt11126994"
     },
     {
       "title": "Stranger Things",
       "year": 2016,
-      "rating": 8.7,
-      "votes": 1450000,
+      "rating": 8.6,
+      "votes": 1691532,
       "genres": [
         "Drama",
         "Fantasy",
         "Horror"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt4574334"
     },
     {
       "title": "Dark",
       "year": 2017,
       "rating": 8.7,
-      "votes": 460000,
+      "votes": 542010,
       "genres": [
         "Crime",
         "Drama",
         "Mystery"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt5753856"
     },
     {
       "title": "Black Mirror",
       "year": 2011,
       "rating": 8.7,
-      "votes": 620000,
+      "votes": 735388,
       "genres": [
         "Drama",
         "Sci-Fi",
         "Thriller"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt2085059"
     },
     {
       "title": "BoJack Horseman",
       "year": 2014,
-      "rating": 8.7,
-      "votes": 240000,
+      "rating": 8.8,
+      "votes": 227110,
       "genres": [
         "Animation",
         "Comedy",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt3398228"
     },
     {
       "title": "Mindhunter",
       "year": 2017,
       "rating": 8.6,
-      "votes": 320000,
+      "votes": 391041,
       "genres": [
         "Crime",
         "Drama",
         "Thriller"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt5290382"
     },
     {
       "title": "Narcos",
       "year": 2015,
-      "rating": 8.8,
-      "votes": 470000,
+      "rating": 8.7,
+      "votes": 522089,
       "genres": [
         "Biography",
         "Crime",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt2707408"
     },
     {
       "title": "The Crown",
       "year": 2016,
       "rating": 8.6,
-      "votes": 240000,
+      "votes": 278925,
       "genres": [
         "Biography",
         "Drama",
         "History"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt4786824"
     },
     {
       "title": "Ozark",
       "year": 2017,
-      "rating": 8.5,
-      "votes": 380000,
+      "rating": 8.4,
+      "votes": 387946,
       "genres": [
         "Crime",
         "Drama",
         "Thriller"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt5071412"
     },
     {
       "title": "House of Cards",
       "year": 2013,
       "rating": 8.6,
-      "votes": 510000,
+      "votes": 556939,
       "genres": [
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt1856010"
     },
     {
       "title": "Cobra Kai",
       "year": 2018,
-      "rating": 8.5,
-      "votes": 200000,
+      "rating": 8.4,
+      "votes": 240954,
       "genres": [
         "Action",
         "Comedy",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt7221388"
     },
     {
       "title": "The Queen's Gambit",
       "year": 2020,
       "rating": 8.5,
-      "votes": 530000,
+      "votes": 660375,
       "genres": [
         "Drama"
       ],
       "type": "limited-series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt10048342"
     },
     {
       "title": "Squid Game",
       "year": 2021,
-      "rating": 8.0,
-      "votes": 690000,
+      "rating": 7.9,
+      "votes": 756973,
       "genres": [
         "Action",
         "Drama",
         "Mystery"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt10919420"
     },
     {
       "title": "Money Heist",
       "year": 2017,
       "rating": 8.2,
-      "votes": 530000,
+      "votes": 604616,
       "genres": [
         "Action",
         "Crime",
         "Mystery"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt6468322"
     },
     {
       "title": "Peaky Blinders",
       "year": 2013,
-      "rating": 8.8,
-      "votes": 660000,
+      "rating": 8.7,
+      "votes": 771795,
       "genres": [
         "Crime",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "exclusive-region"
+      "netflix_status": "exclusive-region",
+      "imdb_id": "tt2442560"
     },
     {
       "title": "The Witcher",
       "year": 2019,
-      "rating": 8.0,
-      "votes": 530000,
+      "rating": 7.9,
+      "votes": 618310,
       "genres": [
         "Action",
         "Adventure",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt5180504"
     },
     {
       "title": "Wednesday",
       "year": 2022,
-      "rating": 8.1,
-      "votes": 380000,
+      "rating": 8.0,
+      "votes": 489715,
       "genres": [
         "Comedy",
         "Crime",
         "Fantasy"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt13443470"
     },
     {
       "title": "Sex Education",
       "year": 2019,
-      "rating": 8.3,
-      "votes": 215000,
+      "rating": 8.2,
+      "votes": 393118,
       "genres": [
         "Comedy",
         "Drama",
         "Romance"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt7767422"
     },
     {
       "title": "The Umbrella Academy",
       "year": 2019,
-      "rating": 7.9,
-      "votes": 290000,
+      "rating": 7.8,
+      "votes": 312703,
       "genres": [
         "Action",
         "Adventure",
         "Comedy"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt1312171"
     },
     {
       "title": "Lupin",
       "year": 2021,
       "rating": 7.5,
-      "votes": 110000,
+      "votes": 154909,
       "genres": [
         "Crime",
         "Drama",
         "Mystery"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt2531336"
     },
     {
       "title": "Bridgerton",
       "year": 2020,
-      "rating": 7.3,
-      "votes": 145000,
+      "rating": 7.5,
+      "votes": 219043,
       "genres": [
         "Drama",
         "Romance"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt8740790"
     },
     {
       "title": "Daredevil",
       "year": 2015,
       "rating": 8.6,
-      "votes": 430000,
+      "votes": 524092,
       "genres": [
         "Action",
         "Crime",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt3322312"
     },
     {
       "title": "The Punisher",
       "year": 2017,
-      "rating": 8.5,
-      "votes": 230000,
+      "rating": 8.4,
+      "votes": 293826,
       "genres": [
         "Action",
         "Crime",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt5675620"
     },
     {
       "title": "Jessica Jones",
       "year": 2015,
-      "rating": 7.9,
-      "votes": 200000,
+      "rating": 7.8,
+      "votes": 237839,
       "genres": [
         "Action",
         "Crime",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt2357547"
     },
     {
       "title": "Luke Cage",
       "year": 2016,
-      "rating": 7.4,
-      "votes": 130000,
+      "rating": 7.2,
+      "votes": 146890,
       "genres": [
         "Action",
         "Crime",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt3322314"
     },
     {
       "title": "Iron Fist",
       "year": 2017,
-      "rating": 6.5,
-      "votes": 95000,
+      "rating": 6.4,
+      "votes": 147761,
       "genres": [
         "Action",
         "Adventure",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt3322310"
     },
     {
       "title": "Orange Is the New Black",
       "year": 2013,
       "rating": 8.0,
-      "votes": 320000,
+      "votes": 331217,
       "genres": [
         "Comedy",
         "Crime",
         "Drama"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt2372162"
     },
     {
       "title": "GLOW",
       "year": 2017,
       "rating": 8.0,
-      "votes": 75000,
+      "votes": 53457,
       "genres": [
         "Comedy",
         "Drama",
         "Sport"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt5770786"
     },
     {
       "title": "Master of None",
       "year": 2015,
-      "rating": 8.3,
-      "votes": 80000,
+      "rating": 8.2,
+      "votes": 78581,
       "genres": [
         "Comedy",
         "Drama",
         "Romance"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt4635276"
     },
     {
       "title": "Unbreakable Kimmy Schmidt",
       "year": 2015,
-      "rating": 7.6,
-      "votes": 60000,
+      "rating": 7.5,
+      "votes": 82744,
       "genres": [
         "Comedy"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt3339966"
     },
     {
       "title": "13 Reasons Why",
       "year": 2017,
-      "rating": 7.5,
-      "votes": 230000,
+      "rating": 7.4,
+      "votes": 337279,
       "genres": [
         "Drama",
         "Mystery"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt1837492"
     },
     {
       "title": "Élite",
       "year": 2018,
-      "rating": 7.4,
-      "votes": 110000,
+      "rating": 7.1,
+      "votes": 98813,
       "genres": [
         "Crime",
         "Drama",
         "Mystery"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt7134908"
     },
     {
       "title": "Mr. Robot",
       "year": 2015,
-      "rating": 8.6,
-      "votes": 470000,
+      "rating": 8.5,
+      "votes": 462430,
       "genres": [
         "Crime",
         "Drama",
         "Thriller"
       ],
       "type": "series",
-      "netflix_status": "exclusive-region"
+      "netflix_status": "exclusive-region",
+      "imdb_id": "tt4158110"
     },
     {
       "title": "Sherlock",
       "year": 2010,
-      "rating": 9.1,
-      "votes": 990000,
+      "rating": 9.0,
+      "votes": 1086290,
       "genres": [
         "Crime",
         "Drama",
         "Mystery"
       ],
       "type": "series",
-      "netflix_status": "library"
+      "netflix_status": "library",
+      "imdb_id": "tt1475582"
     },
     {
       "title": "Anne with an E",
       "year": 2017,
-      "rating": 8.7,
-      "votes": 90000,
+      "rating": 8.6,
+      "votes": 76600,
       "genres": [
         "Drama",
         "Family"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt5421602"
     },
     {
       "title": "Sense8",
       "year": 2015,
-      "rating": 8.3,
-      "votes": 175000,
+      "rating": 8.2,
+      "votes": 170731,
       "genres": [
         "Drama",
         "Sci-Fi"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt2431438"
     },
     {
       "title": "Castlevania",
       "year": 2017,
       "rating": 8.3,
-      "votes": 130000,
+      "votes": 93521,
       "genres": [
         "Animation",
         "Action",
         "Adventure"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt6517102"
     },
     {
       "title": "The Haunting of Hill House",
       "year": 2018,
-      "rating": 8.6,
-      "votes": 290000,
+      "rating": 8.5,
+      "votes": 325686,
       "genres": [
         "Drama",
         "Horror",
         "Mystery"
       ],
       "type": "limited-series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt6763664"
     },
     {
       "title": "When They See Us",
       "year": 2019,
-      "rating": 8.9,
-      "votes": 90000,
+      "rating": 8.8,
+      "votes": 156802,
       "genres": [
         "Biography",
         "Crime",
         "Drama"
       ],
       "type": "limited-series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt7137906"
     },
     {
       "title": "Beef",
       "year": 2023,
       "rating": 8.0,
-      "votes": 130000,
+      "votes": 163497,
       "genres": [
         "Comedy",
         "Drama"
       ],
       "type": "limited-series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt14403178"
     },
     {
       "title": "Baby Reindeer",
       "year": 2024,
-      "rating": 7.8,
-      "votes": 140000,
+      "rating": 7.7,
+      "votes": 190385,
       "genres": [
         "Drama",
         "Thriller"
       ],
       "type": "limited-series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt13649112"
     },
     {
       "title": "One Piece",
       "year": 2023,
-      "rating": 8.4,
-      "votes": 170000,
+      "rating": 8.3,
+      "votes": 204416,
       "genres": [
         "Action",
         "Adventure",
         "Comedy"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt11737520"
     },
     {
       "title": "3 Body Problem",
       "year": 2024,
       "rating": 7.5,
-      "votes": 150000,
+      "votes": 177200,
       "genres": [
         "Drama",
         "Mystery",
         "Sci-Fi"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt13016388"
     },
     {
       "title": "Ripley",
       "year": 2024,
-      "rating": 8.0,
-      "votes": 90000,
+      "rating": 8.1,
+      "votes": 66175,
       "genres": [
         "Crime",
         "Drama",
         "Thriller"
       ],
       "type": "limited-series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt11016042"
     },
     {
       "title": "Fool Me Once",
       "year": 2024,
-      "rating": 7.0,
-      "votes": 60000,
+      "rating": 6.8,
+      "votes": 66420,
       "genres": [
         "Crime",
         "Drama",
         "Mystery"
       ],
       "type": "limited-series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt5611024"
     },
     {
       "title": "The Diplomat",
       "year": 2023,
-      "rating": 7.9,
-      "votes": 75000,
+      "rating": 8.0,
+      "votes": 97245,
       "genres": [
         "Drama",
         "Thriller"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt17491088"
     },
     {
       "title": "Heartstopper",
       "year": 2022,
-      "rating": 8.3,
-      "votes": 65000,
+      "rating": 8.5,
+      "votes": 92809,
       "genres": [
         "Comedy",
         "Drama",
         "Romance"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt10638036"
     },
     {
       "title": "Russian Doll",
       "year": 2019,
-      "rating": 7.8,
-      "votes": 90000,
+      "rating": 7.7,
+      "votes": 115670,
       "genres": [
         "Comedy",
         "Drama",
         "Mystery"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt7520794"
     },
     {
       "title": "The OA",
       "year": 2016,
       "rating": 7.8,
-      "votes": 85000,
+      "votes": 124749,
       "genres": [
         "Drama",
         "Fantasy",
         "Mystery"
       ],
       "type": "series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt4635282"
     },
     {
       "title": "Stateless",
       "year": 2020,
       "rating": 7.5,
-      "votes": 7500,
+      "votes": 11424,
       "genres": [
         "Drama"
       ],
       "type": "limited-series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt4878488"
     },
     {
       "title": "Maid",
       "year": 2021,
-      "rating": 8.4,
-      "votes": 75000,
+      "rating": 8.3,
+      "votes": 115584,
       "genres": [
         "Drama"
       ],
       "type": "limited-series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt11337908"
     },
     {
       "title": "Unorthodox",
       "year": 2020,
       "rating": 8.0,
-      "votes": 70000,
+      "votes": 97818,
       "genres": [
         "Drama"
       ],
       "type": "limited-series",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt9815454"
     },
     {
       "title": "Devs",
       "year": 2020,
-      "rating": 7.8,
-      "votes": 95000,
+      "rating": 7.6,
+      "votes": 55967,
       "genres": [
         "Drama",
         "Mystery",
         "Sci-Fi"
       ],
       "type": "limited-series",
-      "netflix_status": "exclusive-region"
+      "netflix_status": "exclusive-region",
+      "imdb_id": "tt8134186"
     },
     {
       "title": "Klaus",
       "year": 2019,
       "rating": 8.2,
-      "votes": 165000,
+      "votes": 232782,
       "genres": [
         "Animation",
         "Adventure",
         "Comedy"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt4729430"
     },
     {
       "title": "Roma",
       "year": 2018,
-      "rating": 7.7,
-      "votes": 220000,
+      "rating": 7.6,
+      "votes": 176987,
       "genres": [
         "Drama"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt6155172"
     },
     {
       "title": "The Irishman",
       "year": 2019,
       "rating": 7.8,
-      "votes": 410000,
+      "votes": 468945,
       "genres": [
         "Biography",
         "Crime",
         "Drama"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt1302006"
     },
     {
       "title": "Marriage Story",
       "year": 2019,
       "rating": 7.9,
-      "votes": 280000,
+      "votes": 369658,
       "genres": [
         "Comedy",
         "Drama",
         "Romance"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt7653254"
     },
     {
       "title": "The Power of the Dog",
       "year": 2021,
       "rating": 6.8,
-      "votes": 130000,
+      "votes": 202835,
       "genres": [
         "Drama",
         "Romance",
         "Western"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt10293406"
     },
     {
       "title": "All Quiet on the Western Front",
       "year": 2022,
       "rating": 7.8,
-      "votes": 240000,
+      "votes": 310448,
       "genres": [
         "Action",
         "Drama",
         "War"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt1016150"
     },
     {
       "title": "Glass Onion: A Knives Out Mystery",
@@ -796,378 +858,408 @@
         "Drama"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt24734444"
     },
     {
       "title": "Don't Look Up",
       "year": 2021,
-      "rating": 7.2,
-      "votes": 580000,
+      "rating": 7.1,
+      "votes": 669471,
       "genres": [
         "Comedy",
         "Drama",
         "Sci-Fi"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt11286314"
     },
     {
       "title": "The Two Popes",
       "year": 2019,
       "rating": 7.6,
-      "votes": 65000,
+      "votes": 145921,
       "genres": [
         "Biography",
         "Comedy",
         "Drama"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt8404614"
     },
     {
       "title": "I'm Thinking of Ending Things",
       "year": 2020,
-      "rating": 6.6,
-      "votes": 130000,
+      "rating": 6.5,
+      "votes": 109113,
       "genres": [
         "Drama",
         "Mystery",
         "Thriller"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt7939766"
     },
     {
       "title": "His House",
       "year": 2020,
-      "rating": 6.5,
-      "votes": 30000,
+      "rating": 6.4,
+      "votes": 51937,
       "genres": [
         "Drama",
         "Horror",
         "Mystery"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt8508734"
     },
     {
       "title": "The Lost Daughter",
       "year": 2021,
-      "rating": 6.6,
-      "votes": 45000,
+      "rating": 6.7,
+      "votes": 80018,
       "genres": [
         "Drama",
         "Thriller"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt9100054"
     },
     {
       "title": "Maestro",
       "year": 2023,
-      "rating": 6.6,
-      "votes": 35000,
+      "rating": 6.5,
+      "votes": 67592,
       "genres": [
         "Biography",
         "Drama",
         "Music"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt5535276"
     },
     {
       "title": "Society of the Snow",
       "year": 2023,
-      "rating": 7.9,
-      "votes": 100000,
+      "rating": 7.8,
+      "votes": 170929,
       "genres": [
         "Adventure",
         "Biography",
         "Drama"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt16277242"
     },
     {
       "title": "Rebel Ridge",
       "year": 2024,
-      "rating": 7.0,
-      "votes": 80000,
+      "rating": 6.8,
+      "votes": 99463,
       "genres": [
         "Action",
         "Crime",
         "Drama"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt11301886"
     },
     {
       "title": "Hit Man",
       "year": 2023,
-      "rating": 6.9,
-      "votes": 90000,
+      "rating": 6.8,
+      "votes": 128641,
       "genres": [
         "Action",
         "Comedy",
         "Crime"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt20215968"
     },
     {
       "title": "Damsel",
       "year": 2024,
-      "rating": 6.0,
-      "votes": 130000,
+      "rating": 6.1,
+      "votes": 118149,
       "genres": [
         "Action",
         "Adventure",
         "Fantasy"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt13452446"
     },
     {
       "title": "Leave the World Behind",
       "year": 2023,
       "rating": 6.4,
-      "votes": 200000,
+      "votes": 238837,
       "genres": [
         "Drama",
         "Mystery",
         "Sci-Fi"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt12747748"
     },
     {
       "title": "The Killer",
       "year": 2023,
-      "rating": 6.8,
-      "votes": 180000,
+      "rating": 6.7,
+      "votes": 219122,
       "genres": [
         "Action",
         "Adventure",
         "Crime"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt1136617"
     },
     {
       "title": "Nimona",
       "year": 2023,
-      "rating": 7.6,
-      "votes": 65000,
+      "rating": 7.5,
+      "votes": 59981,
       "genres": [
         "Animation",
         "Action",
         "Adventure"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt19500164"
     },
     {
       "title": "Mank",
       "year": 2020,
       "rating": 6.8,
-      "votes": 80000,
+      "votes": 103814,
       "genres": [
         "Biography",
         "Drama"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt10618286"
     },
     {
       "title": "Beasts of No Nation",
       "year": 2015,
       "rating": 7.7,
-      "votes": 80000,
+      "votes": 90320,
       "genres": [
         "Drama",
         "War"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt1365050"
     },
     {
       "title": "Okja",
       "year": 2017,
       "rating": 7.3,
-      "votes": 100000,
+      "votes": 138895,
       "genres": [
         "Action",
         "Adventure",
         "Drama"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt3967856"
     },
     {
       "title": "The Ballad of Buster Scruggs",
       "year": 2018,
-      "rating": 7.3,
-      "votes": 85000,
+      "rating": 7.2,
+      "votes": 177474,
       "genres": [
         "Comedy",
         "Drama",
         "Musical"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt6412452"
     },
     {
       "title": "The Trial of the Chicago 7",
       "year": 2020,
       "rating": 7.7,
-      "votes": 165000,
+      "votes": 204055,
       "genres": [
         "Drama",
         "History",
         "Thriller"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt1070874"
     },
     {
       "title": "Athena",
       "year": 2022,
       "rating": 6.8,
-      "votes": 30000,
+      "votes": 23597,
       "genres": [
         "Action",
         "Drama",
         "Thriller"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt15445056"
     },
     {
       "title": "The Wonder",
       "year": 2022,
       "rating": 6.6,
-      "votes": 35000,
+      "votes": 48691,
       "genres": [
         "Drama",
         "Mystery",
         "Thriller"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt9288822"
     },
     {
       "title": "Tick, Tick... Boom!",
       "year": 2021,
       "rating": 7.5,
-      "votes": 65000,
+      "votes": 125341,
       "genres": [
         "Biography",
         "Drama",
         "Music"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt8721424"
     },
     {
       "title": "Pieces of a Woman",
       "year": 2020,
       "rating": 7.0,
-      "votes": 50000,
+      "votes": 58903,
       "genres": [
         "Drama"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt11161474"
     },
     {
       "title": "Bird Box",
       "year": 2018,
       "rating": 6.6,
-      "votes": 290000,
+      "votes": 416211,
       "genres": [
         "Drama",
         "Horror",
         "Mystery"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt2737304"
     },
     {
       "title": "Extraction",
       "year": 2020,
       "rating": 6.8,
-      "votes": 270000,
+      "votes": 287244,
       "genres": [
         "Action",
         "Thriller"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt8936646"
     },
     {
       "title": "Red Notice",
       "year": 2021,
       "rating": 6.3,
-      "votes": 240000,
+      "votes": 353719,
       "genres": [
         "Action",
         "Comedy",
         "Crime"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt7991608"
     },
     {
       "title": "The Adam Project",
       "year": 2022,
       "rating": 6.7,
-      "votes": 200000,
+      "votes": 257238,
       "genres": [
         "Action",
         "Adventure",
         "Comedy"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt2463208"
     },
     {
       "title": "Enola Holmes",
       "year": 2020,
       "rating": 6.6,
-      "votes": 165000,
+      "votes": 243937,
       "genres": [
         "Action",
         "Adventure",
         "Crime"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt7846844"
     },
     {
       "title": "Murder Mystery",
       "year": 2019,
-      "rating": 6.0,
-      "votes": 175000,
+      "rating": 6.1,
+      "votes": 189570,
       "genres": [
         "Action",
         "Comedy",
         "Crime"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt1618434"
     },
     {
       "title": "The Old Guard",
       "year": 2020,
-      "rating": 6.6,
-      "votes": 230000,
+      "rating": 6.7,
+      "votes": 208963,
       "genres": [
         "Action",
         "Adventure",
         "Fantasy"
       ],
       "type": "movie",
-      "netflix_status": "original"
+      "netflix_status": "original",
+      "imdb_id": "tt7556122"
     }
   ]
 }
