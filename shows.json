@@ -1,6 +1,6 @@
 {
   "updated": "2026-04-25",
-  "source": "Curated dataset of well-known Netflix originals/exclusives with publicly available IMDb ratings. Ratings are static snapshots and may drift over time.",
+  "source": "Catalog discovered via TMDb (Netflix). Ratings from OMDb (IMDb).",
   "shows": [
     {
       "title": "Breaking Bad",
@@ -14,7 +14,9 @@
       ],
       "type": "series",
       "netflix_status": "exclusive-region",
-      "imdb_id": "tt0903747"
+      "imdb_id": "tt0903747",
+      "tmdb_id": 1396,
+      "rating_refreshed_at": "2026-04-25T06:21:30Z"
     },
     {
       "title": "Better Call Saul",
@@ -27,7 +29,9 @@
       ],
       "type": "series",
       "netflix_status": "exclusive-region",
-      "imdb_id": "tt3032476"
+      "imdb_id": "tt3032476",
+      "tmdb_id": 60059,
+      "rating_refreshed_at": "2026-04-25T06:21:31Z"
     },
     {
       "title": "Avatar: The Last Airbender",
@@ -41,7 +45,9 @@
       ],
       "type": "series",
       "netflix_status": "library",
-      "imdb_id": "tt0417299"
+      "imdb_id": "tt0417299",
+      "tmdb_id": 246,
+      "rating_refreshed_at": "2026-04-25T06:21:31Z"
     },
     {
       "title": "Arcane",
@@ -55,7 +61,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt11126994"
+      "imdb_id": "tt11126994",
+      "tmdb_id": 94605,
+      "rating_refreshed_at": "2026-04-25T06:21:31Z"
     },
     {
       "title": "Stranger Things",
@@ -69,7 +77,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt4574334"
+      "imdb_id": "tt4574334",
+      "tmdb_id": 66732,
+      "rating_refreshed_at": "2026-04-25T06:21:31Z"
     },
     {
       "title": "Dark",
@@ -83,7 +93,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt5753856"
+      "imdb_id": "tt5753856",
+      "tmdb_id": 70523,
+      "rating_refreshed_at": "2026-04-25T06:21:31Z"
     },
     {
       "title": "Black Mirror",
@@ -97,7 +109,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt2085059"
+      "imdb_id": "tt2085059",
+      "tmdb_id": 42009,
+      "rating_refreshed_at": "2026-04-25T06:21:31Z"
     },
     {
       "title": "BoJack Horseman",
@@ -111,7 +125,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt3398228"
+      "imdb_id": "tt3398228",
+      "tmdb_id": 61222,
+      "rating_refreshed_at": "2026-04-25T06:21:31Z"
     },
     {
       "title": "Mindhunter",
@@ -125,7 +141,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt5290382"
+      "imdb_id": "tt5290382",
+      "rating_refreshed_at": "2026-04-25T06:21:32Z"
     },
     {
       "title": "Narcos",
@@ -139,7 +156,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt2707408"
+      "imdb_id": "tt2707408",
+      "rating_refreshed_at": "2026-04-25T06:21:32Z"
     },
     {
       "title": "The Crown",
@@ -153,7 +171,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt4786824"
+      "imdb_id": "tt4786824",
+      "tmdb_id": 65494,
+      "rating_refreshed_at": "2026-04-25T06:21:32Z"
     },
     {
       "title": "Ozark",
@@ -167,7 +187,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt5071412"
+      "imdb_id": "tt5071412",
+      "rating_refreshed_at": "2026-04-25T06:21:32Z"
     },
     {
       "title": "House of Cards",
@@ -179,7 +200,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt1856010"
+      "imdb_id": "tt1856010",
+      "rating_refreshed_at": "2026-04-25T06:21:32Z"
     },
     {
       "title": "Cobra Kai",
@@ -193,7 +215,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt7221388"
+      "imdb_id": "tt7221388",
+      "tmdb_id": 77169,
+      "rating_refreshed_at": "2026-04-25T06:21:32Z"
     },
     {
       "title": "The Queen's Gambit",
@@ -205,7 +229,8 @@
       ],
       "type": "limited-series",
       "netflix_status": "original",
-      "imdb_id": "tt10048342"
+      "imdb_id": "tt10048342",
+      "rating_refreshed_at": "2026-04-25T06:21:32Z"
     },
     {
       "title": "Squid Game",
@@ -219,7 +244,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt10919420"
+      "imdb_id": "tt10919420",
+      "tmdb_id": 93405,
+      "rating_refreshed_at": "2026-04-25T06:21:33Z"
     },
     {
       "title": "Money Heist",
@@ -233,7 +260,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt6468322"
+      "imdb_id": "tt6468322",
+      "rating_refreshed_at": "2026-04-25T06:21:33Z"
     },
     {
       "title": "Peaky Blinders",
@@ -246,7 +274,9 @@
       ],
       "type": "series",
       "netflix_status": "exclusive-region",
-      "imdb_id": "tt2442560"
+      "imdb_id": "tt2442560",
+      "tmdb_id": 60574,
+      "rating_refreshed_at": "2026-04-25T06:21:33Z"
     },
     {
       "title": "The Witcher",
@@ -260,7 +290,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt5180504"
+      "imdb_id": "tt5180504",
+      "tmdb_id": 71912,
+      "rating_refreshed_at": "2026-04-25T06:21:33Z"
     },
     {
       "title": "Wednesday",
@@ -274,7 +306,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt13443470"
+      "imdb_id": "tt13443470",
+      "tmdb_id": 119051,
+      "rating_refreshed_at": "2026-04-25T06:21:33Z"
     },
     {
       "title": "Sex Education",
@@ -288,7 +322,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt7767422"
+      "imdb_id": "tt7767422",
+      "rating_refreshed_at": "2026-04-25T06:21:33Z"
     },
     {
       "title": "The Umbrella Academy",
@@ -302,7 +337,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt1312171"
+      "imdb_id": "tt1312171",
+      "rating_refreshed_at": "2026-04-25T06:21:34Z"
     },
     {
       "title": "Lupin",
@@ -316,7 +352,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt2531336"
+      "imdb_id": "tt2531336",
+      "rating_refreshed_at": "2026-04-25T06:21:34Z"
     },
     {
       "title": "Bridgerton",
@@ -329,7 +366,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt8740790"
+      "imdb_id": "tt8740790",
+      "tmdb_id": 91239,
+      "rating_refreshed_at": "2026-04-25T06:21:34Z"
     },
     {
       "title": "Daredevil",
@@ -343,7 +382,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt3322312"
+      "imdb_id": "tt3322312",
+      "rating_refreshed_at": "2026-04-25T06:21:34Z"
     },
     {
       "title": "The Punisher",
@@ -357,7 +397,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt5675620"
+      "imdb_id": "tt5675620",
+      "rating_refreshed_at": "2026-04-25T06:21:34Z"
     },
     {
       "title": "Jessica Jones",
@@ -371,7 +412,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt2357547"
+      "imdb_id": "tt2357547",
+      "rating_refreshed_at": "2026-04-25T06:21:34Z"
     },
     {
       "title": "Luke Cage",
@@ -385,7 +427,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt3322314"
+      "imdb_id": "tt3322314",
+      "rating_refreshed_at": "2026-04-25T06:21:34Z"
     },
     {
       "title": "Iron Fist",
@@ -399,7 +442,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt3322310"
+      "imdb_id": "tt3322310",
+      "rating_refreshed_at": "2026-04-25T06:21:35Z"
     },
     {
       "title": "Orange Is the New Black",
@@ -413,7 +457,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt2372162"
+      "imdb_id": "tt2372162",
+      "tmdb_id": 1424,
+      "rating_refreshed_at": "2026-04-25T06:21:35Z"
     },
     {
       "title": "GLOW",
@@ -427,7 +473,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt5770786"
+      "imdb_id": "tt5770786",
+      "rating_refreshed_at": "2026-04-25T06:21:35Z"
     },
     {
       "title": "Master of None",
@@ -441,7 +488,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt4635276"
+      "imdb_id": "tt4635276",
+      "rating_refreshed_at": "2026-04-25T06:21:35Z"
     },
     {
       "title": "Unbreakable Kimmy Schmidt",
@@ -453,7 +501,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt3339966"
+      "imdb_id": "tt3339966",
+      "rating_refreshed_at": "2026-04-25T06:21:35Z"
     },
     {
       "title": "13 Reasons Why",
@@ -466,7 +515,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt1837492"
+      "imdb_id": "tt1837492",
+      "rating_refreshed_at": "2026-04-25T06:21:35Z"
     },
     {
       "title": "Élite",
@@ -480,7 +530,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt7134908"
+      "imdb_id": "tt7134908",
+      "tmdb_id": 76669,
+      "rating_refreshed_at": "2026-04-25T06:21:35Z"
     },
     {
       "title": "Mr. Robot",
@@ -494,7 +546,8 @@
       ],
       "type": "series",
       "netflix_status": "exclusive-region",
-      "imdb_id": "tt4158110"
+      "imdb_id": "tt4158110",
+      "rating_refreshed_at": "2026-04-25T06:21:36Z"
     },
     {
       "title": "Sherlock",
@@ -508,7 +561,8 @@
       ],
       "type": "series",
       "netflix_status": "library",
-      "imdb_id": "tt1475582"
+      "imdb_id": "tt1475582",
+      "rating_refreshed_at": "2026-04-25T06:21:36Z"
     },
     {
       "title": "Anne with an E",
@@ -521,7 +575,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt5421602"
+      "imdb_id": "tt5421602",
+      "rating_refreshed_at": "2026-04-25T06:21:36Z"
     },
     {
       "title": "Sense8",
@@ -534,7 +589,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt2431438"
+      "imdb_id": "tt2431438",
+      "rating_refreshed_at": "2026-04-25T06:21:36Z"
     },
     {
       "title": "Castlevania",
@@ -548,7 +604,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt6517102"
+      "imdb_id": "tt6517102",
+      "rating_refreshed_at": "2026-04-25T06:21:36Z"
     },
     {
       "title": "The Haunting of Hill House",
@@ -562,7 +619,8 @@
       ],
       "type": "limited-series",
       "netflix_status": "original",
-      "imdb_id": "tt6763664"
+      "imdb_id": "tt6763664",
+      "rating_refreshed_at": "2026-04-25T06:21:36Z"
     },
     {
       "title": "When They See Us",
@@ -576,7 +634,8 @@
       ],
       "type": "limited-series",
       "netflix_status": "original",
-      "imdb_id": "tt7137906"
+      "imdb_id": "tt7137906",
+      "rating_refreshed_at": "2026-04-25T06:21:36Z"
     },
     {
       "title": "Beef",
@@ -589,7 +648,8 @@
       ],
       "type": "limited-series",
       "netflix_status": "original",
-      "imdb_id": "tt14403178"
+      "imdb_id": "tt14403178",
+      "rating_refreshed_at": "2026-04-25T06:21:37Z"
     },
     {
       "title": "Baby Reindeer",
@@ -602,7 +662,8 @@
       ],
       "type": "limited-series",
       "netflix_status": "original",
-      "imdb_id": "tt13649112"
+      "imdb_id": "tt13649112",
+      "rating_refreshed_at": "2026-04-25T06:21:37Z"
     },
     {
       "title": "One Piece",
@@ -616,7 +677,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt11737520"
+      "imdb_id": "tt11737520",
+      "tmdb_id": 111110,
+      "rating_refreshed_at": "2026-04-25T06:21:37Z"
     },
     {
       "title": "3 Body Problem",
@@ -630,7 +693,9 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt13016388"
+      "imdb_id": "tt13016388",
+      "tmdb_id": 108545,
+      "rating_refreshed_at": "2026-04-25T06:21:37Z"
     },
     {
       "title": "Ripley",
@@ -644,7 +709,8 @@
       ],
       "type": "limited-series",
       "netflix_status": "original",
-      "imdb_id": "tt11016042"
+      "imdb_id": "tt11016042",
+      "rating_refreshed_at": "2026-04-25T06:21:37Z"
     },
     {
       "title": "Fool Me Once",
@@ -658,7 +724,8 @@
       ],
       "type": "limited-series",
       "netflix_status": "original",
-      "imdb_id": "tt5611024"
+      "imdb_id": "tt5611024",
+      "rating_refreshed_at": "2026-04-25T06:21:37Z"
     },
     {
       "title": "The Diplomat",
@@ -671,7 +738,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt17491088"
+      "imdb_id": "tt17491088",
+      "rating_refreshed_at": "2026-04-25T06:21:37Z"
     },
     {
       "title": "Heartstopper",
@@ -685,7 +753,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt10638036"
+      "imdb_id": "tt10638036",
+      "rating_refreshed_at": "2026-04-25T06:21:38Z"
     },
     {
       "title": "Russian Doll",
@@ -699,7 +768,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt7520794"
+      "imdb_id": "tt7520794",
+      "rating_refreshed_at": "2026-04-25T06:21:38Z"
     },
     {
       "title": "The OA",
@@ -713,7 +783,8 @@
       ],
       "type": "series",
       "netflix_status": "original",
-      "imdb_id": "tt4635282"
+      "imdb_id": "tt4635282",
+      "rating_refreshed_at": "2026-04-25T06:21:38Z"
     },
     {
       "title": "Stateless",
@@ -725,7 +796,8 @@
       ],
       "type": "limited-series",
       "netflix_status": "original",
-      "imdb_id": "tt4878488"
+      "imdb_id": "tt4878488",
+      "rating_refreshed_at": "2026-04-25T06:21:38Z"
     },
     {
       "title": "Maid",
@@ -737,7 +809,8 @@
       ],
       "type": "limited-series",
       "netflix_status": "original",
-      "imdb_id": "tt11337908"
+      "imdb_id": "tt11337908",
+      "rating_refreshed_at": "2026-04-25T06:21:38Z"
     },
     {
       "title": "Unorthodox",
@@ -749,7 +822,8 @@
       ],
       "type": "limited-series",
       "netflix_status": "original",
-      "imdb_id": "tt9815454"
+      "imdb_id": "tt9815454",
+      "rating_refreshed_at": "2026-04-25T06:21:38Z"
     },
     {
       "title": "Devs",
@@ -763,7 +837,8 @@
       ],
       "type": "limited-series",
       "netflix_status": "exclusive-region",
-      "imdb_id": "tt8134186"
+      "imdb_id": "tt8134186",
+      "rating_refreshed_at": "2026-04-25T06:21:38Z"
     },
     {
       "title": "Klaus",
@@ -777,7 +852,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt4729430"
+      "imdb_id": "tt4729430",
+      "rating_refreshed_at": "2026-04-25T06:21:39Z"
     },
     {
       "title": "Roma",
@@ -789,7 +865,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt6155172"
+      "imdb_id": "tt6155172",
+      "rating_refreshed_at": "2026-04-25T06:21:39Z"
     },
     {
       "title": "The Irishman",
@@ -803,7 +880,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt1302006"
+      "imdb_id": "tt1302006",
+      "rating_refreshed_at": "2026-04-25T06:21:39Z"
     },
     {
       "title": "Marriage Story",
@@ -817,7 +895,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt7653254"
+      "imdb_id": "tt7653254",
+      "rating_refreshed_at": "2026-04-25T06:21:39Z"
     },
     {
       "title": "The Power of the Dog",
@@ -831,7 +910,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt10293406"
+      "imdb_id": "tt10293406",
+      "rating_refreshed_at": "2026-04-25T06:21:39Z"
     },
     {
       "title": "All Quiet on the Western Front",
@@ -845,7 +925,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt1016150"
+      "imdb_id": "tt1016150",
+      "rating_refreshed_at": "2026-04-25T06:21:39Z"
     },
     {
       "title": "Glass Onion: A Knives Out Mystery",
@@ -859,7 +940,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt24734444"
+      "imdb_id": "tt24734444",
+      "rating_refreshed_at": "2026-04-25T06:21:39Z"
     },
     {
       "title": "Don't Look Up",
@@ -873,7 +955,9 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt11286314"
+      "imdb_id": "tt11286314",
+      "tmdb_id": 646380,
+      "rating_refreshed_at": "2026-04-25T06:21:40Z"
     },
     {
       "title": "The Two Popes",
@@ -887,7 +971,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt8404614"
+      "imdb_id": "tt8404614",
+      "rating_refreshed_at": "2026-04-25T06:21:40Z"
     },
     {
       "title": "I'm Thinking of Ending Things",
@@ -901,7 +986,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt7939766"
+      "imdb_id": "tt7939766",
+      "rating_refreshed_at": "2026-04-25T06:21:40Z"
     },
     {
       "title": "His House",
@@ -915,7 +1001,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt8508734"
+      "imdb_id": "tt8508734",
+      "rating_refreshed_at": "2026-04-25T06:21:40Z"
     },
     {
       "title": "The Lost Daughter",
@@ -928,7 +1015,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt9100054"
+      "imdb_id": "tt9100054",
+      "rating_refreshed_at": "2026-04-25T06:21:40Z"
     },
     {
       "title": "Maestro",
@@ -942,7 +1030,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt5535276"
+      "imdb_id": "tt5535276",
+      "rating_refreshed_at": "2026-04-25T06:21:40Z"
     },
     {
       "title": "Society of the Snow",
@@ -956,7 +1045,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt16277242"
+      "imdb_id": "tt16277242",
+      "rating_refreshed_at": "2026-04-25T06:21:40Z"
     },
     {
       "title": "Rebel Ridge",
@@ -970,7 +1060,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt11301886"
+      "imdb_id": "tt11301886",
+      "rating_refreshed_at": "2026-04-25T06:21:41Z"
     },
     {
       "title": "Hit Man",
@@ -984,7 +1075,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt20215968"
+      "imdb_id": "tt20215968",
+      "rating_refreshed_at": "2026-04-25T06:21:41Z"
     },
     {
       "title": "Damsel",
@@ -998,7 +1090,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt13452446"
+      "imdb_id": "tt13452446",
+      "rating_refreshed_at": "2026-04-25T06:21:41Z"
     },
     {
       "title": "Leave the World Behind",
@@ -1012,7 +1105,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt12747748"
+      "imdb_id": "tt12747748",
+      "rating_refreshed_at": "2026-04-25T06:21:41Z"
     },
     {
       "title": "The Killer",
@@ -1026,7 +1120,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt1136617"
+      "imdb_id": "tt1136617",
+      "rating_refreshed_at": "2026-04-25T06:21:41Z"
     },
     {
       "title": "Nimona",
@@ -1040,7 +1135,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt19500164"
+      "imdb_id": "tt19500164",
+      "rating_refreshed_at": "2026-04-25T06:21:41Z"
     },
     {
       "title": "Mank",
@@ -1053,7 +1149,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt10618286"
+      "imdb_id": "tt10618286",
+      "rating_refreshed_at": "2026-04-25T06:21:41Z"
     },
     {
       "title": "Beasts of No Nation",
@@ -1066,7 +1163,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt1365050"
+      "imdb_id": "tt1365050",
+      "rating_refreshed_at": "2026-04-25T06:21:42Z"
     },
     {
       "title": "Okja",
@@ -1080,7 +1178,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt3967856"
+      "imdb_id": "tt3967856",
+      "rating_refreshed_at": "2026-04-25T06:21:42Z"
     },
     {
       "title": "The Ballad of Buster Scruggs",
@@ -1094,7 +1193,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt6412452"
+      "imdb_id": "tt6412452",
+      "rating_refreshed_at": "2026-04-25T06:21:42Z"
     },
     {
       "title": "The Trial of the Chicago 7",
@@ -1108,7 +1208,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt1070874"
+      "imdb_id": "tt1070874",
+      "rating_refreshed_at": "2026-04-25T06:21:42Z"
     },
     {
       "title": "Athena",
@@ -1122,7 +1223,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt15445056"
+      "imdb_id": "tt15445056",
+      "rating_refreshed_at": "2026-04-25T06:21:42Z"
     },
     {
       "title": "The Wonder",
@@ -1136,7 +1238,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt9288822"
+      "imdb_id": "tt9288822",
+      "rating_refreshed_at": "2026-04-25T06:21:42Z"
     },
     {
       "title": "Tick, Tick... Boom!",
@@ -1150,7 +1253,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt8721424"
+      "imdb_id": "tt8721424",
+      "rating_refreshed_at": "2026-04-25T06:21:42Z"
     },
     {
       "title": "Pieces of a Woman",
@@ -1162,7 +1266,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt11161474"
+      "imdb_id": "tt11161474",
+      "rating_refreshed_at": "2026-04-25T06:21:43Z"
     },
     {
       "title": "Bird Box",
@@ -1176,7 +1281,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt2737304"
+      "imdb_id": "tt2737304",
+      "rating_refreshed_at": "2026-04-25T06:21:43Z"
     },
     {
       "title": "Extraction",
@@ -1189,7 +1295,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt8936646"
+      "imdb_id": "tt8936646",
+      "rating_refreshed_at": "2026-04-25T06:21:43Z"
     },
     {
       "title": "Red Notice",
@@ -1203,7 +1310,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt7991608"
+      "imdb_id": "tt7991608",
+      "rating_refreshed_at": "2026-04-25T06:21:43Z"
     },
     {
       "title": "The Adam Project",
@@ -1217,7 +1325,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt2463208"
+      "imdb_id": "tt2463208",
+      "rating_refreshed_at": "2026-04-25T06:21:43Z"
     },
     {
       "title": "Enola Holmes",
@@ -1231,7 +1340,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt7846844"
+      "imdb_id": "tt7846844",
+      "rating_refreshed_at": "2026-04-25T06:21:43Z"
     },
     {
       "title": "Murder Mystery",
@@ -1245,7 +1355,8 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt1618434"
+      "imdb_id": "tt1618434",
+      "rating_refreshed_at": "2026-04-25T06:21:43Z"
     },
     {
       "title": "The Old Guard",
@@ -1259,7 +1370,2596 @@
       ],
       "type": "movie",
       "netflix_status": "original",
-      "imdb_id": "tt7556122"
+      "imdb_id": "tt7556122",
+      "rating_refreshed_at": "2026-04-25T06:21:44Z"
+    },
+    {
+      "title": "Grey's Anatomy",
+      "year": 2005,
+      "rating": 7.6,
+      "votes": 373275,
+      "genres": [
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0413573",
+      "tmdb_id": 1416,
+      "rating_refreshed_at": "2026-04-25T06:21:44Z"
+    },
+    {
+      "title": "NCIS",
+      "year": 2003,
+      "rating": 7.8,
+      "votes": 175454,
+      "genres": [
+        "Crime",
+        "Drama",
+        "Action & Adventure"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0364845",
+      "tmdb_id": 4614,
+      "rating_refreshed_at": "2026-04-25T06:21:44Z"
+    },
+    {
+      "title": "Shameless",
+      "year": 2011,
+      "rating": 8.5,
+      "votes": 329670,
+      "genres": [
+        "Drama",
+        "Comedy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1586680",
+      "tmdb_id": 34307,
+      "rating_refreshed_at": "2026-04-25T06:21:44Z"
+    },
+    {
+      "title": "JUJUTSU KAISEN",
+      "year": 2020,
+      "rating": 8.5,
+      "votes": 203554,
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt12343534",
+      "tmdb_id": 95479,
+      "rating_refreshed_at": "2026-04-25T06:21:44Z"
+    },
+    {
+      "title": "S.W.A.T.",
+      "year": 2017,
+      "rating": 7.2,
+      "votes": 40571,
+      "genres": [
+        "Crime",
+        "Action & Adventure",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt6111130",
+      "tmdb_id": 71790,
+      "rating_refreshed_at": "2026-04-25T06:21:44Z"
+    },
+    {
+      "title": "Suits",
+      "year": 2011,
+      "rating": 8.4,
+      "votes": 533078,
+      "genres": [
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1632701",
+      "tmdb_id": 37680,
+      "rating_refreshed_at": "2026-04-25T06:21:45Z"
+    },
+    {
+      "title": "The Blacklist",
+      "year": 2013,
+      "rating": 7.9,
+      "votes": 298634,
+      "genres": [
+        "Drama",
+        "Crime",
+        "Mystery"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt2741602",
+      "tmdb_id": 46952,
+      "rating_refreshed_at": "2026-04-25T06:21:45Z"
+    },
+    {
+      "title": "Bloodhounds",
+      "year": 2023,
+      "rating": 8.1,
+      "votes": 26563,
+      "genres": [
+        "Drama",
+        "Action & Adventure",
+        "Crime"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt26315487",
+      "tmdb_id": 127529,
+      "rating_refreshed_at": "2026-04-25T06:21:45Z"
+    },
+    {
+      "title": "Miraculous: Tales of Ladybug & Cat Noir",
+      "year": 2015,
+      "rating": 7.5,
+      "votes": 19232,
+      "genres": [
+        "Action & Adventure",
+        "Animation",
+        "Kids"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt2580046",
+      "tmdb_id": 65334,
+      "rating_refreshed_at": "2026-04-25T06:21:45Z"
+    },
+    {
+      "title": "The Flash",
+      "year": 2014,
+      "rating": 7.5,
+      "votes": 383723,
+      "genres": [
+        "Drama",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt3107288",
+      "tmdb_id": 60735,
+      "rating_refreshed_at": "2026-04-25T06:21:45Z"
+    },
+    {
+      "title": "Stargate SG-1",
+      "year": 1997,
+      "rating": 8.4,
+      "votes": 107722,
+      "genres": [
+        "Sci-Fi & Fantasy",
+        "Action & Adventure"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0118480",
+      "tmdb_id": 4629,
+      "rating_refreshed_at": "2026-04-25T06:21:45Z"
+    },
+    {
+      "title": "Lucifer",
+      "year": 2016,
+      "rating": 8.0,
+      "votes": 389333,
+      "genres": [
+        "Crime",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt4052886",
+      "tmdb_id": 63174,
+      "rating_refreshed_at": "2026-04-25T06:21:45Z"
+    },
+    {
+      "title": "The Walking Dead",
+      "year": 2010,
+      "rating": 8.1,
+      "votes": 1180953,
+      "genres": [
+        "Action & Adventure",
+        "Drama",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1520211",
+      "tmdb_id": 1402,
+      "rating_refreshed_at": "2026-04-25T06:21:46Z"
+    },
+    {
+      "title": "Homeland",
+      "year": 2011,
+      "rating": 8.3,
+      "votes": 376471,
+      "genres": [
+        "Drama",
+        "War & Politics",
+        "Crime"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1796960",
+      "tmdb_id": 1407,
+      "rating_refreshed_at": "2026-04-25T06:21:46Z"
+    },
+    {
+      "title": "Spartacus",
+      "year": 2010,
+      "rating": 8.4,
+      "votes": 294023,
+      "genres": [
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1442449",
+      "tmdb_id": 46296,
+      "rating_refreshed_at": "2026-04-25T06:21:46Z"
+    },
+    {
+      "title": "Vikings",
+      "year": 2013,
+      "rating": 8.5,
+      "votes": 636827,
+      "genres": [
+        "Action & Adventure",
+        "Drama",
+        "War & Politics"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt2306299",
+      "tmdb_id": 44217,
+      "rating_refreshed_at": "2026-04-25T06:21:46Z"
+    },
+    {
+      "title": "Outlander",
+      "year": 2014,
+      "rating": 8.3,
+      "votes": 199573,
+      "genres": [
+        "Drama",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt3006802",
+      "tmdb_id": 56570,
+      "rating_refreshed_at": "2026-04-25T06:21:46Z"
+    },
+    {
+      "title": "Frieren: Beyond Journey's End",
+      "year": 2023,
+      "rating": 8.9,
+      "votes": 67196,
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Drama",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt22248376",
+      "tmdb_id": 209867,
+      "rating_refreshed_at": "2026-04-25T06:21:46Z"
+    },
+    {
+      "title": "Teen Wolf",
+      "year": 2011,
+      "rating": 7.7,
+      "votes": 177348,
+      "genres": [
+        "Sci-Fi & Fantasy",
+        "Drama",
+        "Comedy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1567432",
+      "tmdb_id": 34524,
+      "rating_refreshed_at": "2026-04-25T06:21:46Z"
+    },
+    {
+      "title": "Fake Profile",
+      "year": 2023,
+      "rating": 5.7,
+      "votes": 6025,
+      "genres": [
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt14494938",
+      "tmdb_id": 227371,
+      "rating_refreshed_at": "2026-04-25T06:21:47Z"
+    },
+    {
+      "title": "Seinfeld",
+      "year": 1989,
+      "rating": 8.9,
+      "votes": 382252,
+      "genres": [
+        "Comedy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0098904",
+      "tmdb_id": 1400,
+      "rating_refreshed_at": "2026-04-25T06:21:47Z"
+    },
+    {
+      "title": "Pokémon",
+      "year": 1997,
+      "rating": 7.6,
+      "votes": 54288,
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0168366",
+      "tmdb_id": 60572,
+      "rating_refreshed_at": "2026-04-25T06:21:47Z"
+    },
+    {
+      "title": "The Apothecary Diaries",
+      "year": 2023,
+      "rating": 8.6,
+      "votes": 22416,
+      "genres": [
+        "Animation",
+        "Drama",
+        "Mystery"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt26743760",
+      "tmdb_id": 220542,
+      "rating_refreshed_at": "2026-04-25T06:21:47Z"
+    },
+    {
+      "title": "Young Sheldon",
+      "year": 2017,
+      "rating": 7.7,
+      "votes": 140269,
+      "genres": [
+        "Comedy",
+        "Family",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt6226232",
+      "tmdb_id": 71728,
+      "rating_refreshed_at": "2026-04-25T06:21:47Z"
+    },
+    {
+      "title": "XO, Kitty",
+      "year": 2023,
+      "rating": 6.5,
+      "votes": 22644,
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt14490706",
+      "tmdb_id": 195670,
+      "rating_refreshed_at": "2026-04-25T06:21:47Z"
+    },
+    {
+      "title": "Brooklyn Nine-Nine",
+      "year": 2013,
+      "rating": 8.4,
+      "votes": 412257,
+      "genres": [
+        "Comedy",
+        "Crime"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt2467372",
+      "tmdb_id": 48891,
+      "rating_refreshed_at": "2026-04-25T06:21:47Z"
+    },
+    {
+      "title": "You",
+      "year": 2018,
+      "rating": 7.6,
+      "votes": 361631,
+      "genres": [
+        "Mystery",
+        "Crime",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt7335184",
+      "tmdb_id": 78191,
+      "rating_refreshed_at": "2026-04-25T06:21:48Z"
+    },
+    {
+      "title": "Weak Hero",
+      "year": 2022,
+      "rating": 8.4,
+      "votes": 19173,
+      "genres": [
+        "Action & Adventure",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt20234568",
+      "tmdb_id": 200709,
+      "rating_refreshed_at": "2026-04-25T06:21:48Z"
+    },
+    {
+      "title": "Detective Conan",
+      "year": 1996,
+      "rating": 8.5,
+      "votes": 17940,
+      "genres": [
+        "Animation",
+        "Crime",
+        "Mystery",
+        "Comedy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0131179",
+      "tmdb_id": 30983,
+      "rating_refreshed_at": "2026-04-25T06:21:48Z"
+    },
+    {
+      "title": "Gilmore Girls",
+      "year": 2000,
+      "rating": 8.2,
+      "votes": 172052,
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0238784",
+      "tmdb_id": 4586,
+      "rating_refreshed_at": "2026-04-25T06:21:48Z"
+    },
+    {
+      "title": "The Resident",
+      "year": 2018,
+      "rating": 7.8,
+      "votes": 43241,
+      "genres": [
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt6483832",
+      "tmdb_id": 74016,
+      "rating_refreshed_at": "2026-04-25T06:21:48Z"
+    },
+    {
+      "title": "PAW Patrol",
+      "year": 2013,
+      "rating": 6.1,
+      "votes": 7795,
+      "genres": [
+        "Animation",
+        "Kids"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt3121722",
+      "tmdb_id": 57532,
+      "rating_refreshed_at": "2026-04-25T06:21:48Z"
+    },
+    {
+      "title": "Pursuit of Jade",
+      "year": 2026,
+      "rating": 0.0,
+      "votes": 0,
+      "genres": [
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt35316225",
+      "tmdb_id": 279388,
+      "rating_refreshed_at": "2026-04-25T06:21:49Z"
+    },
+    {
+      "title": "BEEF",
+      "year": 2023,
+      "rating": 8.0,
+      "votes": 163497,
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt14403178",
+      "tmdb_id": 154385,
+      "rating_refreshed_at": "2026-04-25T06:21:49Z"
+    },
+    {
+      "title": "Beauty in Black",
+      "year": 2024,
+      "rating": 5.7,
+      "votes": 4118,
+      "genres": [
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt31260386",
+      "tmdb_id": 246246,
+      "rating_refreshed_at": "2026-04-25T06:21:49Z"
+    },
+    {
+      "title": "Dawson's Creek",
+      "year": 1998,
+      "rating": 6.8,
+      "votes": 48153,
+      "genres": [
+        "Drama",
+        "Soap"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0118300",
+      "tmdb_id": 2327,
+      "rating_refreshed_at": "2026-04-25T06:21:49Z"
+    },
+    {
+      "title": "The Lincoln Lawyer",
+      "year": 2022,
+      "rating": 7.8,
+      "votes": 92443,
+      "genres": [
+        "Drama",
+        "Crime"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt13833978",
+      "tmdb_id": 116799,
+      "rating_refreshed_at": "2026-04-25T06:21:49Z"
+    },
+    {
+      "title": "LEGO Ninjago: Dragons Rising",
+      "year": 2023,
+      "rating": 0.0,
+      "votes": 0,
+      "genres": [
+        "Animation",
+        "Kids",
+        "Action & Adventure"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "tmdb_id": 212989,
+      "rating_refreshed_at": "2026-04-25T06:21:49Z"
+    },
+    {
+      "title": "The West Wing",
+      "year": 1999,
+      "rating": 8.9,
+      "votes": 97576,
+      "genres": [
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0200276",
+      "tmdb_id": 688,
+      "rating_refreshed_at": "2026-04-25T06:21:49Z"
+    },
+    {
+      "title": "Sesame Street",
+      "year": 1969,
+      "rating": 8.1,
+      "votes": 16949,
+      "genres": [
+        "Kids",
+        "Comedy"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt0063951",
+      "tmdb_id": 502,
+      "rating_refreshed_at": "2026-04-25T06:21:50Z"
+    },
+    {
+      "title": "Raw",
+      "year": 1993,
+      "rating": 7.8,
+      "votes": 10796,
+      "genres": [
+        "Reality"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt0185103",
+      "tmdb_id": 4656,
+      "rating_refreshed_at": "2026-04-25T06:21:50Z"
+    },
+    {
+      "title": "Heartland",
+      "year": 2007,
+      "rating": 8.4,
+      "votes": 22312,
+      "genres": [
+        "Family",
+        "Drama",
+        "Comedy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1094229",
+      "tmdb_id": 14929,
+      "rating_refreshed_at": "2026-04-25T06:21:50Z"
+    },
+    {
+      "title": "The Closer",
+      "year": 2005,
+      "rating": 7.8,
+      "votes": 30740,
+      "genres": [
+        "Crime",
+        "Drama",
+        "Mystery"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0458253",
+      "tmdb_id": 1450,
+      "rating_refreshed_at": "2026-04-25T06:21:50Z"
+    },
+    {
+      "title": "Teen Titans Go!",
+      "year": 2013,
+      "rating": 5.8,
+      "votes": 29019,
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Comedy",
+        "Family",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt2771780",
+      "tmdb_id": 45140,
+      "rating_refreshed_at": "2026-04-25T06:21:50Z"
+    },
+    {
+      "title": "Supergirl",
+      "year": 2015,
+      "rating": 6.2,
+      "votes": 134338,
+      "genres": [
+        "Drama",
+        "Sci-Fi & Fantasy",
+        "Action & Adventure"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt4016454",
+      "tmdb_id": 62688,
+      "rating_refreshed_at": "2026-04-25T06:21:50Z"
+    },
+    {
+      "title": "Peppa Pig",
+      "year": 2004,
+      "rating": 6.3,
+      "votes": 7928,
+      "genres": [
+        "Animation",
+        "Kids"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0426769",
+      "tmdb_id": 12225,
+      "rating_refreshed_at": "2026-04-25T06:21:50Z"
+    },
+    {
+      "title": "Mom",
+      "year": 2013,
+      "rating": 7.4,
+      "votes": 43439,
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt2660806",
+      "tmdb_id": 49011,
+      "rating_refreshed_at": "2026-04-25T06:21:51Z"
+    },
+    {
+      "title": "Hell's Paradise",
+      "year": 2023,
+      "rating": 8.1,
+      "votes": 26957,
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt13911284",
+      "tmdb_id": 117465,
+      "rating_refreshed_at": "2026-04-25T06:21:51Z"
+    },
+    {
+      "title": "Riverdale",
+      "year": 2017,
+      "rating": 6.4,
+      "votes": 163363,
+      "genres": [
+        "Crime",
+        "Drama",
+        "Mystery"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt5420376",
+      "tmdb_id": 69050,
+      "rating_refreshed_at": "2026-04-25T06:21:51Z"
+    },
+    {
+      "title": "JoJo's Bizarre Adventure",
+      "year": 2012,
+      "rating": 8.5,
+      "votes": 51361,
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt2359704",
+      "tmdb_id": 45790,
+      "rating_refreshed_at": "2026-04-25T06:21:51Z"
+    },
+    {
+      "title": "Hunter x Hunter",
+      "year": 2011,
+      "rating": 9.0,
+      "votes": 178768,
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt2098220",
+      "tmdb_id": 46298,
+      "rating_refreshed_at": "2026-04-25T06:21:51Z"
+    },
+    {
+      "title": "Gossip Girl",
+      "year": 2007,
+      "rating": 7.5,
+      "votes": 211315,
+      "genres": [
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0397442",
+      "tmdb_id": 1395,
+      "rating_refreshed_at": "2026-04-25T06:21:51Z"
+    },
+    {
+      "title": "My Little Pony: Friendship Is Magic",
+      "year": 2010,
+      "rating": 7.8,
+      "votes": 25120,
+      "genres": [
+        "Animation",
+        "Comedy",
+        "Sci-Fi & Fantasy",
+        "Kids"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1751105",
+      "tmdb_id": 33765,
+      "rating_refreshed_at": "2026-04-25T06:21:52Z"
+    },
+    {
+      "title": "Animal Kingdom",
+      "year": 2016,
+      "rating": 8.2,
+      "votes": 53331,
+      "genres": [
+        "Crime",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt5574490",
+      "tmdb_id": 66025,
+      "rating_refreshed_at": "2026-04-25T06:21:52Z"
+    },
+    {
+      "title": "Ninjago: Masters of Spinjitzu",
+      "year": 2012,
+      "rating": 0.0,
+      "votes": 0,
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Sci-Fi & Fantasy",
+        "Comedy",
+        "Family"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "tmdb_id": 38693,
+      "rating_refreshed_at": "2026-04-25T06:21:52Z"
+    },
+    {
+      "title": "The Night Agent",
+      "year": 2023,
+      "rating": 7.4,
+      "votes": 151290,
+      "genres": [
+        "Action & Adventure",
+        "Drama",
+        "Mystery"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt13918776",
+      "tmdb_id": 129552,
+      "rating_refreshed_at": "2026-04-25T06:21:52Z"
+    },
+    {
+      "title": "Sex and the City",
+      "year": 1998,
+      "rating": 7.4,
+      "votes": 158017,
+      "genres": [
+        "Drama",
+        "Comedy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0159206",
+      "tmdb_id": 105,
+      "rating_refreshed_at": "2026-04-25T06:21:52Z"
+    },
+    {
+      "title": "The Sandman",
+      "year": 2022,
+      "rating": 7.6,
+      "votes": 207734,
+      "genres": [
+        "Sci-Fi & Fantasy",
+        "Drama",
+        "Action & Adventure"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt1751634",
+      "tmdb_id": 90802,
+      "rating_refreshed_at": "2026-04-25T06:21:52Z"
+    },
+    {
+      "title": "The Last Kingdom",
+      "year": 2015,
+      "rating": 8.5,
+      "votes": 186546,
+      "genres": [
+        "Action & Adventure",
+        "Drama",
+        "War & Politics"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt4179452",
+      "tmdb_id": 63333,
+      "rating_refreshed_at": "2026-04-25T06:21:52Z"
+    },
+    {
+      "title": "Alice in Borderland",
+      "year": 2020,
+      "rating": 7.8,
+      "votes": 146423,
+      "genres": [
+        "Mystery",
+        "Drama",
+        "Action & Adventure"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt10795658",
+      "tmdb_id": 110316,
+      "rating_refreshed_at": "2026-04-25T06:21:53Z"
+    },
+    {
+      "title": "Blindspot",
+      "year": 2015,
+      "rating": 7.3,
+      "votes": 85428,
+      "genres": [
+        "Crime",
+        "Drama",
+        "Action & Adventure"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt4474344",
+      "tmdb_id": 62710,
+      "rating_refreshed_at": "2026-04-25T06:21:53Z"
+    },
+    {
+      "title": "Alchemy of Souls",
+      "year": 2022,
+      "rating": 8.7,
+      "votes": 27029,
+      "genres": [
+        "Drama",
+        "Sci-Fi & Fantasy",
+        "Action & Adventure",
+        "Mystery"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt20859920",
+      "tmdb_id": 135157,
+      "rating_refreshed_at": "2026-04-25T06:21:53Z"
+    },
+    {
+      "title": "Scandal",
+      "year": 2012,
+      "rating": 7.7,
+      "votes": 83962,
+      "genres": [
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1837576",
+      "tmdb_id": 39269,
+      "rating_refreshed_at": "2026-04-25T06:21:53Z"
+    },
+    {
+      "title": "DC's Legends of Tomorrow",
+      "year": 2016,
+      "rating": 6.7,
+      "votes": 114232,
+      "genres": [
+        "Action & Adventure",
+        "Sci-Fi & Fantasy",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt4532368",
+      "tmdb_id": 62643,
+      "rating_refreshed_at": "2026-04-25T06:21:53Z"
+    },
+    {
+      "title": "Younger",
+      "year": 2015,
+      "rating": 7.8,
+      "votes": 27252,
+      "genres": [
+        "Drama",
+        "Comedy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt3288518",
+      "tmdb_id": 62117,
+      "rating_refreshed_at": "2026-04-25T06:21:53Z"
+    },
+    {
+      "title": "Fighting Spirit",
+      "year": 2000,
+      "rating": 8.8,
+      "votes": 16084,
+      "genres": [
+        "Animation",
+        "Comedy",
+        "Drama",
+        "Action & Adventure"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0481256",
+      "tmdb_id": 42705,
+      "rating_refreshed_at": "2026-04-25T06:21:53Z"
+    },
+    {
+      "title": "Rizzoli & Isles",
+      "year": 2010,
+      "rating": 7.7,
+      "votes": 41228,
+      "genres": [
+        "Crime",
+        "Drama",
+        "Mystery",
+        "Comedy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1551632",
+      "tmdb_id": 32895,
+      "rating_refreshed_at": "2026-04-25T06:21:54Z"
+    },
+    {
+      "title": "iCarly",
+      "year": 2007,
+      "rating": 6.8,
+      "votes": 49255,
+      "genres": [
+        "Comedy",
+        "Kids",
+        "Family",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0972534",
+      "tmdb_id": 5371,
+      "rating_refreshed_at": "2026-04-25T06:21:54Z"
+    },
+    {
+      "title": "Monster",
+      "year": 2004,
+      "rating": 8.7,
+      "votes": 62188,
+      "genres": [
+        "Animation",
+        "Drama",
+        "Mystery",
+        "Crime"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt0434706",
+      "tmdb_id": 30981,
+      "rating_refreshed_at": "2026-04-25T06:21:54Z"
+    },
+    {
+      "title": "Call the Midwife",
+      "year": 2012,
+      "rating": 8.6,
+      "votes": 35042,
+      "genres": [
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1983079",
+      "tmdb_id": 39793,
+      "rating_refreshed_at": "2026-04-25T06:21:54Z"
+    },
+    {
+      "title": "Mob Psycho 100",
+      "year": 2016,
+      "rating": 8.5,
+      "votes": 64638,
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Comedy",
+        "Sci-Fi & Fantasy"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt5897304",
+      "tmdb_id": 67075,
+      "rating_refreshed_at": "2026-04-25T06:21:54Z"
+    },
+    {
+      "title": "Alpha Males",
+      "year": 2022,
+      "rating": 7.6,
+      "votes": 10987,
+      "genres": [
+        "Comedy"
+      ],
+      "type": "series",
+      "netflix_status": "original",
+      "imdb_id": "tt18482892",
+      "tmdb_id": 215092,
+      "rating_refreshed_at": "2026-04-25T06:21:54Z"
+    },
+    {
+      "title": "Fullmetal Alchemist: Brotherhood",
+      "year": 2009,
+      "rating": 9.1,
+      "votes": 232762,
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Sci-Fi & Fantasy",
+        "Drama"
+      ],
+      "type": "series",
+      "netflix_status": "library",
+      "imdb_id": "tt1355642",
+      "tmdb_id": 31911,
+      "rating_refreshed_at": "2026-04-25T06:21:54Z"
+    },
+    {
+      "title": "Thrash",
+      "year": 2026,
+      "rating": 5.1,
+      "votes": 14495,
+      "genres": [
+        "Horror",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt32362890",
+      "tmdb_id": 1290417,
+      "rating_refreshed_at": "2026-04-25T06:21:55Z"
+    },
+    {
+      "title": "Roommates",
+      "year": 2026,
+      "rating": 5.7,
+      "votes": 2181,
+      "genres": [
+        "Comedy"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt37540875",
+      "tmdb_id": 1511057,
+      "rating_refreshed_at": "2026-04-25T06:21:55Z"
+    },
+    {
+      "title": "War Machine",
+      "year": 2026,
+      "rating": 6.3,
+      "votes": 86956,
+      "genres": [
+        "Action",
+        "Science Fiction",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt15940132",
+      "tmdb_id": 1265609,
+      "rating_refreshed_at": "2026-04-25T06:21:55Z"
+    },
+    {
+      "title": "180",
+      "year": 2026,
+      "rating": 4.6,
+      "votes": 153,
+      "genres": [
+        "Thriller",
+        "Crime",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt40891145",
+      "tmdb_id": 1659087,
+      "rating_refreshed_at": "2026-04-25T06:21:55Z"
+    },
+    {
+      "title": "Anaconda",
+      "year": 2025,
+      "rating": 5.6,
+      "votes": 55645,
+      "genres": [
+        "Adventure",
+        "Comedy",
+        "Horror"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt33244668",
+      "tmdb_id": 1234731,
+      "rating_refreshed_at": "2026-04-25T06:21:55Z"
+    },
+    {
+      "title": "Humint",
+      "year": 2026,
+      "rating": 0.0,
+      "votes": 45,
+      "genres": [
+        "Thriller",
+        "Action",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt32606470",
+      "tmdb_id": 1268127,
+      "rating_refreshed_at": "2026-04-25T06:21:55Z"
+    },
+    {
+      "title": "28 Years Later: The Bone Temple",
+      "year": 2026,
+      "rating": 7.3,
+      "votes": 84391,
+      "genres": [
+        "Horror",
+        "Thriller",
+        "Science Fiction"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt32141377",
+      "tmdb_id": 1272837,
+      "rating_refreshed_at": "2026-04-25T06:21:55Z"
+    },
+    {
+      "title": "Jurassic World Rebirth",
+      "year": 2025,
+      "rating": 5.8,
+      "votes": 194010,
+      "genres": [
+        "Science Fiction",
+        "Adventure",
+        "Action"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt31036941",
+      "tmdb_id": 1234821,
+      "rating_refreshed_at": "2026-04-25T06:21:56Z"
+    },
+    {
+      "title": "Peaky Blinders: The Immortal Man",
+      "year": 2026,
+      "rating": 6.5,
+      "votes": 67443,
+      "genres": [
+        "Crime",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt15574124",
+      "tmdb_id": 875828,
+      "rating_refreshed_at": "2026-04-25T06:21:56Z"
+    },
+    {
+      "title": "KPop Demon Hunters",
+      "year": 2025,
+      "rating": 7.4,
+      "votes": 130920,
+      "genres": [
+        "Fantasy",
+        "Music",
+        "Comedy",
+        "Animation"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt14205554",
+      "tmdb_id": 803796,
+      "rating_refreshed_at": "2026-04-25T06:21:56Z"
+    },
+    {
+      "title": "The Rip",
+      "year": 2026,
+      "rating": 6.8,
+      "votes": 123010,
+      "genres": [
+        "Action",
+        "Thriller",
+        "Crime"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt32642706",
+      "tmdb_id": 1306368,
+      "rating_refreshed_at": "2026-04-25T06:21:56Z"
+    },
+    {
+      "title": "After We Fell",
+      "year": 2021,
+      "rating": 4.8,
+      "votes": 24384,
+      "genres": [
+        "Drama",
+        "Romance"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt13069986",
+      "tmdb_id": 744275,
+      "rating_refreshed_at": "2026-04-25T06:21:56Z"
+    },
+    {
+      "title": "Venom: The Last Dance",
+      "year": 2024,
+      "rating": 6.0,
+      "votes": 149838,
+      "genres": [
+        "Science Fiction",
+        "Action",
+        "Adventure"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt16366836",
+      "tmdb_id": 912649,
+      "rating_refreshed_at": "2026-04-25T06:21:56Z"
+    },
+    {
+      "title": "Spider-Man: Into the Spider-Verse",
+      "year": 2018,
+      "rating": 8.4,
+      "votes": 777014,
+      "genres": [
+        "Animation",
+        "Action",
+        "Adventure",
+        "Science Fiction"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt4633694",
+      "tmdb_id": 324857,
+      "rating_refreshed_at": "2026-04-25T06:21:56Z"
+    },
+    {
+      "title": "In Your Dreams",
+      "year": 2025,
+      "rating": 6.5,
+      "votes": 1343,
+      "genres": [
+        "Animation",
+        "Family",
+        "Comedy",
+        "Adventure",
+        "Fantasy"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt27604215",
+      "tmdb_id": 1117857,
+      "rating_refreshed_at": "2026-04-25T06:21:57Z"
+    },
+    {
+      "title": "Sisu: Road to Revenge",
+      "year": 2025,
+      "rating": 6.8,
+      "votes": 25076,
+      "genres": [
+        "Action",
+        "War",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt31844586",
+      "tmdb_id": 1223601,
+      "rating_refreshed_at": "2026-04-25T06:21:57Z"
+    },
+    {
+      "title": "Frankenstein",
+      "year": 2025,
+      "rating": 7.4,
+      "votes": 304688,
+      "genres": [
+        "Drama",
+        "Fantasy",
+        "Horror"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt1312221",
+      "tmdb_id": 1062722,
+      "rating_refreshed_at": "2026-04-25T06:21:57Z"
+    },
+    {
+      "title": "Whiplash",
+      "year": 2014,
+      "rating": 8.5,
+      "votes": 1134459,
+      "genres": [
+        "Drama",
+        "Music",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt2582802",
+      "tmdb_id": 244786,
+      "rating_refreshed_at": "2026-04-25T06:21:57Z"
+    },
+    {
+      "title": "How to Train Your Dragon",
+      "year": 2025,
+      "rating": 7.7,
+      "votes": 131570,
+      "genres": [
+        "Fantasy",
+        "Family",
+        "Action",
+        "Adventure"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt26743210",
+      "tmdb_id": 1087192,
+      "rating_refreshed_at": "2026-04-25T06:21:57Z"
+    },
+    {
+      "title": "Fifty Shades of Grey",
+      "year": 2015,
+      "rating": 4.2,
+      "votes": 354203,
+      "genres": [
+        "Drama",
+        "Romance",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt2322441",
+      "tmdb_id": 216015,
+      "rating_refreshed_at": "2026-04-25T06:21:57Z"
+    },
+    {
+      "title": "Nuremberg",
+      "year": 2025,
+      "rating": 7.4,
+      "votes": 84314,
+      "genres": [
+        "History",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt29567915",
+      "tmdb_id": 1214931,
+      "rating_refreshed_at": "2026-04-25T06:21:58Z"
+    },
+    {
+      "title": "Train to Busan",
+      "year": 2016,
+      "rating": 7.6,
+      "votes": 300921,
+      "genres": [
+        "Horror",
+        "Thriller",
+        "Action",
+        "Adventure"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt5700672",
+      "tmdb_id": 396535,
+      "rating_refreshed_at": "2026-04-25T06:21:58Z"
+    },
+    {
+      "title": "Dhurandhar",
+      "year": 2025,
+      "rating": 8.3,
+      "votes": 118730,
+      "genres": [
+        "Action",
+        "Crime",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt33014583",
+      "tmdb_id": 1291608,
+      "rating_refreshed_at": "2026-04-25T06:21:58Z"
+    },
+    {
+      "title": "Money Shot: The Pornhub Story",
+      "year": 2023,
+      "rating": 5.4,
+      "votes": 5626,
+      "genres": [
+        "Documentary"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt26739529",
+      "tmdb_id": 1087040,
+      "rating_refreshed_at": "2026-04-25T06:21:58Z"
+    },
+    {
+      "title": "Hacksaw Ridge",
+      "year": 2016,
+      "rating": 8.1,
+      "votes": 679234,
+      "genres": [
+        "Drama",
+        "History",
+        "War"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt2119532",
+      "tmdb_id": 324786,
+      "rating_refreshed_at": "2026-04-25T06:21:58Z"
+    },
+    {
+      "title": "The Bad Guys 2",
+      "year": 2025,
+      "rating": 7.0,
+      "votes": 27455,
+      "genres": [
+        "Family",
+        "Comedy",
+        "Crime",
+        "Adventure",
+        "Animation"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt30017619",
+      "tmdb_id": 1175942,
+      "rating_refreshed_at": "2026-04-25T06:21:58Z"
+    },
+    {
+      "title": "Subservience",
+      "year": 2024,
+      "rating": 5.4,
+      "votes": 35273,
+      "genres": [
+        "Science Fiction",
+        "Horror",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt24871974",
+      "tmdb_id": 1064028,
+      "rating_refreshed_at": "2026-04-25T06:21:58Z"
+    },
+    {
+      "title": "Nobody 2",
+      "year": 2025,
+      "rating": 6.3,
+      "votes": 89019,
+      "genres": [
+        "Action",
+        "Thriller",
+        "Comedy"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt28996126",
+      "tmdb_id": 1007734,
+      "rating_refreshed_at": "2026-04-25T06:21:59Z"
+    },
+    {
+      "title": "Fury",
+      "year": 2014,
+      "rating": 7.6,
+      "votes": 607560,
+      "genres": [
+        "War",
+        "Drama",
+        "Action"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt2713180",
+      "tmdb_id": 228150,
+      "rating_refreshed_at": "2026-04-25T06:21:59Z"
+    },
+    {
+      "title": "The Emoji Movie",
+      "year": 2017,
+      "rating": 3.5,
+      "votes": 76999,
+      "genres": [
+        "Animation",
+        "Family",
+        "Comedy"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt4877122",
+      "tmdb_id": 378236,
+      "rating_refreshed_at": "2026-04-25T06:21:59Z"
+    },
+    {
+      "title": "Madagascar",
+      "year": 2005,
+      "rating": 6.9,
+      "votes": 473809,
+      "genres": [
+        "Animation",
+        "Adventure",
+        "Comedy",
+        "Family"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0351283",
+      "tmdb_id": 953,
+      "rating_refreshed_at": "2026-04-25T06:21:59Z"
+    },
+    {
+      "title": "Fifty Shades Freed",
+      "year": 2018,
+      "rating": 4.6,
+      "votes": 80950,
+      "genres": [
+        "Drama",
+        "Romance"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt4477536",
+      "tmdb_id": 337167,
+      "rating_refreshed_at": "2026-04-25T06:21:59Z"
+    },
+    {
+      "title": "Kraven the Hunter",
+      "year": 2024,
+      "rating": 5.5,
+      "votes": 78716,
+      "genres": [
+        "Action",
+        "Adventure",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt8790086",
+      "tmdb_id": 539972,
+      "rating_refreshed_at": "2026-04-25T06:21:59Z"
+    },
+    {
+      "title": "M3GAN 2.0",
+      "year": 2025,
+      "rating": 6.0,
+      "votes": 46354,
+      "genres": [
+        "Action",
+        "Science Fiction",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt26342662",
+      "tmdb_id": 1071585,
+      "rating_refreshed_at": "2026-04-25T06:21:59Z"
+    },
+    {
+      "title": "Fall",
+      "year": 2022,
+      "rating": 6.4,
+      "votes": 132169,
+      "genres": [
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt15325794",
+      "tmdb_id": 985939,
+      "rating_refreshed_at": "2026-04-25T06:22:00Z"
+    },
+    {
+      "title": "Ice Road: Vengeance",
+      "year": 2025,
+      "rating": 4.8,
+      "votes": 17200,
+      "genres": [
+        "Action",
+        "Thriller",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt27621210",
+      "tmdb_id": 1119878,
+      "rating_refreshed_at": "2026-04-25T06:22:00Z"
+    },
+    {
+      "title": "28 Years Later",
+      "year": 2025,
+      "rating": 6.6,
+      "votes": 209527,
+      "genres": [
+        "Horror",
+        "Thriller",
+        "Science Fiction"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt10548174",
+      "tmdb_id": 1100988,
+      "rating_refreshed_at": "2026-04-25T06:22:00Z"
+    },
+    {
+      "title": "After",
+      "year": 2019,
+      "rating": 5.3,
+      "votes": 75034,
+      "genres": [
+        "Drama",
+        "Romance"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt4126476",
+      "tmdb_id": 537915,
+      "rating_refreshed_at": "2026-04-25T06:22:00Z"
+    },
+    {
+      "title": "State of Fear",
+      "year": 2026,
+      "rating": 4.6,
+      "votes": 438,
+      "genres": [
+        "Action",
+        "Thriller",
+        "Crime",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt39369643",
+      "tmdb_id": 1426964,
+      "rating_refreshed_at": "2026-04-25T06:22:00Z"
+    },
+    {
+      "title": "Karate Kid: Legends",
+      "year": 2025,
+      "rating": 6.3,
+      "votes": 45111,
+      "genres": [
+        "Action",
+        "Adventure",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt1674782",
+      "tmdb_id": 1011477,
+      "rating_refreshed_at": "2026-04-25T06:22:00Z"
+    },
+    {
+      "title": "Trap House",
+      "year": 2025,
+      "rating": 5.4,
+      "votes": 4500,
+      "genres": [
+        "Action",
+        "Crime",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt10799690",
+      "tmdb_id": 628847,
+      "rating_refreshed_at": "2026-04-25T06:22:00Z"
+    },
+    {
+      "title": "Scream",
+      "year": 2022,
+      "rating": 6.3,
+      "votes": 184069,
+      "genres": [
+        "Horror",
+        "Mystery"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt11245972",
+      "tmdb_id": 646385,
+      "rating_refreshed_at": "2026-04-25T06:22:01Z"
+    },
+    {
+      "title": "Godzilla Minus One",
+      "year": 2023,
+      "rating": 7.7,
+      "votes": 200436,
+      "genres": [
+        "Science Fiction",
+        "Horror",
+        "Action"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt23289160",
+      "tmdb_id": 940721,
+      "rating_refreshed_at": "2026-04-25T06:22:01Z"
+    },
+    {
+      "title": "Jurassic World Dominion",
+      "year": 2022,
+      "rating": 5.6,
+      "votes": 245361,
+      "genres": [
+        "Adventure",
+        "Action",
+        "Science Fiction"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt8041270",
+      "tmdb_id": 507086,
+      "rating_refreshed_at": "2026-04-25T06:22:01Z"
+    },
+    {
+      "title": "The Creator",
+      "year": 2023,
+      "rating": 6.7,
+      "votes": 194415,
+      "genres": [
+        "Science Fiction",
+        "Action",
+        "Adventure"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt11858890",
+      "tmdb_id": 670292,
+      "rating_refreshed_at": "2026-04-25T06:22:01Z"
+    },
+    {
+      "title": "Penguins of Madagascar",
+      "year": 2014,
+      "rating": 6.6,
+      "votes": 113406,
+      "genres": [
+        "Family",
+        "Animation",
+        "Adventure",
+        "Comedy"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt1911658",
+      "tmdb_id": 270946,
+      "rating_refreshed_at": "2026-04-25T06:22:01Z"
+    },
+    {
+      "title": "Wake Up Dead Man: A Knives Out Mystery",
+      "year": 2025,
+      "rating": 0.0,
+      "votes": 0,
+      "genres": [
+        "Thriller",
+        "Mystery",
+        "Comedy"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "tmdb_id": 812583,
+      "rating_refreshed_at": "2026-04-25T06:22:01Z"
+    },
+    {
+      "title": "Mission: Impossible - Dead Reckoning Part One",
+      "year": 2023,
+      "rating": 7.6,
+      "votes": 326383,
+      "genres": [
+        "Action",
+        "Thriller",
+        "Adventure"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt9603212",
+      "tmdb_id": 575264,
+      "rating_refreshed_at": "2026-04-25T06:22:02Z"
+    },
+    {
+      "title": "Matilda",
+      "year": 1996,
+      "rating": 7.0,
+      "votes": 193551,
+      "genres": [
+        "Comedy",
+        "Family",
+        "Fantasy"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0117008",
+      "tmdb_id": 10830,
+      "rating_refreshed_at": "2026-04-25T06:22:02Z"
+    },
+    {
+      "title": "Bohemian Rhapsody",
+      "year": 2018,
+      "rating": 7.9,
+      "votes": 638785,
+      "genres": [
+        "Music",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt1727824",
+      "tmdb_id": 424694,
+      "rating_refreshed_at": "2026-04-25T06:22:02Z"
+    },
+    {
+      "title": "Dilwale Dulhania Le Jayenge",
+      "year": 1995,
+      "rating": 8.0,
+      "votes": 84286,
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Romance"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0112870",
+      "tmdb_id": 19404,
+      "rating_refreshed_at": "2026-04-25T06:22:02Z"
+    },
+    {
+      "title": "The Red Line",
+      "year": 2026,
+      "rating": 0.0,
+      "votes": 0,
+      "genres": [
+        "Thriller",
+        "Crime",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt39744394",
+      "tmdb_id": 1630433,
+      "rating_refreshed_at": "2026-04-25T06:22:02Z"
+    },
+    {
+      "title": "Saw",
+      "year": 2004,
+      "rating": 7.6,
+      "votes": 508842,
+      "genres": [
+        "Horror",
+        "Mystery",
+        "Crime"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0387564",
+      "tmdb_id": 176,
+      "rating_refreshed_at": "2026-04-25T06:22:02Z"
+    },
+    {
+      "title": "Jujutsu Kaisen 0",
+      "year": 2021,
+      "rating": 7.8,
+      "votes": 59986,
+      "genres": [
+        "Animation",
+        "Action",
+        "Fantasy"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt14331144",
+      "tmdb_id": 810693,
+      "rating_refreshed_at": "2026-04-25T06:22:02Z"
+    },
+    {
+      "title": "Cosmic Princess Kaguya!",
+      "year": 2026,
+      "rating": 7.1,
+      "votes": 1479,
+      "genres": [
+        "Animation",
+        "Fantasy",
+        "Music",
+        "Science Fiction"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt38872297",
+      "tmdb_id": 1575337,
+      "rating_refreshed_at": "2026-04-25T06:22:03Z"
+    },
+    {
+      "title": "Minions: The Rise of Gru",
+      "year": 2022,
+      "rating": 6.5,
+      "votes": 102656,
+      "genres": [
+        "Family",
+        "Comedy",
+        "Adventure",
+        "Animation",
+        "Science Fiction",
+        "Fantasy",
+        "Action"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt5113044",
+      "tmdb_id": 438148,
+      "rating_refreshed_at": "2026-04-25T06:22:03Z"
+    },
+    {
+      "title": "Jaws",
+      "year": 1975,
+      "rating": 8.1,
+      "votes": 731140,
+      "genres": [
+        "Horror",
+        "Thriller",
+        "Adventure"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0073195",
+      "tmdb_id": 578,
+      "rating_refreshed_at": "2026-04-25T06:22:03Z"
+    },
+    {
+      "title": "The Expendables",
+      "year": 2010,
+      "rating": 6.4,
+      "votes": 380153,
+      "genres": [
+        "Thriller",
+        "Adventure",
+        "Action"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt1320253",
+      "tmdb_id": 27578,
+      "rating_refreshed_at": "2026-04-25T06:22:03Z"
+    },
+    {
+      "title": "Hot Girls Wanted",
+      "year": 2015,
+      "rating": 6.1,
+      "votes": 18873,
+      "genres": [
+        "Documentary"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt4382552",
+      "tmdb_id": 318256,
+      "rating_refreshed_at": "2026-04-25T06:22:03Z"
+    },
+    {
+      "title": "Redeeming Love",
+      "year": 2022,
+      "rating": 6.7,
+      "votes": 18365,
+      "genres": [
+        "Romance",
+        "Drama",
+        "Western"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt11365186",
+      "tmdb_id": 698508,
+      "rating_refreshed_at": "2026-04-25T06:22:03Z"
+    },
+    {
+      "title": "Sicario",
+      "year": 2015,
+      "rating": 7.7,
+      "votes": 527661,
+      "genres": [
+        "Action",
+        "Crime",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt3397884",
+      "tmdb_id": 273481,
+      "rating_refreshed_at": "2026-04-25T06:22:03Z"
+    },
+    {
+      "title": "Babylon",
+      "year": 2022,
+      "rating": 7.1,
+      "votes": 204188,
+      "genres": [
+        "Drama",
+        "Comedy"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt10640346",
+      "tmdb_id": 615777,
+      "rating_refreshed_at": "2026-04-25T06:22:04Z"
+    },
+    {
+      "title": "How to Train Your Dragon",
+      "year": 2010,
+      "rating": 8.1,
+      "votes": 882954,
+      "genres": [
+        "Fantasy",
+        "Adventure",
+        "Animation",
+        "Family"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0892769",
+      "tmdb_id": 10191,
+      "rating_refreshed_at": "2026-04-25T06:22:04Z"
+    },
+    {
+      "title": "Lucy",
+      "year": 2014,
+      "rating": 6.4,
+      "votes": 569730,
+      "genres": [
+        "Action",
+        "Science Fiction"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt2872732",
+      "tmdb_id": 240832,
+      "rating_refreshed_at": "2026-04-25T06:22:04Z"
+    },
+    {
+      "title": "Troll 2",
+      "year": 2025,
+      "rating": 0.0,
+      "votes": 0,
+      "genres": [
+        "Action",
+        "Fantasy",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt29232158",
+      "tmdb_id": 1180831,
+      "rating_refreshed_at": "2026-04-25T06:22:04Z"
+    },
+    {
+      "title": "The Great Flood",
+      "year": 2025,
+      "rating": 5.4,
+      "votes": 16621,
+      "genres": [
+        "Science Fiction",
+        "Adventure",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt29927663",
+      "tmdb_id": 982843,
+      "rating_refreshed_at": "2026-04-25T06:22:04Z"
+    },
+    {
+      "title": "Saturday Night",
+      "year": 2024,
+      "rating": 6.9,
+      "votes": 36264,
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt27657135",
+      "tmdb_id": 1120911,
+      "rating_refreshed_at": "2026-04-25T06:22:04Z"
+    },
+    {
+      "title": "Jurassic World",
+      "year": 2015,
+      "rating": 6.9,
+      "votes": 723175,
+      "genres": [
+        "Action",
+        "Adventure",
+        "Science Fiction",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0369610",
+      "tmdb_id": 135397,
+      "rating_refreshed_at": "2026-04-25T06:22:04Z"
+    },
+    {
+      "title": "The Fifth Element",
+      "year": 1997,
+      "rating": 7.6,
+      "votes": 539521,
+      "genres": [
+        "Science Fiction",
+        "Action",
+        "Adventure"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0119116",
+      "tmdb_id": 18,
+      "rating_refreshed_at": "2026-04-25T06:22:05Z"
+    },
+    {
+      "title": "Until Dawn",
+      "year": 2025,
+      "rating": 5.7,
+      "votes": 61557,
+      "genres": [
+        "Horror",
+        "Mystery"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt30955489",
+      "tmdb_id": 1232546,
+      "rating_refreshed_at": "2026-04-25T06:22:05Z"
+    },
+    {
+      "title": "Ne Zha",
+      "year": 2019,
+      "rating": 7.3,
+      "votes": 21890,
+      "genres": [
+        "Animation",
+        "Fantasy",
+        "Adventure"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt10627720",
+      "tmdb_id": 615453,
+      "rating_refreshed_at": "2026-04-25T06:22:05Z"
+    },
+    {
+      "title": "Madagascar: Escape 2 Africa",
+      "year": 2008,
+      "rating": 6.7,
+      "votes": 268534,
+      "genres": [
+        "Adventure",
+        "Animation",
+        "Comedy",
+        "Family"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0479952",
+      "tmdb_id": 10527,
+      "rating_refreshed_at": "2026-04-25T06:22:05Z"
+    },
+    {
+      "title": "Incoming",
+      "year": 2024,
+      "rating": 5.8,
+      "votes": 14663,
+      "genres": [
+        "Comedy"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt21284218",
+      "tmdb_id": 1008953,
+      "rating_refreshed_at": "2026-04-25T06:22:05Z"
+    },
+    {
+      "title": "20th Century Girl",
+      "year": 2022,
+      "rating": 7.4,
+      "votes": 13992,
+      "genres": [
+        "Romance",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt15340724",
+      "tmdb_id": 851644,
+      "rating_refreshed_at": "2026-04-25T06:22:05Z"
+    },
+    {
+      "title": "Just Go with It",
+      "year": 2011,
+      "rating": 6.4,
+      "votes": 289427,
+      "genres": [
+        "Comedy",
+        "Romance"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt1564367",
+      "tmdb_id": 50546,
+      "rating_refreshed_at": "2026-04-25T06:22:05Z"
+    },
+    {
+      "title": "Jurassic World: Fallen Kingdom",
+      "year": 2018,
+      "rating": 6.1,
+      "votes": 377561,
+      "genres": [
+        "Action",
+        "Adventure",
+        "Science Fiction",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt4881806",
+      "tmdb_id": 351286,
+      "rating_refreshed_at": "2026-04-25T06:22:06Z"
+    },
+    {
+      "title": "Pixels",
+      "year": 2015,
+      "rating": 5.6,
+      "votes": 177787,
+      "genres": [
+        "Action",
+        "Comedy",
+        "Science Fiction"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt2120120",
+      "tmdb_id": 257344,
+      "rating_refreshed_at": "2026-04-25T06:22:06Z"
+    },
+    {
+      "title": "Colombiana",
+      "year": 2011,
+      "rating": 6.4,
+      "votes": 113891,
+      "genres": [
+        "Action",
+        "Thriller",
+        "Crime",
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt1657507",
+      "tmdb_id": 62835,
+      "rating_refreshed_at": "2026-04-25T06:22:06Z"
+    },
+    {
+      "title": "Mission: Impossible - Ghost Protocol",
+      "year": 2011,
+      "rating": 7.4,
+      "votes": 564485,
+      "genres": [
+        "Action",
+        "Thriller",
+        "Adventure"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt1229238",
+      "tmdb_id": 56292,
+      "rating_refreshed_at": "2026-04-25T06:22:06Z"
+    },
+    {
+      "title": "Madagascar 3: Europe's Most Wanted",
+      "year": 2012,
+      "rating": 6.8,
+      "votes": 215044,
+      "genres": [
+        "Animation",
+        "Family",
+        "Comedy",
+        "Adventure"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt1277953",
+      "tmdb_id": 80321,
+      "rating_refreshed_at": "2026-04-25T06:22:06Z"
+    },
+    {
+      "title": "The Bad Guys",
+      "year": 2022,
+      "rating": 6.9,
+      "votes": 79744,
+      "genres": [
+        "Family",
+        "Comedy",
+        "Crime",
+        "Animation",
+        "Action"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt8115900",
+      "tmdb_id": 629542,
+      "rating_refreshed_at": "2026-04-25T06:22:06Z"
+    },
+    {
+      "title": "It Ends with Us",
+      "year": 2024,
+      "rating": 6.3,
+      "votes": 98282,
+      "genres": [
+        "Drama",
+        "Romance"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt10655524",
+      "tmdb_id": 1079091,
+      "rating_refreshed_at": "2026-04-25T06:22:07Z"
+    },
+    {
+      "title": "HIM",
+      "year": 2025,
+      "rating": 5.0,
+      "votes": 22463,
+      "genres": [
+        "Horror",
+        "Mystery"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt20990442",
+      "tmdb_id": 986097,
+      "rating_refreshed_at": "2026-04-25T06:22:07Z"
+    },
+    {
+      "title": "How to Train Your Dragon 2",
+      "year": 2014,
+      "rating": 7.8,
+      "votes": 398152,
+      "genres": [
+        "Fantasy",
+        "Action",
+        "Adventure",
+        "Animation",
+        "Family"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt1646971",
+      "tmdb_id": 82702,
+      "rating_refreshed_at": "2026-04-25T06:22:07Z"
+    },
+    {
+      "title": "American Gangster",
+      "year": 2007,
+      "rating": 7.8,
+      "votes": 483108,
+      "genres": [
+        "Drama",
+        "Crime"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0765429",
+      "tmdb_id": 4982,
+      "rating_refreshed_at": "2026-04-25T06:22:07Z"
+    },
+    {
+      "title": "Mantis",
+      "year": 2025,
+      "rating": 5.3,
+      "votes": 2786,
+      "genres": [
+        "Action",
+        "Crime",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt33312131",
+      "tmdb_id": 1267319,
+      "rating_refreshed_at": "2026-04-25T06:22:07Z"
+    },
+    {
+      "title": "Independence Day",
+      "year": 1996,
+      "rating": 7.0,
+      "votes": 642170,
+      "genres": [
+        "Action",
+        "Adventure",
+        "Science Fiction"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0116629",
+      "tmdb_id": 602,
+      "rating_refreshed_at": "2026-04-25T06:22:07Z"
+    },
+    {
+      "title": "Mission: Impossible",
+      "year": 1996,
+      "rating": 7.2,
+      "votes": 516752,
+      "genres": [
+        "Adventure",
+        "Action",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt0117060",
+      "tmdb_id": 954,
+      "rating_refreshed_at": "2026-04-25T06:22:07Z"
+    },
+    {
+      "title": "How to Have Sex",
+      "year": 2023,
+      "rating": 6.4,
+      "votes": 22391,
+      "genres": [
+        "Drama"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt22890246",
+      "tmdb_id": 1075175,
+      "rating_refreshed_at": "2026-04-25T06:22:08Z"
+    },
+    {
+      "title": "Jigsaw",
+      "year": 2017,
+      "rating": 5.7,
+      "votes": 101940,
+      "genres": [
+        "Horror",
+        "Mystery"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "imdb_id": "tt3348730",
+      "tmdb_id": 298250,
+      "rating_refreshed_at": "2026-04-25T06:22:08Z"
+    },
+    {
+      "title": "Expend4bles",
+      "year": 2023,
+      "rating": 0.0,
+      "votes": 0,
+      "genres": [
+        "Action",
+        "Adventure",
+        "Thriller"
+      ],
+      "type": "movie",
+      "netflix_status": "library",
+      "tmdb_id": 299054,
+      "rating_refreshed_at": "2026-04-25T06:22:08Z"
     }
-  ]
+  ],
+  "scan_cursors": {
+    "tv": 6,
+    "movie": 6
+  },
+  "region": "US"
 }
