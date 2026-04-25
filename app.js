@@ -12,6 +12,9 @@
     minRatingVal: document.getElementById("minRatingVal"),
     sort: document.getElementById("sort"),
     reset: document.getElementById("reset"),
+    supportBtn: document.getElementById("supportBtn"),
+    supportDialog: document.getElementById("supportDialog"),
+    supportLinks: document.getElementById("supportLinks"),
   };
 
   const state = { shows: [], updated: "" };
@@ -148,6 +151,47 @@
     }[c]));
   }
 
+  function buildSupportProviders(s) {
+    const out = [];
+    if (s.github_sponsors) out.push({ id: "github", label: "GitHub Sponsors", url: `https://github.com/sponsors/${encodeURIComponent(s.github_sponsors)}` });
+    if (s.buy_me_a_coffee) out.push({ id: "bmc",    label: "Buy Me a Coffee", url: `https://www.buymeacoffee.com/${encodeURIComponent(s.buy_me_a_coffee)}` });
+    if (s.kofi)            out.push({ id: "kofi",   label: "Ko-fi",            url: `https://ko-fi.com/${encodeURIComponent(s.kofi)}` });
+    if (s.paypal)          out.push({ id: "paypal", label: "PayPal",           url: `https://www.paypal.com/paypalme/${encodeURIComponent(s.paypal)}` });
+    if (s.custom && s.custom.url && s.custom.label) {
+      out.push({ id: "custom", label: s.custom.label, url: s.custom.url });
+    }
+    return out;
+  }
+
+  function setupSupport() {
+    const cfg = (window.SITE_CONFIG && window.SITE_CONFIG.support) || {};
+    const providers = buildSupportProviders(cfg);
+    if (providers.length === 0) return;
+
+    els.supportBtn.hidden = false;
+
+    els.supportLinks.innerHTML = providers.map((p) => `
+      <li>
+        <a class="support-link support-${p.id}" href="${p.url}" target="_blank" rel="noopener noreferrer">
+          ${escapeHtml(p.label)}
+        </a>
+      </li>
+    `).join("");
+
+    els.supportBtn.addEventListener("click", () => {
+      if (typeof els.supportDialog.showModal === "function") {
+        els.supportDialog.showModal();
+      } else {
+        // Fallback for ancient browsers without <dialog>.
+        window.open(providers[0].url, "_blank", "noopener");
+      }
+    });
+
+    els.supportDialog.addEventListener("click", (e) => {
+      if (e.target === els.supportDialog) els.supportDialog.close();
+    });
+  }
+
   function bind() {
     ["input", "change"].forEach((evt) => {
       els.q.addEventListener(evt, render);
@@ -182,6 +226,7 @@
       populateGenres(state.shows);
       loadFromQueryString();
       bind();
+      setupSupport();
       render();
     } catch (err) {
       els.meta.textContent = "Could not load data. " + err.message;

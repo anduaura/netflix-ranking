@@ -1,0 +1,9 @@
+# Drives the "Sponsor" button GitHub renders on this repo's page.
+# Uncomment / fill in any platform you actually use; delete the rest.
+# Docs: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+
+# github: anduaura
+# ko_fi: anduaura
+# buy_me_a_coffee: anduaura
+# patreon: anduaura
+# custom: ["https://www.paypal.com/paypalme/anduaura"]

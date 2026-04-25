@@ -82,6 +82,30 @@ OMDB_API_KEY=xxxx python3 scripts/refresh_ratings.py
 
 The script writes back IMDb IDs as it discovers them, so subsequent runs use direct ID lookups (more accurate than title+year).
 
+## Donations / supporting the site
+
+The site is ad-free; an optional **♥ Support** button in the header opens a small modal with donation links. Configure it in two places:
+
+**1. The site button** — edit `config.js`:
+
+```js
+window.SITE_CONFIG = {
+  support: {
+    github_sponsors: "anduaura",          // -> github.com/sponsors/anduaura
+    buy_me_a_coffee: "anduaura",          // -> buymeacoffee.com/anduaura
+    kofi:            "",                  // ko-fi.com/<handle>
+    paypal:          "anduaura",          // paypal.com/paypalme/<handle>
+    custom: { label: "", url: "" }        // any extra URL
+  }
+};
+```
+
+Leave fields you don't use as empty strings — they'll be hidden. If every field is empty, the Support button disappears.
+
+**2. The GitHub repo "Sponsor" button** — edit `.github/FUNDING.yml` and uncomment the lines for the platforms you've set up. GitHub then renders a native Sponsor button on the repo page.
+
+You can mix and match — e.g. GitHub Sponsors only, or just a PayPal link. None of these require running a backend; payouts are handled by the platforms themselves.
+
 ## Notes on data
 
 Ratings come from IMDb (via OMDb when the refresh workflow is enabled). Netflix availability varies by region. This site is not affiliated with Netflix or IMDb.

@@ -14,12 +14,30 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="brand">
-      <span class="brand-mark" aria-hidden="true">N</span>
-      <h1>Netflix IMDb Ranking</h1>
+    <div class="brand-row">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <h1>Netflix IMDb Ranking</h1>
+      </div>
+      <button id="supportBtn" class="support-btn" type="button" hidden aria-haspopup="dialog">
+        <span aria-hidden="true">♥</span> Support
+      </button>
     </div>
     <p class="tagline">Netflix originals &amp; exclusives, ranked by IMDb rating.</p>
   </header>
+
+  <dialog id="supportDialog" class="support-dialog" aria-labelledby="supportTitle">
+    <form method="dialog" class="support-content">
+      <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+      <h2 id="supportTitle">Support this site</h2>
+      <p class="muted">
+        This site is free and ad-free. If it's useful to you, a small contribution
+        helps cover hosting and the OMDb API to keep ratings fresh.
+      </p>
+      <ul id="supportLinks" class="support-links"></ul>
+      <p class="fineprint">100% optional. Thanks for stopping by either way.</p>
+    </form>
+  </dialog>
 
   <section class="controls" aria-label="Filters">
     <div class="control search">
@@ -88,6 +106,7 @@
     </p>
   </footer>
 
+  <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

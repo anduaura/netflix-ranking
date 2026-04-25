@@ -40,11 +40,94 @@ a:hover { color: var(--accent); }
   padding: 32px 20px 8px;
 }
 
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
 }
+
+.support-btn {
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.2px;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.support-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.support-btn span { margin-right: 4px; }
+
+.support-dialog {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 0;
+  max-width: 420px;
+  width: calc(100% - 32px);
+}
+.support-dialog::backdrop { background: rgba(0,0,0,0.6); }
+
+.support-content {
+  padding: 24px 22px 20px;
+  position: relative;
+  margin: 0;
+}
+.support-content h2 { margin: 0 0 8px; font-size: 20px; }
+.support-content .muted { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.support-content .fineprint { color: var(--muted); font-size: 12px; margin: 16px 0 0; text-align: center; }
+
+.dialog-close {
+  position: absolute;
+  top: 8px; right: 10px;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.dialog-close:hover { color: var(--text); }
+
+.support-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.support-link {
+  display: block;
+  text-align: center;
+  padding: 11px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.support-link:hover { border-color: var(--accent); color: var(--text); }
+.support-github   { border-color: #6e5494; }
+.support-bmc      { background: #ffdd00; color: #111; border-color: #ffdd00; }
+.support-bmc:hover { background: #f5d300; color: #111; }
+.support-kofi     { background: #29abe0; color: #fff; border-color: #29abe0; }
+.support-kofi:hover { background: #1e95c4; color: #fff; }
+.support-paypal   { background: #003087; color: #fff; border-color: #003087; }
+.support-paypal:hover { background: #002066; color: #fff; }
 
 .brand-mark {
   display: inline-grid;
