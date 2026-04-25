@@ -30,6 +30,9 @@ from collections import OrderedDict
 from datetime import date
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _catalog import composite_key  # noqa: E402
+
 # ---------------------------------------------------------------------------
 # Limits & knobs (single source of truth — keep CLAUDE.md in sync)
 # ---------------------------------------------------------------------------
@@ -173,15 +176,20 @@ def reorder(entry: dict) -> "OrderedDict[str, object]":
     return out
 
 
-def index_existing(shows: list[dict]) -> tuple[dict[int, int], dict[tuple[str, int], int]]:
-    """Return (by_tmdb_id, by_title_year) -> index in shows list."""
+def index_existing(shows: list[dict]) -> tuple[dict[int, int], dict[tuple[str, int, str], int]]:
+    """Return (by_tmdb_id, by_composite_key) -> index in shows list.
+
+    The composite key folds normalized title + year + type so trivial
+    title variance (case, punctuation, accents) doesn't fragment one
+    show into multiple entries on first scan. See _catalog.composite_key.
+    """
     by_tmdb: dict[int, int] = {}
-    by_title: dict[tuple[str, int], int] = {}
+    by_key: dict[tuple[str, int, str], int] = {}
     for i, s in enumerate(shows):
         if s.get("tmdb_id"):
             by_tmdb[int(s["tmdb_id"])] = i
-        by_title[(s["title"].lower(), int(s.get("year") or 0))] = i
-    return by_tmdb, by_title
+        by_key[composite_key(s)] = i
+    return by_tmdb, by_key
 
 
 def make_entry(result: dict, media: str, genre_lookup: dict[int, str], originals_ids: set[int]) -> dict | None:
@@ -293,7 +301,7 @@ def main() -> int:
     originals_ids = fetch_originals_ids(api_key)
     print(f"Identified {len(originals_ids)} TV originals on this scan slice.")
 
-    by_tmdb, by_title = index_existing(shows)
+    by_tmdb, by_key = index_existing(shows)
     added = 0
 
     for media in ("tv", "movie"):
@@ -307,16 +315,17 @@ def main() -> int:
             tid = e["tmdb_id"]
             if tid in by_tmdb:
                 continue
-            tk = (e["title"].lower(), e["year"])
-            if tk in by_title:
-                # Existing curated entry — backfill tmdb_id only.
-                idx = by_title[tk]
+            ckey = composite_key(e)
+            if ckey in by_key:
+                # Existing entry under a slightly different title/year —
+                # backfill tmdb_id only, never overwrite ratings.
+                idx = by_key[ckey]
                 shows[idx].setdefault("tmdb_id", tid)
                 by_tmdb[tid] = idx
                 continue
             shows.append(e)
             by_tmdb[tid] = len(shows) - 1
-            by_title[tk] = len(shows) - 1
+            by_key[ckey] = len(shows) - 1
             added_for_media += 1
             added += 1
             if len(shows) >= CATALOG_MAX_SIZE:

@@ -65,6 +65,21 @@ These document *why* the data pipeline looks the way it does. If a constraint ch
 - **Why budget = 950 (not 1000):** OMDb's free cap is 1k/day; reserving ~50 covers the preflight + any incidental retries + a buffer for the existing-data UI to also hit OMDb if we ever add that.
 - **Why no concurrency:** OMDb has no published rate limit but `SLEEP_BETWEEN=0.1` keeps us conservative. Adding a thread pool buys minutes per run, not hours.
 
+### Identity & deduplication
+- **Two-tier identity:** `tmdb_id` (canonical, exact) + composite key `(normalize_title(title), year, type)` for entries without one. Both live in `scripts/_catalog.py` — never reimplement them inline.
+- **`normalize_title`** strips diacritics, lowercases, drops punctuation, collapses whitespace. So `"Spider-Man: Across the Spider-Verse"`, `"Spider-Man Across the Spider-Verse"`, and `"  spider man across the spider verse "` all hash to one key. `"Élite"` and `"Elite"` collapse together; `"Money Heist"` and `"La Casa de Papel"` deliberately do not (different strings → different content under our model; merging across translations requires `tmdb_id`).
+- **`type` is part of the composite key** so a movie and a series sharing title+year don't false-merge.
+- **Hot-path dedup in `refresh_catalog.py`** uses both indices: tmdb_id collision skips, composite-key collision backfills `tmdb_id` onto the existing row without touching ratings.
+- **One-shot dedupe pass: `scripts/dedupe_catalog.py`.** Detects intra-catalog duplicates via union-find over (same tmdb_id) ∪ (same composite key). Mergeable groups are merged via `merge_entries`; groups with multiple distinct `tmdb_id`s are flagged as **conflicts** and left untouched (manual review). Run on demand: `python3 scripts/dedupe_catalog.py [--dry-run]`. Exits 1 if any conflicts remain.
+- **`merge_entries`** rules (deterministic, order-independent):
+  - title/year/type → first entry sorted by `(has tmdb_id, has imdb_id, -votes, -rating)` wins
+  - rating, votes → max non-zero
+  - genres → sorted union
+  - netflix_status → highest-priority label (`original > exclusive-region > library`)
+  - imdb_id, tmdb_id → any non-empty
+  - rating_refreshed_at → most recent (ISO-8601-Z compares correctly as a string)
+- **Why we don't auto-merge across distinct tmdb_ids:** TMDb occasionally has duplicate listings, but more often two entries with the same composite key + different tmdb_ids are genuinely different content (anthology, reboot using the same name). Picking silently is worse than asking.
+
 ### Schema decisions
 - `tmdb_id` and `imdb_id` are both stored. TMDb is canonical for catalog identity (matches the discovery source); IMDb id makes OMDb lookups exact (no title+year fuzzy matching).
 - `rating_refreshed_at` is ISO-8601 UTC with `Z` suffix — stable, sortable as a string, no timezone gymnastics.

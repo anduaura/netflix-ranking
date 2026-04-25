@@ -102,6 +102,15 @@ OMDB_API_KEY=yyyy python3 scripts/refresh_ratings.py
 
 Each script saves what it has on partial failures (network blips, mid-run quota exhaustion) so a flaky day doesn't waste prior progress.
 
+**Dedupe pass (on demand):**
+
+```bash
+python3 scripts/dedupe_catalog.py --dry-run   # preview
+python3 scripts/dedupe_catalog.py             # write merges
+```
+
+Detects duplicate entries by composite key `(normalized_title, year, type)`, merges the safe ones (via `scripts/_catalog.merge_entries`), and flags conflicts (same composite key, different `tmdb_id`s) for manual review.
+
 ## Donations / supporting the site
 
 The site is ad-free. A **♥ Support** button in the header opens a small modal pointing at [GitHub Sponsors](https://github.com/sponsors/anduaura), and `.github/FUNDING.yml` enables GitHub's native "Sponsor" button on the repo page.
