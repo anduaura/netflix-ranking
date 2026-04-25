@@ -106,9 +106,22 @@ def merge_entries(group: list[dict]) -> dict:
             elif k in ("rating_refreshed_at", "enriched_at"):
                 if v > (merged.get(k) or ""):
                     merged[k] = v
+            elif k == "enrichment_failures":
+                # If either side has data (available_in), the failures
+                # field there is irrelevant — pop it. Otherwise keep
+                # the lower count (more optimistic).
+                if "available_in" in merged:
+                    merged.pop("enrichment_failures", None)
+                else:
+                    merged[k] = min(int(v), int(merged.get(k, v)))
             elif k in ("imdb_id", "tmdb_id", "original_language"):
                 if not merged.get(k):
                     merged[k] = v
             else:
                 merged.setdefault(k, v)
+
+    # Final cleanup: if the merged record has data, drop any
+    # leftover failure counter (success makes it meaningless).
+    if "available_in" in merged:
+        merged.pop("enrichment_failures", None)
     return merged

@@ -76,10 +76,14 @@ MAX_ENRICH_PER_RUN = 1000
 
 # Days an entry's availability stays "fresh" after enrichment. Within
 # this window, the entry is skipped — no /watch/providers call. Past it,
-# the entry is eligible for re-enrichment. Stamping happens on every
-# attempt (success or failure) so titles TMDb has no provider data for
-# don't get hammered every run either.
+# the entry is eligible for re-enrichment.
 ENRICH_COOLDOWN_DAYS = 7
+
+# Maximum failed-fetch attempts before an incomplete entry is parked
+# until ENRICH_COOLDOWN_DAYS elapses. After the cooldown the counter
+# resets and the entry gets a fresh budget. Caps how often we hammer
+# TMDb for genuinely-missing data.
+MAX_ENRICHMENT_FAILURES = 2
 
 # Polite pacing. TMDb's rate limit is generous (~50 req/s) but we
 # don't need to sprint.
@@ -96,7 +100,7 @@ FIELD_ORDER = [
     "genres", "type", "netflix_status",
     "original_language", "origin_country", "available_in",
     "imdb_id", "tmdb_id",
-    "rating_refreshed_at", "enriched_at",
+    "rating_refreshed_at", "enriched_at", "enrichment_failures",
 ]
 
 
@@ -487,13 +491,16 @@ def main() -> int:
     if migrated:
         print(f"Cooldown migration: stamped {migrated} pre-existing enriched entries.")
 
-    # Cooldown is bypassed when an entry's data is incomplete (missing
-    # `available_in` from a prior failed fetch). Those entries retry on
-    # every run until they get a valid response, even if `enriched_at`
-    # is recent. Entries that *do* have `available_in` respect the
-    # 7-day cooldown.
+    # Selection gating:
+    #   1. Has available_in + enriched within cooldown    → skip
+    #   2. Has available_in + cooldown elapsed            → re-enrich (refresh data)
+    #   3. Missing available_in + failures < cap          → retry (data-completeness exception)
+    #   4. Missing available_in + failures ≥ cap + cooldown active → skip (parked)
+    #   5. Missing available_in + failures ≥ cap + cooldown elapsed → reset failures, retry
+    #   6. Never enriched                                 → enrich
     enriched = 0
     skipped_cooldown = 0
+    skipped_max_failures = 0
     retried_incomplete = 0
     if MAX_ENRICH_PER_RUN > 0:
         candidates: list[tuple[int, dict]] = []
@@ -503,25 +510,37 @@ def main() -> int:
             has_data = "available_in" in s
             last = s.get("enriched_at") or ""
             in_cooldown = last >= cutoff_iso
-            if has_data and in_cooldown:
-                skipped_cooldown += 1
-                continue
-            if not has_data:
+
+            if has_data:
+                if in_cooldown:
+                    skipped_cooldown += 1
+                    continue
+            else:
+                failures = s.get("enrichment_failures", 0)
+                if failures >= MAX_ENRICHMENT_FAILURES:
+                    if in_cooldown:
+                        skipped_max_failures += 1
+                        continue
+                    # Cooldown elapsed: reset the counter, give it a
+                    # fresh budget on this run.
+                    s["enrichment_failures"] = 0
                 retried_incomplete += 1
             candidates.append((i, s))
+
         to_enrich = candidates[:MAX_ENRICH_PER_RUN]
         if to_enrich:
             print(f"Enriching {len(to_enrich)} entries with watch/providers "
-                  f"(cooldown={ENRICH_COOLDOWN_DAYS}d skipped {skipped_cooldown}, "
+                  f"(cooldown-skipped {skipped_cooldown}, "
+                  f"max-failures-skipped {skipped_max_failures}, "
                   f"retrying-incomplete {retried_incomplete}).")
         for idx, s in to_enrich:
             avail = fetch_availability(api_key, int(s["tmdb_id"]), s.get("type", "movie"))
             if avail is not None:
                 shows[idx]["available_in"] = avail
+                shows[idx].pop("enrichment_failures", None)  # clear on success
                 enriched += 1
-            # Stamp every attempt so successful runs skip on cooldown.
-            # Failed attempts still get stamped, but the `not has_data`
-            # branch above means they'll be retried next run anyway.
+            else:
+                shows[idx]["enrichment_failures"] = shows[idx].get("enrichment_failures", 0) + 1
             shows[idx]["enriched_at"] = now_iso
             time.sleep(SLEEP_BETWEEN)
 
@@ -543,6 +562,7 @@ def main() -> int:
     print()
     print(f"Catalog size after: {len(shows)} (+{added})  "
           f"enriched: {enriched}  cooldown-skipped: {skipped_cooldown}  "
+          f"max-failures-skipped: {skipped_max_failures}  "
           f"retried-incomplete: {retried_incomplete}  migrated: {migrated}")
     return 0
 

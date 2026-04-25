@@ -68,10 +68,20 @@ These document *why* the data pipeline looks the way it does. If a constraint ch
 ### Availability enrichment & cooldown
 - After the catalog growth pass, `refresh_catalog.py` calls `/watch/providers` per entry to populate `available_in` (regions where Netflix carries it as a flatrate provider). This drives the UI's region filter.
 - **`ENRICH_COOLDOWN_DAYS = 7`**: an entry that already has `available_in` is skipped for 7 days after its last `enriched_at` stamp. Avoids hammering TMDb daily for data that rarely changes.
-- **Exception (data completeness wins):** if `available_in` is *missing* on an entry (prior fetch failed / never ran), the cooldown is bypassed — the entry retries every run until it succeeds, even if `enriched_at` is recent.
-- **Stamp every attempt** — successes and failures both write `enriched_at = now`. Successful entries respect the cooldown; failures are still retried via the data-completeness exception. (One pathological case: titles TMDb truly has no provider data for will be retried forever; if that becomes wasteful, add a `enrichment_failures` counter and stop after N consecutive misses.)
+- **`MAX_ENRICHMENT_FAILURES = 2`**: incomplete entries (missing `available_in`) retry on every run *up to* this many consecutive failed attempts. After hitting the cap, the entry is parked until `ENRICH_COOLDOWN_DAYS` passes; then the counter resets and it gets a fresh budget. Stops the script from hammering TMDb forever for titles that genuinely have no provider data.
+- **Stamp every attempt** — successes and failures both write `enriched_at = now`. Successes also clear `enrichment_failures` (it's irrelevant once we have data). Failures increment it.
+- **Decision matrix** for whether to enrich an entry on a given run:
+  | `available_in` | last `enriched_at` | `enrichment_failures` | action |
+  |---|---|---|---|
+  | present | ≤ 7d | any | skip (cooldown) |
+  | present | > 7d | any | re-enrich |
+  | missing | any | < 2 | retry |
+  | missing | ≤ 7d | ≥ 2 | skip (parked) |
+  | missing | > 7d | ≥ 2 | reset counter, retry |
+  | absent  | n/a | n/a | enrich |
 - **One-time migration:** entries that already have `available_in` but no `enriched_at` (added before the cooldown shipped) get `enriched_at = now` at script start, so the cooldown immediately protects them without an extra round of redundant calls.
 - **`MAX_ENRICH_PER_RUN = 1000`** caps per-run cost. Catalog can't currently approach that.
+- **Merge logic:** when duplicates merge, if either side has `available_in` the failures counter is dropped (success makes it meaningless); if neither side has data, the lower count wins (more optimistic).
 
 ### Identity & deduplication
 - **Two-tier identity:** `tmdb_id` (canonical, exact) + composite key `(normalize_title(title), year, type)` for entries without one. Both live in `scripts/_catalog.py` — never reimplement them inline.
