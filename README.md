@@ -84,27 +84,9 @@ The script writes back IMDb IDs as it discovers them, so subsequent runs use dir
 
 ## Donations / supporting the site
 
-The site is ad-free; an optional **♥ Support** button in the header opens a small modal with donation links. Configure it in two places:
+The site is ad-free. A **♥ Support** button in the header opens a small modal pointing at [GitHub Sponsors](https://github.com/sponsors/anduaura), and `.github/FUNDING.yml` enables GitHub's native "Sponsor" button on the repo page.
 
-**1. The site button** — edit `config.js`:
-
-```js
-window.SITE_CONFIG = {
-  support: {
-    github_sponsors: "anduaura",          // -> github.com/sponsors/anduaura
-    buy_me_a_coffee: "anduaura",          // -> buymeacoffee.com/anduaura
-    kofi:            "",                  // ko-fi.com/<handle>
-    paypal:          "anduaura",          // paypal.com/paypalme/<handle>
-    custom: { label: "", url: "" }        // any extra URL
-  }
-};
-```
-
-Leave fields you don't use as empty strings — they'll be hidden. If every field is empty, the Support button disappears.
-
-**2. The GitHub repo "Sponsor" button** — edit `.github/FUNDING.yml` and uncomment the lines for the platforms you've set up. GitHub then renders a native Sponsor button on the repo page.
-
-You can mix and match — e.g. GitHub Sponsors only, or just a PayPal link. None of these require running a backend; payouts are handled by the platforms themselves.
+Want to add Buy Me a Coffee, Ko-fi, PayPal, or a custom destination later? Drop the relevant handle into `config.js` (any field you leave empty is hidden in the UI; if every field is empty, the Support button disappears entirely).
 
 ## Notes on data
 
