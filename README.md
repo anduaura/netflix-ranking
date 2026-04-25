@@ -2,6 +2,8 @@
 
 An interactive ranking of Netflix originals and exclusives sorted by IMDb rating. Pure static site — no backend, no build step, deployable for free on GitHub Pages.
 
+**Live site:** https://anduaura.github.io/netflix-ranking/
+
 ## Features
 
 - Sort by rating, votes, year, or title
