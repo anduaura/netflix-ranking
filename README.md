@@ -42,9 +42,9 @@ This repo ships with a workflow that publishes the site automatically.
 3. Merge `claude/netflix-ranking-site-jeHqx` into `main` (or change the workflow's `branches` line if you want to publish from another branch).
 4. Once the workflow finishes, your site is live at `https://<user>.github.io/<repo>/`.
 
-## Updating the data
+## shows.json schema
 
-Edit `shows.json`. Each entry looks like:
+Each entry looks like:
 
 ```json
 {
@@ -54,33 +54,53 @@ Edit `shows.json`. Each entry looks like:
   "votes": 250000,
   "genres": ["Drama", "Thriller"],
   "type": "series",
-  "netflix_status": "original"
+  "netflix_status": "original",
+  "imdb_id": "tt1234567",
+  "tmdb_id": 98765,
+  "rating_refreshed_at": "2026-04-25T06:00:00Z"
 }
 ```
 
-Allowed values:
 - `type`: `series` · `limited-series` · `movie`
 - `netflix_status`: `original` · `exclusive-region` · `library`
+- `rating_refreshed_at`: drives LRU sharding for the daily ratings refresh.
 
-Bump the top-level `updated` field when you publish a new dataset; it's shown in the footer.
+Top-level fields:
 
-## Auto-refreshing ratings (optional)
+```json
+{
+  "updated": "2026-04-25",
+  "region": "US",
+  "scan_cursors": { "tv": 6, "movie": 11 },
+  "shows": [ ... ]
+}
+```
 
-A scheduled workflow can keep `shows.json` fresh by pulling current IMDb ratings from [OMDb](https://www.omdbapi.com/) once a day.
+You can hand-edit `shows.json`, but typically you'll let the workflow grow and refresh it.
+
+## Auto-updating data (catalog + ratings)
+
+Two scripts run daily in the same workflow (`.github/workflows/refresh-ratings.yml`):
+
+1. **Catalog grower** — `scripts/refresh_catalog.py` scans a few pages of [TMDb](https://www.themoviedb.org/)'s Netflix discover endpoint and **appends** any new titles to `shows.json`. A page cursor stored in the file rotates through the catalog over many runs, so the library grows incrementally toward a complete Netflix index.
+2. **Sharded ratings refresh** — `scripts/refresh_ratings.py` picks the `OMDB_DAILY_BUDGET` entries with the oldest `rating_refreshed_at` (LRU) and updates ratings + votes via [OMDb](https://www.omdbapi.com/). Over a full cycle every catalog entry is touched.
+
+**Limits live as named constants** at the top of each script (`TMDB_PAGES_PER_RUN`, `TMDB_MIN_VOTE_COUNT`, `CATALOG_MAX_SIZE`, `OMDB_DAILY_BUDGET`, etc.). Tune those in one place — don't sprinkle magic numbers.
 
 **Set it up:**
 
-1. Get a free OMDb API key at https://www.omdbapi.com/apikey.aspx (1,000 requests/day on the free tier — ~100 shows per daily run sits well under the cap).
-2. In your repo: **Settings → Secrets and variables → Actions → New repository secret**, name it `OMDB_API_KEY`.
-3. The workflow at `.github/workflows/refresh-ratings.yml` runs every day at 06:00 UTC and on manual dispatch. When ratings or vote counts change, it commits `shows.json` to `main`, which then triggers the Pages deploy.
+1. **OMDb key** — free at https://www.omdbapi.com/apikey.aspx (1,000 req/day). Store as repo secret `OMDB_API_KEY`. **You must click the verification email**, otherwise every call returns 401.
+2. **TMDb key** — free at https://www.themoviedb.org/settings/api. Store as repo secret `TMDB_API_KEY`. (Optional — if missing, catalog growth is skipped and only the existing entries get rating refreshes.)
+3. The workflow runs daily at 06:00 UTC and on manual dispatch. When `shows.json` changes, it commits to `main`, which triggers the Pages deploy.
 
-**Run it manually:** **Actions → Refresh IMDb ratings → Run workflow**, or locally:
+**Run locally:**
 
 ```bash
-OMDB_API_KEY=xxxx python3 scripts/refresh_ratings.py
+TMDB_API_KEY=xxxx python3 scripts/refresh_catalog.py
+OMDB_API_KEY=yyyy python3 scripts/refresh_ratings.py
 ```
 
-The script writes back IMDb IDs as it discovers them, so subsequent runs use direct ID lookups (more accurate than title+year).
+Each script saves what it has on partial failures (network blips, mid-run quota exhaustion) so a flaky day doesn't waste prior progress.
 
 ## Donations / supporting the site
 

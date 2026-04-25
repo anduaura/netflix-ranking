@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""Refresh IMDb rating + votes for every entry in shows.json via OMDb.
+"""Refresh IMDb rating + votes for the oldest slice of shows.json via OMDb.
+
+Sharded LRU refresh: each run picks the OMDB_DAILY_BUDGET entries with the
+oldest rating_refreshed_at timestamp (entries that have never been refreshed
+sort first) and updates them. Over a full cycle every catalog entry is
+touched; titles never refresh more than once per cycle.
 
 Reads OMDB_API_KEY from the environment. Writes updated values back to
 shows.json in place, preserving entry order and field order. A preflight
 call against a known title verifies the key before iterating; auth and
-quota errors abort the run immediately rather than burning 92 doomed
-requests. Per-show *lookup* failures (network blips, unknown title) are
-logged and skipped so a few stale entries don't block the rest.
+quota errors abort immediately rather than burning the whole shard.
 
 Exit codes:
-  0  success (shows possibly updated)
+  0  success (shard processed, shows possibly updated)
   2  OMDB_API_KEY not set
   3  auth failure (bad/unverified key)
   4  daily quota exhausted
@@ -29,20 +32,35 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from collections import OrderedDict
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
+
+# ---------------------------------------------------------------------------
+# Limits & knobs (single source of truth — keep CLAUDE.md in sync)
+# ---------------------------------------------------------------------------
+
+# OMDb free tier: 1,000 requests/day. Reserve a margin for the preflight
+# call and any incidental retries. The shard size is BUDGET - 1 (preflight
+# costs 1 request).
+OMDB_DAILY_BUDGET = 950
+
+# Polite pacing between calls (seconds). OMDb has no published per-second
+# rate limit but ~10 req/s is comfortable.
+SLEEP_BETWEEN = 0.1
+
+# Network timeout per OMDb call.
+TIMEOUT = 15
 
 OMDB_URL = "https://www.omdbapi.com/"
 PREFLIGHT_IMDB_ID = "tt0903747"  # Breaking Bad — stable, won't disappear.
 ROOT = Path(__file__).resolve().parent.parent
 DATA_FILE = ROOT / "shows.json"
-TIMEOUT = 15
-SLEEP_BETWEEN = 0.1  # be polite
 
 # Field order preserved when rewriting each entry.
 FIELD_ORDER = [
     "title", "year", "rating", "votes",
-    "genres", "type", "netflix_status", "imdb_id",
+    "genres", "type", "netflix_status",
+    "imdb_id", "tmdb_id", "rating_refreshed_at",
 ]
 
 
@@ -167,6 +185,22 @@ def reorder(entry: dict) -> "OrderedDict[str, object]":
     return out
 
 
+def select_shard(shows: list[dict], budget: int) -> tuple[list[dict], list[int]]:
+    """Return (shard_entries, original_indices) — oldest rating_refreshed_at first.
+
+    Entries with no timestamp sort first (treated as infinitely stale), so a
+    freshly-grown catalog is fully refreshed before any rotation starts.
+    """
+    if budget <= 0 or not shows:
+        return [], []
+    indexed = list(enumerate(shows))
+    # Empty string sorts before any ISO-8601 string, which is exactly what we
+    # want for "never refreshed".
+    indexed.sort(key=lambda pair: pair[1].get("rating_refreshed_at") or "")
+    chosen = indexed[:budget]
+    return [s for _, s in chosen], [i for i, _ in chosen]
+
+
 def main() -> int:
     api_key = os.environ.get("OMDB_API_KEY")
     if not api_key:
@@ -196,17 +230,33 @@ def main() -> int:
     raw = json.loads(DATA_FILE.read_text())
     shows = raw["shows"]
 
+    shard, shard_indices = select_shard(shows, OMDB_DAILY_BUDGET - 1)
+    if not shard:
+        print("Catalog is empty; nothing to refresh.")
+        return 0
+
+    print(
+        f"Shard: {len(shard)}/{len(shows)} entries selected "
+        f"(budget={OMDB_DAILY_BUDGET}, full-cycle ≈ "
+        f"{(len(shows) + (OMDB_DAILY_BUDGET - 1) - 1) // max(OMDB_DAILY_BUDGET - 1, 1)} runs)."
+    )
+
     updated = 0
     skipped = 0
     failed = 0
 
     try:
-        for i, show in enumerate(shows, 1):
+        for i, (show, idx) in enumerate(zip(shard, shard_indices), 1):
             title = show["title"]
-            print(f"[{i}/{len(shows)}] {title} ({show['year']})")
+            print(f"[{i}/{len(shard)}] {title} ({show.get('year', '?')})")
             data = lookup(api_key, show)
+            now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
             if not data:
                 failed += 1
+                # Still stamp it so a permanently-unmatchable entry doesn't
+                # monopolize every shard. Site UX is better off touching the
+                # next stale entry instead.
+                shows[idx]["rating_refreshed_at"] = now
                 time.sleep(SLEEP_BETWEEN)
                 continue
 
@@ -217,16 +267,17 @@ def main() -> int:
             changed = False
             if new_rating is not None and new_rating != show.get("rating"):
                 print(f"  rating: {show.get('rating')} -> {new_rating}")
-                show["rating"] = new_rating
+                shows[idx]["rating"] = new_rating
                 changed = True
             if new_votes is not None and new_votes != show.get("votes"):
                 print(f"  votes:  {show.get('votes')} -> {new_votes}")
-                show["votes"] = new_votes
+                shows[idx]["votes"] = new_votes
                 changed = True
             if imdb_id and show.get("imdb_id") != imdb_id:
-                show["imdb_id"] = imdb_id
+                shows[idx]["imdb_id"] = imdb_id
                 changed = True
 
+            shows[idx]["rating_refreshed_at"] = now
             if changed:
                 updated += 1
             else:
@@ -252,7 +303,8 @@ def main() -> int:
     DATA_FILE.write_text(json.dumps(raw, indent=2, ensure_ascii=False) + "\n")
 
     print()
-    print(f"updated: {updated}  unchanged: {skipped}  failed: {failed}")
+    print(f"updated: {updated}  unchanged: {skipped}  failed: {failed}  "
+          f"(shard={len(shard)}, catalog={len(shows)})")
     return 0
 
 

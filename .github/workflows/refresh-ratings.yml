@@ -1,4 +1,4 @@
-name: Refresh IMDb ratings
+name: Refresh catalog and ratings
 
 on:
   schedule:
@@ -10,12 +10,15 @@ permissions:
   contents: write
 
 concurrency:
-  group: refresh-ratings
+  group: refresh-data
   cancel-in-progress: false
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    env:
+      TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+      OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -23,9 +26,19 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Refresh shows.json from OMDb
-        env:
-          OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
+      # Step 1: incrementally grow the catalog from TMDb.
+      # Skipped (with a warning, not a failure) if TMDB_API_KEY isn't set —
+      # the OMDb refresh below still runs against whatever's in shows.json.
+      - name: Grow catalog from TMDb
+        if: ${{ env.TMDB_API_KEY != '' }}
+        run: python scripts/refresh_catalog.py
+
+      - name: Warn if TMDB_API_KEY missing
+        if: ${{ env.TMDB_API_KEY == '' }}
+        run: echo "::warning::TMDB_API_KEY secret not set; skipping catalog growth. Add it to grow shows.json beyond the curated seed."
+
+      # Step 2: sharded LRU refresh of IMDb ratings via OMDb.
+      - name: Refresh ratings shard from OMDb
         run: python scripts/refresh_ratings.py
 
       - name: Commit and push if changed
@@ -38,5 +51,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add shows.json
-          git commit -m "chore(data): daily IMDb ratings refresh"
+          git commit -m "chore(data): refresh catalog + ratings shard"
           git push

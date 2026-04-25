@@ -22,9 +22,23 @@ These rules apply to every session in this repo. Read them before doing any work
 
 ## Data refresh
 
-- `shows.json` is refreshed daily by `.github/workflows/refresh-ratings.yml` using the `OMDB_API_KEY` repo secret.
-- Manual local run: `OMDB_API_KEY=xxxx python3 scripts/refresh_ratings.py`.
-- The script preserves field order and only writes when something actually changed.
+`.github/workflows/refresh-ratings.yml` runs daily at 06:00 UTC and chains two scripts:
+
+1. **`scripts/refresh_catalog.py`** — grows `shows.json` incrementally from TMDb's Netflix discover endpoint using a rotating page cursor stored inside the file. Existing entries are never modified by this step. Requires `TMDB_API_KEY` secret; if missing, the step is skipped (warning, not failure).
+2. **`scripts/refresh_ratings.py`** — sharded LRU refresh of IMDb ratings via OMDb. Picks the `OMDB_DAILY_BUDGET` entries with the oldest `rating_refreshed_at` and updates them. Requires `OMDB_API_KEY` secret.
+
+**Architectural rules:**
+- **Limits are named constants** at the top of each script (`OMDB_DAILY_BUDGET`, `TMDB_PAGES_PER_RUN`, `TMDB_MIN_VOTE_COUNT`, `CATALOG_MAX_SIZE`, `TMDB_REGION`, etc.). Never inline magic numbers in the body of the scripts. When tuning, change the constant.
+- **Fail fast on auth/quota errors** (exit codes 3 / 4). Never retry through a doomed budget.
+- **Preserve field order** when rewriting entries (`FIELD_ORDER` constant).
+- **Catalog growth is append-only.** Don't remove entries based on TMDb absence — Netflix availability flaps.
+- **Stamp `rating_refreshed_at` even on lookup failures** so a permanently-unmatchable entry doesn't monopolize every shard.
+
+Manual local run:
+```bash
+TMDB_API_KEY=xxxx python3 scripts/refresh_catalog.py
+OMDB_API_KEY=yyyy python3 scripts/refresh_ratings.py
+```
 
 ## Donations
 
