@@ -12,6 +12,8 @@
     minRatingVal: document.getElementById("minRatingVal"),
     sort: document.getElementById("sort"),
     reset: document.getElementById("reset"),
+    language: document.getElementById("language"),
+    regionFilters: document.getElementById("regionFilters"),
     supportBtn: document.getElementById("supportBtn"),
     supportDialog: document.getElementById("supportDialog"),
     supportLinks: document.getElementById("supportLinks"),
@@ -31,6 +33,27 @@
     "movie": "Movie",
   };
 
+  // ISO 639-1 → display name. Extend as the catalog grows.
+  const LANGUAGE_LABEL = {
+    en: "English", ko: "Korean", ja: "Japanese", es: "Spanish",
+    fr: "French", de: "German", it: "Italian", pt: "Portuguese",
+    zh: "Chinese", hi: "Hindi", ar: "Arabic", ru: "Russian",
+    th: "Thai", tr: "Turkish", id: "Indonesian", nl: "Dutch",
+    sv: "Swedish", da: "Danish", no: "Norwegian", pl: "Polish",
+    he: "Hebrew", uk: "Ukrainian", vi: "Vietnamese", tl: "Tagalog",
+    fi: "Finnish", el: "Greek", cs: "Czech", ro: "Romanian",
+    hu: "Hungarian", fa: "Persian",
+  };
+  const langLabel = (code) => LANGUAGE_LABEL[code] || (code ? code.toUpperCase() : "Unknown");
+
+  const REGION_LABEL = {
+    US: "🇺🇸 United States", KR: "🇰🇷 Korea", JP: "🇯🇵 Japan",
+    GB: "🇬🇧 United Kingdom", IN: "🇮🇳 India", BR: "🇧🇷 Brazil",
+    DE: "🇩🇪 Germany", FR: "🇫🇷 France", ES: "🇪🇸 Spain", MX: "🇲🇽 Mexico",
+    CA: "🇨🇦 Canada", AU: "🇦🇺 Australia", IT: "🇮🇹 Italy", NL: "🇳🇱 Netherlands",
+  };
+  const regionLabel = (code) => REGION_LABEL[code] || code;
+
   const imdbSearchUrl = (title, year) =>
     `https://www.imdb.com/find/?s=tt&q=${encodeURIComponent(title + " " + year)}`;
 
@@ -41,11 +64,15 @@
   };
 
   function readFilters() {
+    const checkedRegions = [...els.regionFilters.querySelectorAll("input:checked")]
+      .map((el) => el.value);
     return {
       q: els.q.value.trim().toLowerCase(),
       genre: els.genre.value,
       type: els.type.value,
       status: els.status.value,
+      language: els.language.value,
+      regions: checkedRegions,
       minRating: parseFloat(els.minRating.value) || 0,
       sort: els.sort.value,
     };
@@ -57,6 +84,8 @@
     if (f.genre) params.set("genre", f.genre);
     if (f.type) params.set("type", f.type);
     if (f.status) params.set("status", f.status);
+    if (f.language) params.set("lang", f.language);
+    if (f.regions.length) params.set("regions", f.regions.join(","));
     if (f.minRating > 0) params.set("min", String(f.minRating));
     if (f.sort && f.sort !== "rating") params.set("sort", f.sort);
     const qs = params.toString();
@@ -69,6 +98,13 @@
     if (p.has("genre")) els.genre.value = p.get("genre");
     if (p.has("type")) els.type.value = p.get("type");
     if (p.has("status")) els.status.value = p.get("status");
+    if (p.has("lang")) els.language.value = p.get("lang");
+    if (p.has("regions")) {
+      const wanted = new Set(p.get("regions").split(",").filter(Boolean));
+      els.regionFilters.querySelectorAll("input").forEach((el) => {
+        el.checked = wanted.has(el.value);
+      });
+    }
     if (p.has("min")) {
       els.minRating.value = p.get("min");
       els.minRatingVal.textContent = parseFloat(p.get("min")).toFixed(1);
@@ -88,12 +124,47 @@
     }
   }
 
+  function populateLanguages(shows) {
+    const set = new Set();
+    shows.forEach((s) => { if (s.original_language) set.add(s.original_language); });
+    const codes = [...set].sort((a, b) => langLabel(a).localeCompare(langLabel(b)));
+    for (const code of codes) {
+      const opt = document.createElement("option");
+      opt.value = code;
+      opt.textContent = langLabel(code);
+      els.language.appendChild(opt);
+    }
+  }
+
+  function populateRegions(shows, configuredRegions) {
+    // Union of configured regions + anything we've actually seen.
+    const set = new Set(configuredRegions || []);
+    shows.forEach((s) => (s.available_in || []).forEach((r) => set.add(r)));
+    const codes = [...set].sort((a, b) => regionLabel(a).localeCompare(regionLabel(b)));
+    if (!codes.length) {
+      els.regionFilters.parentElement.hidden = true;
+      return;
+    }
+    els.regionFilters.innerHTML = codes.map((c) => `
+      <label class="region-chip">
+        <input type="checkbox" value="${escapeHtml(c)}" />
+        <span>${escapeHtml(regionLabel(c))}</span>
+      </label>
+    `).join("");
+  }
+
   function applyFilters(shows, f) {
     let out = shows.filter((s) => {
       if (f.q && !s.title.toLowerCase().includes(f.q)) return false;
       if (f.genre && !s.genres.includes(f.genre)) return false;
       if (f.type && s.type !== f.type) return false;
       if (f.status && s.netflix_status !== f.status) return false;
+      if (f.language && s.original_language !== f.language) return false;
+      if (f.regions.length) {
+        const avail = s.available_in || [];
+        // OR semantics: show titles available in ANY of the checked regions.
+        if (!f.regions.some((r) => avail.includes(r))) return false;
+      }
       if (s.rating < f.minRating) return false;
       return true;
     });
@@ -123,6 +194,9 @@
     items.forEach((s, i) => {
       const li = document.createElement("li");
       li.className = "card" + (i < 3 ? " top" : "");
+      const langTag = s.original_language && s.original_language !== "en"
+        ? `<span class="tag tag-lang">${escapeHtml(langLabel(s.original_language))}</span>`
+        : "";
       li.innerHTML = `
         <div class="rank">${i + 1}</div>
         <div class="title">
@@ -132,6 +206,7 @@
             <span>·</span>
             <span>${TYPE_LABEL[s.type] || s.type}</span>
             <span class="tag ${s.netflix_status === "original" ? "original" : ""}">${STATUS_LABEL[s.netflix_status] || s.netflix_status}</span>
+            ${langTag}
             ${s.genres.slice(0, 3).map((g) => `<span class="tag">${escapeHtml(g)}</span>`).join("")}
           </div>
         </div>
@@ -200,14 +275,17 @@
         render();
       });
     });
-    [els.genre, els.type, els.status, els.sort].forEach((el) =>
+    [els.genre, els.type, els.status, els.language, els.sort].forEach((el) =>
       el.addEventListener("change", render)
     );
+    els.regionFilters.addEventListener("change", render);
     els.reset.addEventListener("click", () => {
       els.q.value = "";
       els.genre.value = "";
       els.type.value = "";
       els.status.value = "";
+      els.language.value = "";
+      els.regionFilters.querySelectorAll("input").forEach((el) => (el.checked = false));
       els.minRating.value = "0";
       els.minRatingVal.textContent = "0.0";
       els.sort.value = "rating";
@@ -224,6 +302,8 @@
       state.updated = data.updated || "";
       els.updated.textContent = state.updated || "—";
       populateGenres(state.shows);
+      populateLanguages(state.shows);
+      populateRegions(state.shows, data.regions);
       loadFromQueryString();
       bind();
       setupSupport();

@@ -67,6 +67,13 @@ TMDB_MIN_VOTE_COUNT = 50
 # Safety: cap the catalog so a misconfigured run can't balloon it.
 CATALOG_MAX_SIZE = 5000
 
+# How many entries get enriched with /watch/providers per run. Drives the
+# `available_in` field that powers the UI's region filter. TMDb's free
+# tier has no daily cap so this can be large; we just don't want one run
+# to hang for 20 minutes if the catalog ever gets huge. Set to 0 to
+# disable availability enrichment entirely.
+MAX_ENRICH_PER_RUN = 1000
+
 # Polite pacing. TMDb's rate limit is generous (~50 req/s) but we
 # don't need to sprint.
 SLEEP_BETWEEN = 0.05
@@ -80,6 +87,7 @@ DATA_FILE = ROOT / "shows.json"
 FIELD_ORDER = [
     "title", "year", "rating", "votes",
     "genres", "type", "netflix_status",
+    "original_language", "origin_country", "available_in",
     "imdb_id", "tmdb_id", "rating_refreshed_at",
 ]
 
@@ -138,6 +146,31 @@ def discover_page(api_key: str, media: str, page: int, region: str, *, network: 
     if network is not None:
         params["with_networks"] = network
     return tmdb_get(api_key, f"/discover/{media}", params)
+
+
+def fetch_availability(api_key: str, tmdb_id: int, media: str) -> list[str] | None:
+    """Return regions where Netflix is a flatrate (subscription) provider.
+
+    Returns [] if Netflix isn't on any region's provider list (rare but
+    possible — TMDb may know about a title without watch-provider data).
+    Returns None on hard failure so callers can leave the field unset
+    and retry later.
+    """
+    path = "tv" if media in ("tv", "series", "limited-series") else "movie"
+    try:
+        data = tmdb_get(api_key, f"/{path}/{tmdb_id}/watch/providers")
+    except Exception as e:
+        print(f"  ! providers {path}/{tmdb_id}: {e}", file=sys.stderr)
+        return None
+
+    found: list[str] = []
+    for region, info in (data.get("results") or {}).items():
+        flatrate = info.get("flatrate") or []
+        for provider in flatrate:
+            if provider.get("provider_id") == TMDB_NETFLIX_PROVIDER:
+                found.append(region)
+                break
+    return sorted(found)
 
 
 def fetch_originals_ids(api_key: str) -> set[int]:
@@ -227,7 +260,7 @@ def make_entry(result: dict, media: str, genre_lookup: dict[int, str], originals
         netflix_status = "library"
         media_type = "movie"
 
-    return {
+    entry: dict = {
         "title": title,
         "year": year,
         "rating": 0.0,           # placeholder; OMDb fills these in later
@@ -237,6 +270,14 @@ def make_entry(result: dict, media: str, genre_lookup: dict[int, str], originals
         "netflix_status": netflix_status,
         "tmdb_id": result["id"],
     }
+    if result.get("original_language"):
+        entry["original_language"] = result["original_language"]
+    if media == "tv":
+        # /discover/tv returns origin_country; /discover/movie does not.
+        oc = result.get("origin_country") or []
+        if oc:
+            entry["origin_country"] = list(oc)
+    return entry
 
 
 # ---------------------------------------------------------------------------
@@ -413,6 +454,26 @@ def main() -> int:
             if stop_outer:
                 break
 
+    # Availability enrichment: any entry with a tmdb_id but no
+    # `available_in` field gets a /watch/providers call so the UI can
+    # filter "what's on Netflix in my region". Capped per-run so a huge
+    # catalog can't stall a run; remaining entries enrich on the next
+    # run.
+    enriched = 0
+    if MAX_ENRICH_PER_RUN > 0:
+        to_enrich = [
+            (i, s) for i, s in enumerate(shows)
+            if s.get("tmdb_id") and "available_in" not in s
+        ][:MAX_ENRICH_PER_RUN]
+        if to_enrich:
+            print(f"Enriching {len(to_enrich)} entries with watch/providers…")
+        for idx, s in to_enrich:
+            avail = fetch_availability(api_key, int(s["tmdb_id"]), s.get("type", "movie"))
+            if avail is not None:
+                shows[idx]["available_in"] = avail
+                enriched += 1
+            time.sleep(SLEEP_BETWEEN)
+
     # Persist cursors. Region cursor advances regardless of whether we hit
     # the cap, so a maxed catalog still rotates if we ever raise the cap.
     out_cursors: dict = dict(cursors)
@@ -423,13 +484,13 @@ def main() -> int:
     raw["regions"] = TMDB_REGIONS
     raw["source"] = "Catalog discovered via TMDb (Netflix). Ratings from OMDb (IMDb)."
     raw.pop("region", None)  # superseded by regions
-    if added > 0:
+    if added > 0 or enriched > 0:
         raw["updated"] = date.today().isoformat()
 
     DATA_FILE.write_text(json.dumps(raw, indent=2, ensure_ascii=False) + "\n")
 
     print()
-    print(f"Catalog size after: {len(shows)} (+{added})")
+    print(f"Catalog size after: {len(shows)} (+{added})  enriched: {enriched}")
     return 0
 
 

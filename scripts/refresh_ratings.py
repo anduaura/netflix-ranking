@@ -60,6 +60,7 @@ DATA_FILE = ROOT / "shows.json"
 FIELD_ORDER = [
     "title", "year", "rating", "votes",
     "genres", "type", "netflix_status",
+    "original_language", "origin_country", "available_in",
     "imdb_id", "tmdb_id", "rating_refreshed_at",
 ]
 

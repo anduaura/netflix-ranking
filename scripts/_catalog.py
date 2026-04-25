@@ -93,8 +93,8 @@ def merge_entries(group: list[dict]) -> dict:
             if v in (None, "", [], {}):
                 continue
 
-            if k == "genres":
-                merged["genres"] = sorted(set(merged.get("genres") or []) | set(v))
+            if k in ("genres", "origin_country", "available_in"):
+                merged[k] = sorted(set(merged.get(k) or []) | set(v))
             elif k in ("rating", "votes"):
                 if (v or 0) > (merged.get(k) or 0):
                     merged[k] = v
@@ -106,7 +106,7 @@ def merge_entries(group: list[dict]) -> dict:
             elif k == "rating_refreshed_at":
                 if v > (merged.get(k) or ""):
                     merged[k] = v
-            elif k in ("imdb_id", "tmdb_id"):
+            elif k in ("imdb_id", "tmdb_id", "original_language"):
                 if not merged.get(k):
                     merged[k] = v
             else:
