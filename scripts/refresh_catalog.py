@@ -160,6 +160,70 @@ def discover_page(api_key: str, media: str, page: int, region: str, *, network: 
     return tmdb_get(api_key, f"/discover/{media}", params)
 
 
+def report_enrichment_status(shows: list[dict], cutoff_iso: str) -> None:
+    """Print a one-screen summary of where every catalog entry stands
+    in the enrichment lifecycle, plus when the earliest parked entry
+    will be eligible to retry.
+
+    Doesn't mutate state; pure read.
+    """
+    n_total = len(shows)
+    n_no_tmdb = 0
+    n_skip_cooldown = 0       # has data + within cooldown
+    n_refresh_stale = 0       # has data + cooldown elapsed
+    n_first_time = 0          # incomplete + never attempted
+    n_retry_incomplete = 0    # incomplete + under failure cap (or cooldown elapsed)
+    n_parked = 0              # incomplete + at cap + within cooldown
+    earliest_parked_at: str | None = None
+
+    for s in shows:
+        if not s.get("tmdb_id"):
+            n_no_tmdb += 1
+            continue
+        has_data = "available_in" in s
+        last = s.get("enriched_at") or ""
+        in_cooldown = last >= cutoff_iso
+        if has_data:
+            if in_cooldown:
+                n_skip_cooldown += 1
+            else:
+                n_refresh_stale += 1
+            continue
+        failures = s.get("enrichment_failures", 0)
+        if failures >= MAX_ENRICHMENT_FAILURES and in_cooldown:
+            n_parked += 1
+            if earliest_parked_at is None or last < earliest_parked_at:
+                earliest_parked_at = last
+        elif not last:
+            n_first_time += 1
+        else:
+            n_retry_incomplete += 1
+
+    will_attempt = n_refresh_stale + n_first_time + n_retry_incomplete
+    msg = (
+        f"Enrichment status: {n_total} entries; "
+        f"{will_attempt} eligible this run "
+        f"({n_first_time} first-time, {n_retry_incomplete} retry, "
+        f"{n_refresh_stale} refresh-stale); "
+        f"{n_skip_cooldown} cooldown-skipped, {n_parked} parked"
+    )
+    if n_no_tmdb:
+        msg += f", {n_no_tmdb} ineligible (no tmdb_id)"
+    msg += "."
+    print(msg, file=sys.stderr)
+
+    if n_parked and earliest_parked_at:
+        try:
+            dt = datetime.strptime(earliest_parked_at, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+        except ValueError:
+            return
+        eligible = dt + timedelta(days=ENRICH_COOLDOWN_DAYS)
+        print(
+            f"  ↳ next parked entry eligible {eligible.strftime('%Y-%m-%d %H:%MZ')}",
+            file=sys.stderr,
+        )
+
+
 def fetch_availability(api_key: str, tmdb_id: int, media: str) -> list[str] | None:
     """Return regions where Netflix is a flatrate (subscription) provider.
 
@@ -490,6 +554,8 @@ def main() -> int:
             migrated += 1
     if migrated:
         print(f"Cooldown migration: stamped {migrated} pre-existing enriched entries.")
+
+    report_enrichment_status(shows, cutoff_iso)
 
     # Selection gating:
     #   1. Has available_in + enriched within cooldown    → skip
