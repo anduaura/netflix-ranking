@@ -76,12 +76,17 @@ class OMDbQuotaError(Exception):
 
 def _is_auth_error(msg: str) -> bool:
     m = msg.lower()
-    return "invalid api key" in m or "no api key" in m or "unauthori" in m
+    return "invalid api key" in m or "no api key" in m
 
 
 def _is_quota_error(msg: str) -> bool:
     m = msg.lower()
-    return "request limit reached" in m or "limit" in m and "exceeded" in m
+    return any(p in m for p in (
+        "request limit reached",
+        "rate limit",
+        "too many requests",
+        "quota",
+    )) or ("limit" in m and "exceeded" in m)
 
 
 def omdb_get(api_key: str, params: dict) -> dict | None:
@@ -89,6 +94,12 @@ def omdb_get(api_key: str, params: dict) -> dict | None:
 
     Raises OMDbAuthError / OMDbQuotaError on conditions that mean every
     subsequent call would also fail — caller should abort, not retry.
+
+    Note on classification: OMDb returns HTTP 401 for BOTH a bad/unverified
+    key AND a blown daily quota (with the real reason in the JSON body's
+    Error field). We inspect the body before classifying — quota signals
+    win, then auth, then 4xx fall through to "skip this one" and 5xx /
+    network errors propagate as transient.
     """
     q = {"apikey": api_key, **params}
     url = OMDB_URL + "?" + urllib.parse.urlencode(q)
@@ -97,16 +108,24 @@ def omdb_get(api_key: str, params: dict) -> dict | None:
         with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
             body = resp.read().decode("utf-8")
     except urllib.error.HTTPError as e:
-        # OMDb sometimes returns useful JSON with a non-2xx status.
         try:
             err_body = e.read().decode("utf-8", errors="replace")
         except Exception:
             err_body = ""
         snippet = err_body.strip()[:300] or "(empty body)"
+        # Body inspection before status-code routing — OMDb conflates
+        # auth and quota under 401.
+        if _is_quota_error(snippet):
+            raise OMDbQuotaError(f"{e.code} {e.reason}: {snippet}") from None
+        if _is_auth_error(snippet):
+            raise OMDbAuthError(f"{e.code} {e.reason}: {snippet}") from None
+        # 429 = standard rate-limit (other APIs); 402 = OMDb's "payment
+        # required" sometimes used for quota; 401 with no body signal
+        # falls through to auth as a defensive default.
+        if e.code in (429, 402):
+            raise OMDbQuotaError(f"{e.code} {e.reason}: {snippet}") from None
         if e.code == 401:
-            raise OMDbAuthError(f"401 Unauthorized: {snippet}") from None
-        if e.code == 402:
-            raise OMDbQuotaError(f"402 Payment Required: {snippet}") from None
+            raise OMDbAuthError(f"{e.code} {e.reason}: {snippet}") from None
         print(f"  ! HTTP {e.code} {e.reason}: {snippet}", file=sys.stderr)
         return None
     except urllib.error.URLError as e:
