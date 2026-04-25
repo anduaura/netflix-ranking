@@ -2,8 +2,8 @@ name: Refresh IMDb ratings
 
 on:
   schedule:
-    # Weekly, Mondays at 06:00 UTC.
-    - cron: "0 6 * * 1"
+    # Daily at 06:00 UTC.
+    - cron: "0 6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -38,5 +38,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add shows.json
-          git commit -m "chore(data): weekly IMDb ratings refresh"
+          git commit -m "chore(data): daily IMDb ratings refresh"
           git push

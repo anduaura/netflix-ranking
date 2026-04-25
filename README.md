@@ -66,13 +66,13 @@ Bump the top-level `updated` field when you publish a new dataset; it's shown in
 
 ## Auto-refreshing ratings (optional)
 
-A scheduled workflow can keep `shows.json` fresh by pulling current IMDb ratings from [OMDb](https://www.omdbapi.com/) once a week.
+A scheduled workflow can keep `shows.json` fresh by pulling current IMDb ratings from [OMDb](https://www.omdbapi.com/) once a day.
 
 **Set it up:**
 
-1. Get a free OMDb API key at https://www.omdbapi.com/apikey.aspx (1,000 requests/day on the free tier — plenty for ~100 shows weekly).
+1. Get a free OMDb API key at https://www.omdbapi.com/apikey.aspx (1,000 requests/day on the free tier — ~100 shows per daily run sits well under the cap).
 2. In your repo: **Settings → Secrets and variables → Actions → New repository secret**, name it `OMDB_API_KEY`.
-3. The workflow at `.github/workflows/refresh-ratings.yml` runs every Monday 06:00 UTC and on manual dispatch. When ratings or vote counts change, it commits `shows.json` to `main`, which then triggers the Pages deploy.
+3. The workflow at `.github/workflows/refresh-ratings.yml` runs every day at 06:00 UTC and on manual dispatch. When ratings or vote counts change, it commits `shows.json` to `main`, which then triggers the Pages deploy.
 
 **Run it manually:** **Actions → Refresh IMDb ratings → Run workflow**, or locally:
 
