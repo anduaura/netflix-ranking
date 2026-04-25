@@ -229,28 +229,28 @@
     const frag = document.createDocumentFragment();
     items.forEach((s, i) => {
       const li = document.createElement("li");
-      li.className = "card" + (i < 3 ? " top" : "");
       const langTag = s.original_language && s.original_language !== "en"
         ? `<span class="tag tag-lang">${escapeHtml(langLabel(s.original_language))}</span>`
         : "";
       li.innerHTML = `
-        <div class="rank">${i + 1}</div>
-        <div class="title">
-          <a class="title-link" href="${netflixSearchUrl(s.title)}" target="_blank" rel="noopener noreferrer" title="Open on Netflix">${escapeHtml(s.title)}</a>
-          <div class="sub">
-            <span>${s.year}</span>
-            <span>·</span>
-            <span>${TYPE_LABEL[s.type] || s.type}</span>
-            <span class="tag ${s.netflix_status === "original" ? "original" : ""}">${STATUS_LABEL[s.netflix_status] || s.netflix_status}</span>
-            ${langTag}
-            ${s.genres.slice(0, 3).map((g) => `<span class="tag">${escapeHtml(g)}</span>`).join("")}
-            <a class="ext-link" href="${imdbSearchUrl(s.title, s.year)}" target="_blank" rel="noopener noreferrer" title="View on IMDb">IMDb ↗</a>
+        <a class="card${i < 3 ? " top" : ""}" href="${netflixSearchUrl(s.title)}" target="_blank" rel="noopener noreferrer" title="Open on Netflix">
+          <div class="rank">${i + 1}</div>
+          <div class="title">
+            <span class="title-text">${escapeHtml(s.title)}</span>
+            <div class="sub">
+              <span>${s.year}</span>
+              <span>·</span>
+              <span>${TYPE_LABEL[s.type] || s.type}</span>
+              <span class="tag ${s.netflix_status === "original" ? "original" : ""}">${STATUS_LABEL[s.netflix_status] || s.netflix_status}</span>
+              ${langTag}
+              ${s.genres.slice(0, 3).map((g) => `<span class="tag">${escapeHtml(g)}</span>`).join("")}
+            </div>
           </div>
-        </div>
-        <div class="score" title="${s.votes.toLocaleString()} votes">
-          <div class="num">${s.rating.toFixed(1)}</div>
-          <div class="label">${fmtVotes(s.votes)} votes</div>
-        </div>
+          <div class="score" title="${s.votes.toLocaleString()} votes">
+            <div class="num">${s.rating.toFixed(1)}</div>
+            <div class="label">${fmtVotes(s.votes)} votes</div>
+          </div>
+        </a>
       `;
       frag.appendChild(li);
     });
