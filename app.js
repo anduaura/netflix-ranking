@@ -47,10 +47,11 @@
   const langLabel = (code) => LANGUAGE_LABEL[code] || (code ? code.toUpperCase() : "Unknown");
 
   // Major Netflix markets, in roughly subscriber-count order. Surfaced
-  // first in the "Available on" dropdown.
+  // first in the "Available on" dropdown — these always appear in the
+  // Popular section even when the catalog has no data backing them yet.
   const POPULAR_REGIONS = [
     "US", "GB", "CA", "BR", "MX", "DE", "FR", "IN",
-    "JP", "KR", "AU", "ES", "IT", "NL",
+    "JP", "KR", "VN", "AU", "ES", "IT", "NL",
   ];
 
   // ISO 3166 country code → 🇺🇸-style flag emoji via regional indicators.
@@ -150,25 +151,33 @@
   }
 
   function populateRegions(shows, configuredRegions) {
-    // Union of configured regions + anything we've actually seen in
-    // the data. Only keep regions that are real candidates.
-    const set = new Set(configuredRegions || []);
-    shows.forEach((s) => (s.available_in || []).forEach((r) => set.add(r)));
-    if (!set.size) {
-      els.region.parentElement.hidden = true;
-      return;
-    }
-    const popular = POPULAR_REGIONS.filter((c) => set.has(c));
-    const popularSet = new Set(popular);
-    const rest = [...set]
-      .filter((c) => !popularSet.has(c))
+    // Count how many catalog entries actually list each region in
+    // available_in. Drives the dropdown contents and the per-region
+    // hint when a popular region has no data yet.
+    const counts = new Map();
+    shows.forEach((s) => (s.available_in || []).forEach((r) => {
+      counts.set(r, (counts.get(r) || 0) + 1);
+    }));
+    (configuredRegions || []).forEach((r) => {
+      if (!counts.has(r)) counts.set(r, 0);
+    });
+
+    // Popular section: ALWAYS show every popular region, even when no
+    // titles back it yet. Picking a zero-count region just returns an
+    // empty list — same as any over-narrow filter combination.
+    const popularSet = new Set(POPULAR_REGIONS);
+    const rest = [...counts.keys()]
+      .filter((c) => !popularSet.has(c) && counts.get(c) > 0)
       .sort((a, b) => regionName(a).localeCompare(regionName(b)));
 
-    const opt = (c) => `<option value="${escapeHtml(c)}">${escapeHtml(regionLabel(c))}</option>`;
+    const opt = (c) => {
+      const n = counts.get(c) || 0;
+      const suffix = n === 0 ? " (no titles yet)" : "";
+      return `<option value="${escapeHtml(c)}">${escapeHtml(regionLabel(c) + suffix)}</option>`;
+    };
+
     let html = '<option value="">Anywhere</option>';
-    if (popular.length) {
-      html += `<optgroup label="Popular">${popular.map(opt).join("")}</optgroup>`;
-    }
+    html += `<optgroup label="Popular">${POPULAR_REGIONS.map(opt).join("")}</optgroup>`;
     if (rest.length) {
       html += `<optgroup label="All regions">${rest.map(opt).join("")}</optgroup>`;
     }

@@ -105,7 +105,7 @@ These document *why* the data pipeline looks the way it does. If a constraint ch
 - Top-level `scan_cursors` is per-media (`tv`, `movie`) so the two cycle independently.
 
 ### Region scope (multi-region rotating)
-- `TMDB_REGIONS` constant (currently `["US", "KR", "JP"]`) drives discovery scope. TMDb's `with_watch_providers` filter is region-specific, so each region gets scanned independently.
+- `TMDB_REGIONS` constant (currently `["US", "KR", "JP", "VN"]`) drives discovery scope. TMDb's `with_watch_providers` filter is region-specific, so each region gets scanned independently.
 - **Two-axis rotation:**
   - **Page cursor per (region, media):** stored in `shows.json` as `scan_cursors[region][media]`. Advances by `TMDB_PAGES_PER_RUN` each time the region is scanned.
   - **Region cursor:** stored as `scan_cursors["region_cursor"]` (an integer index into `TMDB_REGIONS`). Each run picks the next `TMDB_REGIONS_PER_RUN` regions starting from this cursor and advances modulo `len(TMDB_REGIONS)`.
