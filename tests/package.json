@@ -1,0 +1,11 @@
+{
+  "name": "netflix-ranking-tests",
+  "private": true,
+  "description": "Test harness for the static site. Lives in its own dir so the deployed site stays dependency-free (no package.json at the repo root).",
+  "scripts": {
+    "test": "node test_app.js"
+  },
+  "dependencies": {
+    "jsdom": "^24.0.0"
+  }
+}

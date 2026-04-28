@@ -145,9 +145,22 @@ These document *why* the data pipeline looks the way it does. If a constraint ch
 
 ## Style
 
-- Static site, no build step. Vanilla HTML/CSS/JS only. Don't introduce a bundler, framework, or package.json unless asked.
+- Static site, no build step. Vanilla HTML/CSS/JS only. Don't introduce a bundler, framework, or package.json *at the repo root*. The `tests/` directory has its own `package.json` for jsdom — that's allowed because it doesn't affect the deployed artifact.
 - Refresh script: Python stdlib only (no `requests`, no `pip install`).
 - No ads, ever.
+
+## Tests
+
+- `tests/` directory holds jsdom-based smoke tests for the frontend (`tests/test_app.js`).
+- Run locally: `cd tests && npm install && npm test`.
+- CI: `.github/workflows/tests.yml` runs on every push to main + every PR. Tests are scoped via `paths:` so data-only commits (bot ratings refresh) don't trigger them.
+- **Coverage focus** — these are intentionally smoke tests, not full unit tests. They catch:
+  - Rendering pipeline broken end-to-end ("list disappeared")
+  - Setup functions throwing when elements missing (deploy mismatch: cached old HTML + new JS)
+  - Filter logic regressions
+  - Dialog wiring (Support/About/Feedback)
+  - Bad data tolerance (missing `shows` key)
+- **When adding a new feature**, add a test that would have caught its absence. Don't over-fit — one or two assertions per feature is enough.
 
 ## Adding more rules
 

@@ -302,7 +302,7 @@
   }
 
   function setupAbout() {
-    if (!els.aboutDialog || !els.aboutBtns.length) return;
+    if (!els.aboutDialog || !els.aboutBtns || !els.aboutBtns.length) return;
     els.aboutBtns.forEach((btn) =>
       btn.addEventListener("click", () => openDialog(els.aboutDialog)),
     );
@@ -310,7 +310,22 @@
   }
 
   function setupFeedback() {
-    if (!els.feedbackDialog || !els.feedbackBtns.length) return;
+    // Defensive: bail if any required element is missing. This protects
+    // against a deploy mismatch — a cached old index.html paired with a
+    // newer app.js that references IDs the old HTML doesn't have.
+    const required = [
+      "feedbackDialog", "feedbackBtns", "feedbackText",
+      "feedbackSend", "feedbackStatus", "feedbackGithub", "feedbackHoney",
+    ];
+    for (const k of required) {
+      const v = els[k];
+      const empty = v == null || (v.length !== undefined && v.length === 0);
+      if (empty) {
+        console.warn(`setupFeedback: missing element "${k}"; skipping setup.`);
+        return;
+      }
+    }
+
     const cfg = (window.SITE_CONFIG && window.SITE_CONFIG.feedback) || {};
     const email = cfg.email || "";
     const repo = cfg.github_repo || "";
@@ -459,12 +474,23 @@
     });
   }
 
+  // Run a setup function inside its own try/catch so a single broken
+  // setup (e.g. cached HTML missing a new element ID) can't take down
+  // the rest of the page.
+  function safeSetup(name, fn) {
+    try { fn(); }
+    catch (e) {
+      console.warn(`${name} setup failed:`, e && e.message ? e.message : e);
+    }
+  }
+
   async function init() {
     // Wire up dialogs first — these don't depend on data and we want them
-    // working even if the catalog fetch fails.
-    setupSupport();
-    setupAbout();
-    setupFeedback();
+    // working even if the catalog fetch fails. Each setup is isolated so a
+    // missing element in one section doesn't break the rendering pipeline.
+    safeSetup("Support", setupSupport);
+    safeSetup("About", setupAbout);
+    safeSetup("Feedback", setupFeedback);
 
     try {
       const res = await fetch("shows.json", { cache: "no-cache" });
@@ -472,7 +498,7 @@
       const data = await res.json();
       state.shows = data.shows || [];
       state.updated = data.updated || "";
-      els.updated.textContent = state.updated || "—";
+      if (els.updated) els.updated.textContent = state.updated || "—";
       populateGenres(state.shows);
       populateLanguages(state.shows);
       populateRegions(state.shows, data.regions);
@@ -480,7 +506,8 @@
       bind();
       render();
     } catch (err) {
-      els.meta.textContent = "Could not load data. " + err.message;
+      if (els.meta) els.meta.textContent = "Could not load data. " + err.message;
+      console.error("init failed:", err);
     }
   }
 
