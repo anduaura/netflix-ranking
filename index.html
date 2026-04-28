@@ -19,9 +19,13 @@
         <span class="brand-mark" aria-hidden="true">N</span>
         <h1>Netflix IMDb Ranking</h1>
       </div>
-      <button id="supportBtn" class="support-btn" type="button" hidden aria-haspopup="dialog">
-        <span aria-hidden="true">♥</span> Support
-      </button>
+      <div class="header-actions">
+        <button class="header-action js-about" type="button" aria-haspopup="dialog">About</button>
+        <button class="header-action js-feedback" type="button" aria-haspopup="dialog">Feedback</button>
+        <button id="supportBtn" class="support-btn" type="button" hidden aria-haspopup="dialog">
+          <span aria-hidden="true">♥</span> Support
+        </button>
+      </div>
     </div>
     <p class="tagline">Netflix originals &amp; exclusives, ranked by IMDb rating.</p>
   </header>
@@ -182,9 +186,9 @@
       Not affiliated with Netflix, IMDb, TMDB, or OMDb. Last updated <span id="updated"></span>.
     </p>
     <p class="footer-links">
-      <button type="button" class="link-btn" id="aboutBtn">About</button>
+      <button type="button" class="link-btn js-about">About</button>
       <span aria-hidden="true">·</span>
-      <button type="button" class="link-btn" id="feedbackBtn">Feedback</button>
+      <button type="button" class="link-btn js-feedback">Feedback</button>
       <span aria-hidden="true">·</span>
       <a href="https://github.com/anduaura/netflix-ranking" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
     </p>

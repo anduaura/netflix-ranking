@@ -17,9 +17,9 @@
     supportBtn: document.getElementById("supportBtn"),
     supportDialog: document.getElementById("supportDialog"),
     supportLinks: document.getElementById("supportLinks"),
-    aboutBtn: document.getElementById("aboutBtn"),
+    aboutBtns: document.querySelectorAll(".js-about"),
     aboutDialog: document.getElementById("aboutDialog"),
-    feedbackBtn: document.getElementById("feedbackBtn"),
+    feedbackBtns: document.querySelectorAll(".js-feedback"),
     feedbackDialog: document.getElementById("feedbackDialog"),
     feedbackText: document.getElementById("feedbackText"),
     feedbackGithub: document.getElementById("feedbackGithub"),
@@ -300,13 +300,15 @@
   }
 
   function setupAbout() {
-    if (!els.aboutBtn || !els.aboutDialog) return;
-    els.aboutBtn.addEventListener("click", () => openDialog(els.aboutDialog));
+    if (!els.aboutDialog || !els.aboutBtns.length) return;
+    els.aboutBtns.forEach((btn) =>
+      btn.addEventListener("click", () => openDialog(els.aboutDialog)),
+    );
     bindDialogDismiss(els.aboutDialog);
   }
 
   function setupFeedback() {
-    if (!els.feedbackBtn || !els.feedbackDialog) return;
+    if (!els.feedbackDialog || !els.feedbackBtns.length) return;
     const cfg = (window.SITE_CONFIG && window.SITE_CONFIG.feedback) || {};
     const email = cfg.email || "";
     const repo = cfg.github_repo || "";
@@ -315,9 +317,10 @@
     if (!email) els.feedbackEmail.hidden = true;
     if (!repo) els.feedbackGithub.hidden = true;
 
-    // If no channel is configured at all, don't surface the button.
+    // If no channel is configured at all, don't surface any feedback
+    // entry-points.
     if (!email && !repo) {
-      els.feedbackBtn.hidden = true;
+      els.feedbackBtns.forEach((b) => (b.hidden = true));
       return;
     }
 
@@ -332,17 +335,17 @@
       if (email) {
         const params = new URLSearchParams({ subject });
         if (body) params.set("body", body);
-        // Use unencoded `?` join then re-encode body via URLSearchParams.
         els.feedbackEmail.href = `mailto:${email}?${params.toString()}`;
       }
     };
 
-    els.feedbackBtn.addEventListener("click", () => {
-      refresh();
-      openDialog(els.feedbackDialog);
-      // Wait a tick for the dialog to be on-screen before focusing.
-      setTimeout(() => els.feedbackText.focus(), 0);
-    });
+    els.feedbackBtns.forEach((btn) =>
+      btn.addEventListener("click", () => {
+        refresh();
+        openDialog(els.feedbackDialog);
+        setTimeout(() => els.feedbackText.focus(), 0);
+      }),
+    );
     els.feedbackText.addEventListener("input", refresh);
     bindDialogDismiss(els.feedbackDialog);
     refresh(); // prime hrefs with empty body
