@@ -120,3 +120,10 @@ Want to add Buy Me a Coffee, Ko-fi, PayPal, or a custom destination later? Drop 
 ## Notes on data
 
 Ratings come from IMDb (via OMDb when the refresh workflow is enabled). Netflix availability varies by region. This site is not affiliated with Netflix or IMDb.
+
+## License
+
+The code in this repository is licensed under the [MIT License](./LICENSE) — © 2026 Andu.
+
+The **data** in `shows.json` is a separate matter: it's derived from third-party APIs ([TMDb](https://www.themoviedb.org/) for catalog discovery and watch-provider availability, [OMDb](https://www.omdbapi.com/) for IMDb ratings) and is governed by their respective terms of service, not the MIT license above. Notably, OMDb's free tier is intended for non-commercial use; treat the data accordingly if you fork this and run it at scale.
+
