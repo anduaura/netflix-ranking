@@ -39,6 +39,54 @@
     </form>
   </dialog>
 
+  <dialog id="aboutDialog" class="info-dialog" aria-labelledby="aboutTitle">
+    <form method="dialog" class="info-content">
+      <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+      <h2 id="aboutTitle">About</h2>
+      <p>
+        A simple, ad-free ranking of what's on Netflix, sorted by IMDb rating.
+        Filter by genre, type, language, region, and minimum rating.
+        Click any tile to jump straight to Netflix.
+      </p>
+      <h3>Where the data comes from</h3>
+      <ul>
+        <li><strong>Catalog</strong> — discovered daily via <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer">TMDb</a> across multiple Netflix regions (US, KR, JP, VN).</li>
+        <li><strong>IMDb ratings &amp; vote counts</strong> — refreshed via <a href="https://www.omdbapi.com/" target="_blank" rel="noopener noreferrer">OMDb</a> on a sharded LRU schedule.</li>
+        <li><strong>Region availability</strong> — TMDb's watch-providers endpoint, drives the "Available on" filter.</li>
+      </ul>
+      <p class="muted">
+        The site is a static page on GitHub Pages — no tracking, no ads, no accounts.
+        <a href="https://github.com/anduaura/netflix-ranking" target="_blank" rel="noopener noreferrer">Open source</a>;
+        contributions and bug reports welcome.
+      </p>
+    </form>
+  </dialog>
+
+  <dialog id="feedbackDialog" class="info-dialog" aria-labelledby="feedbackTitle">
+    <form method="dialog" class="info-content">
+      <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+      <h2 id="feedbackTitle">Send feedback</h2>
+      <p class="muted">
+        Bug, feature idea, or just hello — all welcome. Type your message below,
+        then choose how to send it.
+      </p>
+      <label for="feedbackText" class="sr-only">Your message</label>
+      <textarea id="feedbackText" rows="6" placeholder="What's on your mind?"></textarea>
+      <div class="feedback-actions">
+        <a id="feedbackGithub" class="feedback-btn primary" href="#" target="_blank" rel="noopener noreferrer">
+          Open as GitHub issue
+        </a>
+        <a id="feedbackEmail" class="feedback-btn" href="#">
+          Send by email
+        </a>
+      </div>
+      <p class="fineprint">
+        GitHub issues are public and best for bug reports / feature requests.
+        Email goes only to the maintainer.
+      </p>
+    </form>
+  </dialog>
+
   <section class="controls" aria-label="Filters">
     <div class="control search">
       <label for="q" class="sr-only">Search</label>
@@ -133,7 +181,11 @@
       Ratings from IMDb via <a href="https://www.omdbapi.com/" target="_blank" rel="noopener noreferrer">OMDb</a>.
       Not affiliated with Netflix, IMDb, TMDB, or OMDb. Last updated <span id="updated"></span>.
     </p>
-    <p>
+    <p class="footer-links">
+      <button type="button" class="link-btn" id="aboutBtn">About</button>
+      <span aria-hidden="true">·</span>
+      <button type="button" class="link-btn" id="feedbackBtn">Feedback</button>
+      <span aria-hidden="true">·</span>
       <a href="https://github.com/anduaura/netflix-ranking" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
     </p>
   </footer>

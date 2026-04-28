@@ -17,6 +17,13 @@
     supportBtn: document.getElementById("supportBtn"),
     supportDialog: document.getElementById("supportDialog"),
     supportLinks: document.getElementById("supportLinks"),
+    aboutBtn: document.getElementById("aboutBtn"),
+    aboutDialog: document.getElementById("aboutDialog"),
+    feedbackBtn: document.getElementById("feedbackBtn"),
+    feedbackDialog: document.getElementById("feedbackDialog"),
+    feedbackText: document.getElementById("feedbackText"),
+    feedbackGithub: document.getElementById("feedbackGithub"),
+    feedbackEmail: document.getElementById("feedbackEmail"),
   };
 
   const state = { shows: [], updated: "" };
@@ -275,6 +282,72 @@
     return out;
   }
 
+  function openDialog(dlg) {
+    if (!dlg) return;
+    if (typeof dlg.showModal === "function") {
+      dlg.showModal();
+    } else {
+      dlg.setAttribute("open", "");
+    }
+  }
+
+  function bindDialogDismiss(dlg) {
+    if (!dlg) return;
+    // Click outside the content (i.e., on the backdrop) closes.
+    dlg.addEventListener("click", (e) => {
+      if (e.target === dlg) dlg.close();
+    });
+  }
+
+  function setupAbout() {
+    if (!els.aboutBtn || !els.aboutDialog) return;
+    els.aboutBtn.addEventListener("click", () => openDialog(els.aboutDialog));
+    bindDialogDismiss(els.aboutDialog);
+  }
+
+  function setupFeedback() {
+    if (!els.feedbackBtn || !els.feedbackDialog) return;
+    const cfg = (window.SITE_CONFIG && window.SITE_CONFIG.feedback) || {};
+    const email = cfg.email || "";
+    const repo = cfg.github_repo || "";
+
+    // Hide any channel that isn't configured.
+    if (!email) els.feedbackEmail.hidden = true;
+    if (!repo) els.feedbackGithub.hidden = true;
+
+    // If no channel is configured at all, don't surface the button.
+    if (!email && !repo) {
+      els.feedbackBtn.hidden = true;
+      return;
+    }
+
+    const refresh = () => {
+      const body = (els.feedbackText.value || "").trim();
+      const subject = "Netflix IMDb Ranking — feedback";
+      if (repo) {
+        const params = new URLSearchParams({ title: subject });
+        if (body) params.set("body", body);
+        els.feedbackGithub.href = `https://github.com/${repo}/issues/new?${params.toString()}`;
+      }
+      if (email) {
+        const params = new URLSearchParams({ subject });
+        if (body) params.set("body", body);
+        // Use unencoded `?` join then re-encode body via URLSearchParams.
+        els.feedbackEmail.href = `mailto:${email}?${params.toString()}`;
+      }
+    };
+
+    els.feedbackBtn.addEventListener("click", () => {
+      refresh();
+      openDialog(els.feedbackDialog);
+      // Wait a tick for the dialog to be on-screen before focusing.
+      setTimeout(() => els.feedbackText.focus(), 0);
+    });
+    els.feedbackText.addEventListener("input", refresh);
+    bindDialogDismiss(els.feedbackDialog);
+    refresh(); // prime hrefs with empty body
+  }
+
   function setupSupport() {
     const cfg = (window.SITE_CONFIG && window.SITE_CONFIG.support) || {};
     const providers = buildSupportProviders(cfg);
@@ -343,6 +416,8 @@
       loadFromQueryString();
       bind();
       setupSupport();
+      setupAbout();
+      setupFeedback();
       render();
     } catch (err) {
       els.meta.textContent = "Could not load data. " + err.message;
