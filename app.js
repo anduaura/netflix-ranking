@@ -249,8 +249,8 @@
             <div class="sub">
               <span>${s.year}</span>
               <span>·</span>
-              <span>${TYPE_LABEL[s.type] || s.type}</span>
-              <span class="tag ${s.netflix_status === "original" ? "original" : ""}">${STATUS_LABEL[s.netflix_status] || s.netflix_status}</span>
+              <span>${escapeHtml(TYPE_LABEL[s.type] || s.type || "")}</span>
+              <span class="tag ${s.netflix_status === "original" ? "original" : ""}">${escapeHtml(STATUS_LABEL[s.netflix_status] || s.netflix_status || "")}</span>
               ${langTag}
               ${s.genres.slice(0, 3).map((g) => `<span class="tag">${escapeHtml(g)}</span>`).join("")}
             </div>

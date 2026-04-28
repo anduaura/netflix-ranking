@@ -3,6 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!--
+    Content Security Policy. Locks the page to same-origin assets and
+    scripts; the only outbound network call is the feedback POST to
+    formsubmit.co. data: URIs are allowed for the inline SVG favicon.
+    base-uri 'self' blocks <base> tag injection; form-action 'self'
+    is permissive enough for the in-page <form method="dialog"> close
+    buttons while still preventing exfiltration via injected forms.
+  -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; connect-src 'self' https://formsubmit.co; img-src 'self' data:; base-uri 'self'; form-action 'self'" />
+  <!-- Don't leak the path/query of our URL to outbound sites
+       (Netflix, IMDb, GitHub, sponsor providers, etc.). -->
+  <meta name="referrer" content="no-referrer" />
+  <!-- Disable browser APIs we never use. Any attacker who somehow gets
+       script execution is also denied access to these. -->
+  <meta http-equiv="Permissions-Policy"
+        content="geolocation=(), camera=(), microphone=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=(), midi=(), interest-cohort=()" />
   <title>Top Netflix Shows by IMDb Rating</title>
   <meta name="description" content="An interactive ranking of Netflix originals and exclusives sorted by IMDb rating. Search, filter by genre, year, type and rating threshold." />
   <meta name="theme-color" content="#141414" />

@@ -234,6 +234,37 @@ async function run() {
     assertEqual(list.children.length, 0, "no rows when shows is absent");
   });
 
+  await test("unknown type / status values are escaped, not rendered as HTML", async () => {
+    // Defense-in-depth check: if TMDb (or a tampered shows.json) ever
+    // returns a `type` or `netflix_status` value that's not in our
+    // label maps, the raw string must be HTML-escaped before reaching
+    // the DOM. Without escaping these were the only two interpolations
+    // left as fallbacks.
+    const evil = {
+      updated: "2026-04-29",
+      regions: ["US"],
+      shows: [{
+        title: "Hostile Show", year: 2026, rating: 5.0, votes: 100,
+        genres: ["Drama"],
+        type: "<img src=x onerror=window.__pwned=1>",
+        netflix_status: "<script>window.__pwned=1</script>",
+        original_language: "en", available_in: ["US"],
+      }],
+    };
+    const { dom } = await mount({ data: evil });
+    const list = dom.window.document.getElementById("list");
+    assertEqual(list.children.length, 1, "row renders");
+    // No unexpected <img> or <script> elements should have been created
+    // inside the rendered card.
+    const injected = dom.window.document.querySelectorAll("#list img, #list script");
+    assertEqual(injected.length, 0, "no injected nodes");
+    assert(!dom.window.__pwned, "no script execution");
+    // The literal text should appear in the rendered HTML, escaped.
+    const html = list.innerHTML;
+    assert(html.includes("&lt;img"), "type rendered as escaped text");
+    assert(html.includes("&lt;script"), "status rendered as escaped text");
+  });
+
   // ---------------------------------------------------------------------------
   console.log(`\n${passed} passed, ${failed} failed`);
   if (failed > 0) {
