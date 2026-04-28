@@ -71,22 +71,22 @@
       <button class="dialog-close" value="cancel" aria-label="Close">×</button>
       <h2 id="feedbackTitle">Send feedback</h2>
       <p class="muted">
-        Bug, feature idea, or just hello — all welcome. Type your message below,
-        then choose how to send it.
+        Bug, feature idea, or just hello — all welcome.
       </p>
       <label for="feedbackText" class="sr-only">Your message</label>
       <textarea id="feedbackText" rows="6" placeholder="What's on your mind?"></textarea>
+      <!-- Honeypot: legit users won't see this; bots filling everything will trip it. -->
+      <input type="text" id="feedbackHoney" tabindex="-1" autocomplete="off" hidden aria-hidden="true" />
+      <p id="feedbackStatus" class="feedback-status" hidden role="status" aria-live="polite"></p>
       <div class="feedback-actions">
-        <a id="feedbackGithub" class="feedback-btn primary" href="#" target="_blank" rel="noopener noreferrer">
-          Open as GitHub issue
-        </a>
-        <a id="feedbackEmail" class="feedback-btn" href="#">
-          Send by email
+        <button type="button" id="feedbackSend" class="feedback-btn primary">Send</button>
+        <a id="feedbackGithub" class="feedback-btn" href="#" target="_blank" rel="noopener noreferrer">
+          Or open as GitHub issue
         </a>
       </div>
       <p class="fineprint">
-        GitHub issues are public and best for bug reports / feature requests.
-        Email goes only to the maintainer.
+        "Send" delivers your message straight to the maintainer. GitHub issues are public —
+        better for bug reports and feature requests you want others to see.
       </p>
     </form>
   </dialog>

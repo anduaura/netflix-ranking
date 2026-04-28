@@ -135,6 +135,14 @@ These document *why* the data pipeline looks the way it does. If a constraint ch
 - Donation provider: **GitHub Sponsors** for `anduaura`. Wired via `config.js` (in-page Support button) and `.github/FUNDING.yml` (repo Sponsor button).
 - Other providers (Buy Me a Coffee, Ko-fi, PayPal, custom) are configured in `config.js`; empty values hide their link.
 
+## Feedback form
+
+- The Feedback dialog's "Send" button POSTs straight to **FormSubmit** (`https://formsubmit.co/ajax/<email>`) so users never leave the site. Free, no signup, no backend.
+- **First-time activation:** the very first submission triggers FormSubmit to email the recipient (`andu.ucsd@gmail.com`) with a confirmation link. Until that link is clicked once, submissions go nowhere. After activation, all future submissions pass through silently.
+- If the email is rotated or the recipient changes, update `config.js → feedback.email` and re-activate FormSubmit on the new address.
+- The "Or open as GitHub issue" link is a non-FormSubmit fallback that opens a prefilled issue creation page on the repo. Always works regardless of FormSubmit state.
+- A hidden honeypot field deters basic bot submissions; FormSubmit also has built-in spam protection. Captcha is disabled (`_captcha: false`) for UX; bump it on if abuse becomes a problem.
+
 ## Style
 
 - Static site, no build step. Vanilla HTML/CSS/JS only. Don't introduce a bundler, framework, or package.json unless asked.

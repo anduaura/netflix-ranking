@@ -23,7 +23,9 @@
     feedbackDialog: document.getElementById("feedbackDialog"),
     feedbackText: document.getElementById("feedbackText"),
     feedbackGithub: document.getElementById("feedbackGithub"),
-    feedbackEmail: document.getElementById("feedbackEmail"),
+    feedbackSend: document.getElementById("feedbackSend"),
+    feedbackStatus: document.getElementById("feedbackStatus"),
+    feedbackHoney: document.getElementById("feedbackHoney"),
   };
 
   const state = { shows: [], updated: "" };
@@ -313,42 +315,94 @@
     const email = cfg.email || "";
     const repo = cfg.github_repo || "";
 
-    // Hide any channel that isn't configured.
-    if (!email) els.feedbackEmail.hidden = true;
+    // Hide channels that aren't configured.
+    if (!email) els.feedbackSend.hidden = true;
     if (!repo) els.feedbackGithub.hidden = true;
 
-    // If no channel is configured at all, don't surface any feedback
-    // entry-points.
     if (!email && !repo) {
       els.feedbackBtns.forEach((b) => (b.hidden = true));
       return;
     }
 
-    const refresh = () => {
+    const SUBJECT = "Netflix IMDb Ranking — feedback";
+
+    const refreshGithubHref = () => {
+      if (!repo) return;
       const body = (els.feedbackText.value || "").trim();
-      const subject = "Netflix IMDb Ranking — feedback";
-      if (repo) {
-        const params = new URLSearchParams({ title: subject });
-        if (body) params.set("body", body);
-        els.feedbackGithub.href = `https://github.com/${repo}/issues/new?${params.toString()}`;
+      const params = new URLSearchParams({ title: SUBJECT });
+      if (body) params.set("body", body);
+      els.feedbackGithub.href = `https://github.com/${repo}/issues/new?${params.toString()}`;
+    };
+
+    const showStatus = (text, kind) => {
+      if (!text) { els.feedbackStatus.hidden = true; return; }
+      els.feedbackStatus.textContent = text;
+      els.feedbackStatus.className = `feedback-status feedback-${kind}`;
+      els.feedbackStatus.hidden = false;
+    };
+
+    // POST directly to FormSubmit's AJAX endpoint so the user never
+    // leaves the page. First-ever submission triggers a one-time
+    // activation email to the maintainer; subsequent submissions go
+    // through immediately.
+    const sendEmail = async () => {
+      const message = (els.feedbackText.value || "").trim();
+      if (!message) {
+        showStatus("Type a message first.", "error");
+        els.feedbackText.focus();
+        return;
       }
-      if (email) {
-        const params = new URLSearchParams({ subject });
-        if (body) params.set("body", body);
-        els.feedbackEmail.href = `mailto:${email}?${params.toString()}`;
+      // Honeypot — bots fill every field; humans don't see this one.
+      if (els.feedbackHoney && els.feedbackHoney.value) {
+        showStatus("Thanks!", "success"); // pretend it worked
+        return;
+      }
+      els.feedbackSend.disabled = true;
+      els.feedbackSend.textContent = "Sending…";
+      showStatus("", "");
+      try {
+        const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(email)}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            _subject: SUBJECT,
+            _template: "table",
+            _captcha: "false",
+            message,
+            page: location.href,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && (data.success === "true" || data.success === true)) {
+          showStatus("Thanks — message sent.", "success");
+          els.feedbackText.value = "";
+          refreshGithubHref();
+        } else {
+          throw new Error(data.message || `HTTP ${res.status}`);
+        }
+      } catch (err) {
+        showStatus(
+          `Couldn't send (${err.message}). Try the GitHub issue option instead.`,
+          "error",
+        );
+      } finally {
+        els.feedbackSend.disabled = false;
+        els.feedbackSend.textContent = "Send";
       }
     };
 
     els.feedbackBtns.forEach((btn) =>
       btn.addEventListener("click", () => {
-        refresh();
+        refreshGithubHref();
+        showStatus("", "");
         openDialog(els.feedbackDialog);
         setTimeout(() => els.feedbackText.focus(), 0);
       }),
     );
-    els.feedbackText.addEventListener("input", refresh);
+    els.feedbackText.addEventListener("input", refreshGithubHref);
+    if (email) els.feedbackSend.addEventListener("click", sendEmail);
     bindDialogDismiss(els.feedbackDialog);
-    refresh(); // prime hrefs with empty body
+    refreshGithubHref();
   }
 
   function setupSupport() {

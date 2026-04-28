@@ -202,10 +202,32 @@ a:hover { color: var(--accent); }
   border: 1px solid var(--border);
   color: var(--text);
   text-decoration: none;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
 }
 .feedback-btn:hover { border-color: var(--accent); color: var(--text); }
+.feedback-btn:disabled { opacity: 0.6; cursor: progress; }
 .feedback-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
 .feedback-btn.primary:hover { filter: brightness(1.08); color: #fff; }
+.feedback-btn.primary:disabled:hover { filter: none; }
+
+.feedback-status {
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin: 0 0 10px;
+}
+.feedback-status.feedback-success {
+  background: rgba(76, 175, 80, 0.12);
+  color: #9ee0a4;
+  border: 1px solid rgba(76, 175, 80, 0.4);
+}
+.feedback-status.feedback-error {
+  background: var(--accent-soft);
+  color: #ffb3b8;
+  border: 1px solid var(--accent);
+}
 
 .footer-links { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; }
 .link-btn {
