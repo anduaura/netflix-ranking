@@ -406,6 +406,12 @@
   }
 
   async function init() {
+    // Wire up dialogs first — these don't depend on data and we want them
+    // working even if the catalog fetch fails.
+    setupSupport();
+    setupAbout();
+    setupFeedback();
+
     try {
       const res = await fetch("shows.json", { cache: "no-cache" });
       if (!res.ok) throw new Error("Failed to load shows.json: " + res.status);
@@ -418,9 +424,6 @@
       populateRegions(state.shows, data.regions);
       loadFromQueryString();
       bind();
-      setupSupport();
-      setupAbout();
-      setupFeedback();
       render();
     } catch (err) {
       els.meta.textContent = "Could not load data. " + err.message;
