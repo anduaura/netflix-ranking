@@ -12,11 +12,13 @@ call against a known title verifies the key before iterating; auth and
 quota errors abort immediately rather than burning the whole shard.
 
 Exit codes:
-  0  success (shard processed, shows possibly updated)
+  0  success — including the *expected* outcome of the daily quota
+     being exhausted. Quota is a routine event (1k/day free tier),
+     so we save partial progress, emit a GitHub-Actions ::warning::,
+     and exit 0 rather than turning the workflow red.
   2  OMDB_API_KEY not set
-  3  auth failure (bad/unverified key)
-  4  daily quota exhausted
-  5  preflight failed for an unknown reason
+  3  auth failure (bad/unverified key) — a real problem requiring action
+  5  preflight failed for an unknown reason (network, OMDb down, etc.)
 
 Usage:
     OMDB_API_KEY=xxxx python scripts/refresh_ratings.py
@@ -72,6 +74,21 @@ class OMDbAuthError(Exception):
 
 class OMDbQuotaError(Exception):
     """OMDb's free-tier daily request cap has been hit."""
+
+
+def gha(level: str, msg: str) -> None:
+    """Emit a GitHub Actions log annotation.
+
+    `level` is one of "warning", "error", "notice". The annotation
+    surfaces in the run summary UI without (for warning/notice)
+    turning the workflow red. Falls back to an ordinary print line
+    when not running under Actions, so local runs stay readable.
+    """
+    if not os.environ.get("GITHUB_ACTIONS"):
+        print(f"[{level.upper()}] {msg}", file=sys.stderr)
+        return
+    safe = msg.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+    print(f"::{level}::{safe}")
 
 
 def _is_auth_error(msg: str) -> bool:
@@ -231,7 +248,8 @@ def main() -> int:
     try:
         preflight(api_key)
     except OMDbAuthError as e:
-        print(f"\nFATAL: OMDb auth failed — {e}", file=sys.stderr)
+        msg = f"OMDb auth failed at preflight — {e}"
+        print(f"\nFATAL: {msg}", file=sys.stderr)
         print(
             "Most common cause: the OMDb account hasn't been verified yet. "
             "Check your inbox for the activation email from omdbapi.com and "
@@ -239,13 +257,19 @@ def main() -> int:
             "matches the verified key.",
             file=sys.stderr,
         )
+        gha("error", msg)
         return 3
     except OMDbQuotaError as e:
-        print(f"\nFATAL: OMDb quota exhausted — {e}", file=sys.stderr)
-        print("Free tier is 1,000 requests/day. Try again tomorrow UTC.", file=sys.stderr)
-        return 4
+        msg = (
+            f"OMDb daily quota exhausted at preflight — no rating updates this run. "
+            f"Free tier is 1,000 requests/day; resets at UTC midnight. ({e})"
+        )
+        print(f"\n{msg}", file=sys.stderr)
+        gha("warning", msg)
+        return 0  # expected outcome — don't fail the workflow
     except Exception as e:
         print(f"\nFATAL: preflight failed — {e}", file=sys.stderr)
+        gha("error", f"OMDb preflight failed: {e}")
         return 5
 
     raw = json.loads(DATA_FILE.read_text())
@@ -307,15 +331,25 @@ def main() -> int:
             time.sleep(SLEEP_BETWEEN)
     except OMDbAuthError as e:
         # Key got revoked mid-run; bail without writing partial garbage.
-        print(f"\nFATAL: OMDb auth failed mid-run — {e}", file=sys.stderr)
+        msg = f"OMDb auth failed mid-run — {e}"
+        print(f"\nFATAL: {msg}", file=sys.stderr)
+        gha("error", msg)
         return 3
     except OMDbQuotaError as e:
-        print(f"\nFATAL: OMDb quota exhausted mid-run — {e}", file=sys.stderr)
-        # Still write what we have so far so the run isn't wasted.
+        # Expected outcome on busy days. Save what we have and exit clean
+        # so the workflow doesn't show red — the data we did fetch is
+        # already useful and the next run picks up where we left off.
         raw["shows"] = [reorder(s) for s in shows]
         DATA_FILE.write_text(json.dumps(raw, indent=2, ensure_ascii=False) + "\n")
+        msg = (
+            f"OMDb daily quota exhausted mid-run after updating {updated} entries. "
+            f"Partial progress saved; resumes on the next run. "
+            f"Free tier is 1,000 requests/day; resets at UTC midnight. ({e})"
+        )
+        print(f"\n{msg}", file=sys.stderr)
         print(f"partial save: updated={updated} skipped={skipped}", file=sys.stderr)
-        return 4
+        gha("warning", msg)
+        return 0  # expected outcome — don't fail the workflow
 
     raw["shows"] = [reorder(s) for s in shows]
     if updated > 0 or failed == 0:

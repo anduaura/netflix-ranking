@@ -31,7 +31,7 @@ The workflow's `actions/checkout` step authenticates with `secrets.BOT_PUSH_TOKE
 
 **Architectural rules:**
 - **Limits are named constants** at the top of each script (`OMDB_DAILY_BUDGET`, `TMDB_PAGES_PER_RUN`, `TMDB_MIN_VOTE_COUNT`, `CATALOG_MAX_SIZE`, `TMDB_REGION`, etc.). Never inline magic numbers in the body of the scripts. When tuning, change the constant.
-- **Fail fast on auth/quota errors** (exit codes 3 / 4). Never retry through a doomed budget.
+- **Fail fast on auth errors (exit 3); succeed-with-warning on quota errors (exit 0).** Daily quota is an *expected* outcome of a 1k/day free-tier API and routine on busy days, so the script saves partial progress, emits a GitHub-Actions `::warning::` annotation (visible in the run summary UI), and exits 0 — the workflow shouldn't go red for a routine event. Auth failures are different: they need human intervention, so they emit `::error::` and exit non-zero.
 - **Preserve field order** when rewriting entries (`FIELD_ORDER` constant).
 - **Catalog growth is append-only.** Don't remove entries based on TMDb absence — Netflix availability flaps.
 - **Stamp `rating_refreshed_at` even on lookup failures** so a permanently-unmatchable entry doesn't monopolize every shard.
