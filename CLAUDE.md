@@ -27,6 +27,8 @@ These rules apply to every session in this repo. Read them before doing any work
 1. **`scripts/refresh_catalog.py`** — grows `shows.json` incrementally from TMDb's Netflix discover endpoint using a rotating page cursor stored inside the file. Existing entries are never modified by this step. Requires `TMDB_API_KEY` secret; if missing, the step is skipped (warning, not failure).
 2. **`scripts/refresh_ratings.py`** — sharded LRU refresh of IMDb ratings via OMDb. Picks the `OMDB_DAILY_BUDGET` entries with the oldest `rating_refreshed_at` and updates them. Requires `OMDB_API_KEY` secret.
 
+The workflow's `actions/checkout` step authenticates with `secrets.BOT_PUSH_TOKEN` — a fine-grained PAT owned by the repo admin (`anduaura`). Required because the `main` branch ruleset requires PRs from non-admin actors, and the default `GITHUB_TOKEN` pushes as `github-actions[bot]`, which isn't a bypass actor in personal-repo rulesets. The PAT inherits the admin bypass entry and can push directly. If the PAT ever needs to be rotated, the only place to update is the secret value at `Settings → Secrets and variables → Actions → BOT_PUSH_TOKEN`.
+
 **Architectural rules:**
 - **Limits are named constants** at the top of each script (`OMDB_DAILY_BUDGET`, `TMDB_PAGES_PER_RUN`, `TMDB_MIN_VOTE_COUNT`, `CATALOG_MAX_SIZE`, `TMDB_REGION`, etc.). Never inline magic numbers in the body of the scripts. When tuning, change the constant.
 - **Fail fast on auth/quota errors** (exit codes 3 / 4). Never retry through a doomed budget.
