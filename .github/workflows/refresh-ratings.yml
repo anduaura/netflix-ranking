@@ -20,7 +20,19 @@ jobs:
       TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
       OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
     steps:
+      # The PAT (BOT_PUSH_TOKEN) authenticates this checkout's git remote
+      # so subsequent `git push` calls authenticate as the PAT's owner
+      # (the repo admin). This satisfies the branch ruleset's "Repository
+      # admin" bypass entry — without it, the default GITHUB_TOKEN would
+      # push as github-actions[bot] which can't bypass branch protection
+      # in personal repos.
+      #
+      # If BOT_PUSH_TOKEN is unset, checkout falls back to GITHUB_TOKEN
+      # and the workflow still runs; the push step will fail loudly if
+      # branch protection blocks it.
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.BOT_PUSH_TOKEN || secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-python@v5
         with:
