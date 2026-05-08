@@ -1,0 +1,9 @@
+# GitHub auto-requests review from listed owners when a PR touches
+# matching paths. For a solo project this just makes sure I'm
+# automatically on every PR — useful as a notification when external
+# contributors open one.
+#
+# Syntax: <pattern> <owner> [<owner>...]
+# Patterns are gitignore-style. The last matching line wins.
+
+* @anduaura
