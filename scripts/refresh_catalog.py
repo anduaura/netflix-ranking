@@ -43,14 +43,18 @@ TMDB_NETFLIX_NETWORK = 213      # Netflix as a TV network (originals)
 
 # Regions to scan, in order. Each region has its own scan cursor stored in
 # shows.json so they advance independently. Add codes here to expand the
-# catalog (e.g. "GB", "IN"); remove to narrow it.
-TMDB_REGIONS = ["US", "KR", "JP", "VN"]
+# catalog (e.g. "GB", "IN", "HK"); remove to narrow it.
+#
+# Note: Netflix doesn't operate in mainland China (CN) so it isn't here.
+# TW covers most Chinese-language content; add HK if/when Cantonese
+# coverage feels thin.
+TMDB_REGIONS = ["US", "KR", "JP", "VN", "TW"]
 
 # How many regions get scanned per run. The script rotates through
 # TMDB_REGIONS in order, scanning this many per run starting from the
 # stored region cursor. Set to len(TMDB_REGIONS) to scan everything every
 # run; set to 1 to be polite (one region per day).
-TMDB_REGIONS_PER_RUN = 4
+TMDB_REGIONS_PER_RUN = 5
 
 # TMDb response language. Affects returned title spelling; doesn't
 # restrict which content is returned.

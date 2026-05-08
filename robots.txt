@@ -1,0 +1,6 @@
+# Allow every crawler full access — the site is meant to be discoverable.
+User-agent: *
+Allow: /
+
+# Help search engines find the canonical URL.
+Sitemap: https://showranks.com/sitemap.xml
