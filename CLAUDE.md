@@ -17,7 +17,7 @@ These rules apply to every session in this repo. Read them before doing any work
 ## Deployment
 
 - The site auto-deploys to GitHub Pages on every push to `main` via `.github/workflows/pages.yml`.
-- Live URL: https://anduaura.github.io/netflix-ranking/
+- Live URL: https://showranks.com (custom domain set via the `CNAME` file at repo root). The GitHub Pages default `https://anduaura.github.io/netflix-ranking/` redirects to the custom domain once Pages applies the setting.
 - After pushing user-visible changes, you can verify by curling that URL once Pages has had ~30–60s to redeploy.
 
 ## Data refresh
