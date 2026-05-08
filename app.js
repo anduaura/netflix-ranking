@@ -60,7 +60,7 @@
   // Popular section even when the catalog has no data backing them yet.
   const POPULAR_REGIONS = [
     "US", "GB", "CA", "BR", "MX", "DE", "FR", "IN",
-    "JP", "KR", "VN", "AU", "ES", "IT", "NL",
+    "JP", "KR", "TW", "VN", "AU", "ES", "IT", "NL",
   ];
 
   // ISO 3166 country code → 🇺🇸-style flag emoji via regional indicators.

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- 1200×630 is the canonical og:image dimension. Designed to read
+       cleanly at small sizes (link-preview thumbnails) and at full
+       size (Twitter/X large-card previews). Inline SVG so we ship a
+       single file with no font dependency on the host platform. -->
+  <rect width="1200" height="630" fill="#0b0b0b"/>
+  <rect x="0" y="0" width="8" height="630" fill="#e50914"/>
+
+  <!-- Brand mark -->
+  <g transform="translate(80,100)">
+    <rect width="104" height="104" rx="18" fill="#e50914"/>
+    <text x="52" y="86" font-family="Helvetica, Arial, sans-serif" font-weight="900"
+          font-size="84" fill="#ffffff" text-anchor="middle">N</text>
+  </g>
+
+  <!-- Title -->
+  <text x="80" y="300" font-family="Helvetica, Arial, sans-serif" font-weight="800"
+        font-size="72" fill="#f5f5f5">Top Netflix Shows</text>
+  <text x="80" y="380" font-family="Helvetica, Arial, sans-serif" font-weight="800"
+        font-size="72" fill="#f5f5f5">by IMDb Rating</text>
+
+  <!-- Tagline -->
+  <text x="80" y="450" font-family="Helvetica, Arial, sans-serif" font-weight="400"
+        font-size="30" fill="#b3b3b3">Ranked daily. Filter by genre, language, region.</text>
+
+  <!-- Sample rating row -->
+  <g transform="translate(80, 525)">
+    <text font-family="Helvetica, Arial, sans-serif" font-weight="800" font-size="44"
+          fill="#f5c518">★ 9.5</text>
+    <text x="170" y="-4" font-family="Helvetica, Arial, sans-serif" font-weight="500"
+          font-size="28" fill="#b3b3b3">2.1M IMDb votes</text>
+  </g>
+
+  <!-- URL footer -->
+  <text x="1120" y="590" font-family="Helvetica, Arial, sans-serif" font-weight="700"
+        font-size="28" fill="#e50914" text-anchor="end">showranks.com</text>
+</svg>
