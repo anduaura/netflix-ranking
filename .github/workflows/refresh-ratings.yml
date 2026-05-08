@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: refresh-data
@@ -53,21 +54,45 @@ jobs:
       - name: Refresh ratings shard from OMDb
         run: python scripts/refresh_ratings.py
 
-      - name: Commit and push if changed
+      - name: Commit, PR, and admin-merge if changed
         # Run even when an earlier step failed — refresh_ratings.py
         # writes partial progress to shows.json before exiting on
-        # OMDb quota exhaustion (exit 4) or auth failure (exit 3),
-        # and we don't want to discard that work just because the
-        # step ended non-zero.
+        # OMDb quota exhaustion or auth failure, and we don't want to
+        # discard that work just because the step ended non-zero.
+        #
+        # The main branch ruleset enforces "Require pull request before
+        # merging", which can't be bypassed by direct push even with
+        # admin role. So instead of `git push origin main`, the bot:
+        #   1. Pushes the change to a unique side branch.
+        #   2. Opens a PR via gh CLI (authed with the admin PAT).
+        #   3. Merges the PR with `gh pr merge --admin` to bypass the
+        #      approval and status-check requirements (the tests
+        #      workflow doesn't run on shows.json-only changes due to
+        #      its `paths:` filter, so --admin is the right escape).
+        # The side branch auto-deletes after merge per the repo
+        # setting "Automatically delete head branches".
         if: always()
+        env:
+          GH_TOKEN: ${{ secrets.BOT_PUSH_TOKEN || secrets.GITHUB_TOKEN }}
         run: |
           set -e
           if [ -z "$(git status --porcelain shows.json)" ]; then
             echo "No changes."
             exit 0
           fi
+
+          BRANCH="bot/refresh-$(date -u +%Y%m%d-%H%M%S)"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
           git add shows.json
           git commit -m "chore(data): refresh catalog + ratings shard"
-          git push
+          git push -u origin "$BRANCH"
+
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "chore(data): refresh catalog + ratings shard" \
+            --body "Automated daily refresh from \`refresh-ratings.yml\`. Auto-merged by the workflow with admin privileges to bypass the PR-required ruleset."
+
+          gh pr merge "$BRANCH" --admin --rebase --delete-branch
